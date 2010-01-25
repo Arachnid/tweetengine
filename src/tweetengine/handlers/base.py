@@ -1,7 +1,16 @@
 import os
 
+from google.appengine.api import users
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import template
+
+
+def requires_login(func):
+  def decorate(self, *args, **kwargs):
+    if not users.get_current_user():
+      self.redirect(users.create_login_url(self.request.url))
+    else:
+      return func(self, *args, **kwargs)
 
 
 class BaseHandler(webapp.RequestHandler):
