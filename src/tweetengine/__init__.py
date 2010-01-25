@@ -8,4 +8,5 @@ application = webapp.WSGIApplication([
         ('/[a-zA-Z_]+/', handlers.DashboardHandler),
         ('/add/callback', handlers.CallbackHandler),
         ('/add', handlers.AddHandler),
+        ('/admin', handlers.SettingsHandler),
 ], debug=True)
