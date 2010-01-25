@@ -32,8 +32,7 @@ def requires_account(func):
     return decorate
 
 class Menu(object):
-    
-    
+
     def __init__(self):
         self.keys = list()
         self.items = dict()
@@ -58,7 +57,6 @@ class Menu(object):
             for key in self.keys:
                 yield self.items[key]
         return _iterator()
-    
 
 class BaseHandler(webapp.RequestHandler):
     def initialize(self, request, response):
@@ -73,13 +71,13 @@ class BaseHandler(webapp.RequestHandler):
             
     def init_menu(self):
         if not self.user:
-            self.menu.add('login', '#')
+            self.menu.add('login', users.create_login_url("/me/"))
         else:
-            self.menu.add('dashboard', '#')
+            self.menu.add('dashboard', '/')
             self.menu.add('manage', '#')
-            if users.is_current_user_admin:
-                 self.menu.add('admin', '#')
-            self.menu.add('logout', '#')
+            if users.is_current_user_admin():
+                 self.menu.add('admin', '/admin')
+            self.menu.add('logout', users.create_logout_url("/"))
 
     def render_template(self, template_path, template_vars=None):
         if not template_vars:

@@ -6,9 +6,10 @@ from tweetengine.model import Configuration
 class SettingsHandler(base.BaseHandler):
     
     def get(self):
-        if not users.is_current_user_admin:
+        if not users.is_current_user_admin():
             self.error(403)
-            return        
+            return
+        self.menu.activate('admin')      
         cfg = Configuration.instance()
         self.render_template("settings.html", {'saved': False, 'cfg': cfg})
         
@@ -16,6 +17,7 @@ class SettingsHandler(base.BaseHandler):
         if not users.is_current_user_admin:
             self.error(403)
             return
+
         saved = False
         logging.info(self.request.params)
         cfg = Configuration.instance()
