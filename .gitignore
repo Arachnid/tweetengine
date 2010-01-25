@@ -8,3 +8,4 @@ develop-eggs
 *.pyc
 src/packages
 src/index.yaml
+*~

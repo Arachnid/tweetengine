@@ -9,11 +9,10 @@ from tweetengine import oauth
 
 class TweetHandler(base.BaseHandler):
     @base.requires_account
-    def post(self, current_account):
+    def post(self, account_name):
         tweet = model.OutgoingTweet(account=self.current_account,
                                     user=self.user_account,
                                     approved_by=self.user_account,
                                     message=self.request.get("tweet"))
         tweet.put()
-        
-        self.render_template("me.html", {"account": self.current_account})
+        self.redirect("/%s/" % (account_name,))

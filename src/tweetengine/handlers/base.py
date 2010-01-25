@@ -18,12 +18,12 @@ def requires_login(func):
 def requires_account(func):
     """A decorator that requires a logged in user and a current account."""
     @requires_login
-    def decorate(self, current_account, *args, **kwargs):
-        self.current_account = model.TwitterAccount.get_by_key_name(current_account)
+    def decorate(self, account_name, *args, **kwargs):
+        self.current_account = model.TwitterAccount.get_by_key_name(account_name)
         if not self.current_account:
             self.redirect('/')
         else:
-            return func(self, current_account, *args, **kwargs)
+            return func(self, account_name, *args, **kwargs)
     return decorate
 
 class Menu(object):
@@ -94,5 +94,6 @@ class UserHandler(BaseHandler):
         template_vars.update({
             "permissions": permissions,
             "current_account": self.current_account,
+            "logout_url": users.create_logout_url("/"),
         })
         super(UserHandler, self).render_template(template_path, template_vars)
