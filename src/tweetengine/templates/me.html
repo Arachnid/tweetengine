@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}My accounts{% endblock %}
 {% block body %}
-  <h1>My accounts</h1>
+  <h2>My accounts</h2>
   
   <table>
     <tr><th>Account name</th><th>Permission level</th></tr>
@@ -13,7 +13,7 @@
     {% endfor %}
   </table>
   
-  <h2>Add a new account</h2>
+  <h3>Add a new account</h3>
   <form method="POST" action="/me/add">
     <input type="text" name="username" />
     <input type="submit" value="Add" />

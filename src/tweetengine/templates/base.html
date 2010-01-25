@@ -1,12 +1,68 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!--
+Design by Free CSS Templates
+http://www.freecsstemplates.org
+Released for free under a Creative Commons Attribution 2.5 License
+
+Title      : Featuring
+Version    : 1.0
+Released   : 20090625
+Description: A two-column fixed-width template suitable for small websites.
+
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <title>{% block title %}Tweet Engine{% endblock %}</title>
-  {% block style %}
-  {% endblock %}
-  {% block head %}{% endblock %}
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>{% block title %}Tweet Engine{% endblock %}</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="static/default.css" rel="stylesheet" type="text/css" />
+{% block head %}{% endblock %}
 </head>
 <body>
-  {% block body %}{% endblock %}
+<div id="wrapper">
+    <div id="header">
+        <div id="logo">
+            <h1><a href="#">tweet engine</a></h1>
+            <h2><a href="#">control and share twitter posts</a></h2>
+        </div>
+        <!-- end div#logo -->
+        <div id="menu">
+            <ul>
+                {% block menu %}{% endblock %}
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">Products</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+        <!-- end div#menu -->
+    </div>
+    <!-- end div#header -->
+    <div id="page">
+        <div id="page-bgtop">
+            <div id="content">
+                <div class="post">
+                  {% block body %}{% endblock %}
+                </div>
+            </div>
+            <!-- end div#content -->
+            <div id="sidebar">
+                {% block sidebar %}{% endblock %}
+            </div>
+            <div style="clear: both; height: 1px"></div>
+        </div>
+    </div>
+    <!-- end div#page -->
+    <div id="footer">
+        <p id="legal">TweetEngine is a snowsprint 2010 creation.</p>
+        <p id="legal">Theme Copyright &copy; 2007 Featuring. 
+                      All Rights Reserved. Designed by 
+                      <a href="http://www.freecsstemplates.org/">Free CSS Templates</a>.
+        </p>
+    </div>
+    <!-- end div#footer -->
+</div>
+<!-- end div#wrapper -->
 </body>
 </html>
