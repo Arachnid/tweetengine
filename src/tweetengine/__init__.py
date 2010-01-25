@@ -5,7 +5,7 @@ from tweetengine import handlers
 
 application = webapp.WSGIApplication([
         ('/', handlers.HomepageHandler),
-        ('/me/', handlers.MeHandler),
-        ('/me/add', handlers.AddHandler),
-        ('/_oauth/callback', handlers.CallbackHandler),
+        ('/[a-zA-Z_]+/', handlers.DashboardHandler),
+        ('/add/callback', handlers.CallbackHandler),
+        ('/add', handlers.AddHandler),
 ], debug=True)
