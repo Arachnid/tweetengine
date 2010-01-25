@@ -8,8 +8,8 @@
   <table>
     {% for permission in permissions %}
       <tr>
-        <td><img src="{{permission.account.picture}}" alt=""/></td>
-        <td><a href="/{{permission.account.username}}">{{permission.account.name}} ({{permission.account.username}})</a></td>
+        <td><a href="/{{permission.account.username}}/"><img src="{{permission.account.picture}}" alt=""/></a></td>
+        <td><a href="/{{permission.account.username}}/">{{permission.account.name}} ({{permission.account.username}})</a></td>
       </tr>
     {% endfor %}
   </table>

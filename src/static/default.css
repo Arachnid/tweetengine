@@ -250,6 +250,7 @@ a:hover {
 	float: right;
 	width: 208px;
 	padding-top: 30px;
+    text-align: left;
 }
 
 #sidebar ul {
