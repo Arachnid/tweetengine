@@ -23,7 +23,6 @@ class SettingsHandler(base.BaseHandler):
         if params.get('settings', False):
             cfg.oauth_secret = params.get('twitterapisecret')
             cfg.oauth_key = params.get('twitterapikey')
-            logging.info(params.get('twitterapisecret')+ params.get('twitterapikey'))
             cfg.put()
             logging.info('Global settings changed!')
             saved = True
