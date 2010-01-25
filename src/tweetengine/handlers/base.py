@@ -11,6 +11,7 @@ def requires_login(func):
       self.redirect(users.create_login_url(self.request.url))
     else:
       return func(self, *args, **kwargs)
+  return decorate
 
 
 class BaseHandler(webapp.RequestHandler):

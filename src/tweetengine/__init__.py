@@ -1,8 +1,9 @@
 from google.appengine.ext import webapp
 
-import handlers
+from tweetengine import handlers
 
 
 application = webapp.WSGIApplication([
     ('/', handlers.HomepageHandler),
+    ('/me/', handlers.MeHandler),
 ], debug=True)

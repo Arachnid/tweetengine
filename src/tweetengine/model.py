@@ -1,5 +1,5 @@
 from google.appengine.ext import db
-from google.appengine.ext import polymodel
+from google.appengine.ext.db import polymodel
 
 
 class UserAccount(polymodel.PolyModel):
@@ -27,7 +27,9 @@ class Permission(db.Model):
 
 class OutgoingTweet(db.Model):
   account = db.ReferenceProperty(TwitterAccount, required=True)
-  user = db.ReferenceProperty(UserAccount, required=True)
-  approved_by = db.ReferenceProperty(UserAccount, required=True)
+  user = db.ReferenceProperty(UserAccount, required=True,
+                              collection_name='tweets')
+  approved_by = db.ReferenceProperty(UserAccount, required=True,
+                                     collection_name='approved_tweets')
   message = db.TextProperty(required=True)
   timestamp = db.DateTimeProperty(required=True, auto_now_add=True)
