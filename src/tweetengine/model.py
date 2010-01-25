@@ -1,6 +1,7 @@
 from google.appengine.ext import db
 from google.appengine.ext.db import polymodel
 
+from tweetengine import oauth
 
 class UserAccount(polymodel.PolyModel):
     pass
@@ -49,3 +50,7 @@ class Configuration(db.Model):
     @classmethod
     def instance(cls):
         return cls.get_or_insert('oauthkey')
+
+    def get_client(self, callback_url):
+        return oauth.TwitterClient(self.oauth_key, self.oauth_secret,
+                                   callback_url)
