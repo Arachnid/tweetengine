@@ -7,7 +7,7 @@ from tweetengine import model
 from tweetengine import oauth
 
 
-class AddHandler(base.BaseHandler):
+class AddHandler(base.UserHandler):
     @base.requires_login
     def get(self):
         config = model.Configuration.instance()
@@ -17,7 +17,7 @@ class AddHandler(base.BaseHandler):
         self.redirect(client.get_authorization_url())
 
 
-class CallbackHandler(base.BaseHandler):
+class CallbackHandler(base.UserHandler):
     @base.requires_login
     def get(self):
         config = model.Configuration.instance()
