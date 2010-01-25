@@ -1,11 +1,15 @@
 import os
 import tenjin
+from tenjin.helpers import *
 
 from google.appengine.api import users
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import template
 
 from tweetengine import model
+
+shared_cache = tenjin.GaeMemcacheCacheStorage()
+tengine = tenjin.Engine(cache=shared_cache)
 
 def requires_login(func):
     def decorate(self, *args, **kwargs):
@@ -47,7 +51,7 @@ class Menu(object):
     def rendered(self):   
         path = os.path.join(os.path.dirname(__file__), "..", "templates",
                             'menu.html')     
-        return template.render(path, {'menu': self})
+        return tengine.render(path, {'menu': self})
     
     def __iter__(self):
         def _iterator():
