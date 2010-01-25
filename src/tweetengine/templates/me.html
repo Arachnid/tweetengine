@@ -1,21 +1,7 @@
 {% extends "userbase.html" %}
 {% block title %}My accounts{% endblock %}
 {% block body %}
-  <h2>My accounts</h2>
-  
-  <table>
-    <tr><th>Account name</th><th>Permission level</th></tr>
-    {% for permission in permissions %}
-      <tr>
-        <td>{{permission.account.username}}</td>
-        <td>{% ifequal permission.role 1 %}User{% else %}Administrator{% endifequal %}</td>
-      </tr>
-    {% endfor %}
-  </table>
-  
-  <p><a href="/me/add">Add a new account</a></p>
-
-  <h3>Submit an interesting  Tweet</h3>
+  <h2>Submit a Tweet</h2>
   <form action="/{{current_account.username}}/tweet" method="post">
    <div> <textarea cols="40" rows="2" name="tweet" ></textarea>
     <input type="submit" value="Submit" /></div>

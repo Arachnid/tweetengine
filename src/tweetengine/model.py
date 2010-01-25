@@ -62,7 +62,7 @@ class OutgoingTweet(db.Model):
             additional_params={"status": self.message})
         if response.status_code == 200:
             self.sent = True
-        self.put()
+            self.put()
         return response
 
 
