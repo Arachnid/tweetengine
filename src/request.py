@@ -4,7 +4,7 @@ import tweetengine
 
 
 def main():
-  run_wsgi_app(tweetengine.application)
+    run_wsgi_app(tweetengine.application)
 
 if __name__ == '__main__':
-  main()
+    main()
