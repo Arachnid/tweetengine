@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block menu %}
-  <li class="active"><a href="/{{current_account}}/">Home</a></li>
-  <li><a href="/{{current_account}}/manage">Manage</a></li>
+  <li class="active"><a href="/{{current_account.username}}/">Home</a></li>
+  <li><a href="/{{current_account.username}}/manage">Manage</a></li>
 {% endblock %}
 {% block sidebar %}
   <h2>Accounts</h2>
