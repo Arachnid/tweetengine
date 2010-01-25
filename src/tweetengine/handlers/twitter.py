@@ -14,5 +14,8 @@ class TweetHandler(base.BaseHandler):
                                     user=self.user_account,
                                     approved_by=self.user_account,
                                     message=self.request.get("tweet"))
-        tweet.put()
+        response = tweet.send()
+        if response.status_code != 200:
+            self.error(500)
+            logging.error(response.content)
         self.redirect("/%s/" % (account_name,))

@@ -1,3 +1,4 @@
+from google.appengine.api import urlfetch
 from google.appengine.ext import db
 from google.appengine.ext.db import polymodel
 
@@ -21,6 +22,18 @@ class TwitterAccount(db.Model):
     def username(self):
         return self.key().name()
 
+    def make_request(self, url, additional_params=None, method=urlfetch.POST):
+        if not additional_params:
+            additional_params = {}
+        client = Configuration.instance().get_client("")
+        return client.make_request(
+            url,
+            token=self.oauth_token,
+            secret=self.oauth_secret,
+            additional_params=additional_params,
+            protected=True,
+            method=method)
+
 
 ROLE_USER = 1
 ROLE_ADMINISTRATOR = 2
@@ -41,6 +54,16 @@ class OutgoingTweet(db.Model):
                                        collection_name='approved_tweets')
     message = db.TextProperty(required=True)
     timestamp = db.DateTimeProperty(required=True, auto_now_add=True)
+    sent = db.BooleanProperty(required=True, default=False)
+
+    def send(self):
+        response = self.account.make_request(
+            "http://twitter.com/statuses/update.json",
+            additional_params={"status": self.message})
+        if response.status_code == 200:
+            self.sent = True
+        self.put()
+        return response
 
 
 class Configuration(db.Model):
