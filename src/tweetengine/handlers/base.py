@@ -41,4 +41,4 @@ class UserHandler(BaseHandler):
         template_vars.update({
             "permissions": permissions,
         })
-        self.render_template(template_path, template_vars)
+        super(UserHandler, self).render_template(template_path, template_vars)
