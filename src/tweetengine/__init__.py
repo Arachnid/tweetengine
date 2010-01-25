@@ -10,4 +10,6 @@ application = webapp.WSGIApplication([
         ('/add/callback', handlers.CallbackHandler),
         ('/add', handlers.AddHandler),
         ('/admin', handlers.SettingsHandler),
+        ('/tweet', handlers.TweetHandler),
 ], debug=True)
+
