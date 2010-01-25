@@ -1,0 +1,20 @@
+div.field {
+    clear: right;
+    float: left;
+    left: 0;
+    margin: 0 2em 1em 0 !important;
+    top: 0;
+}
+div.field label {
+    display: block;
+    float: left;
+    padding-top: 0.5em;
+    width: 140px;
+}
+div.field input[type="text"] {
+	width: 190px;
+}
+div.field.submit {
+	clear: both;
+	padding-left: 140px;
+}
