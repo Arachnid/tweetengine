@@ -8,6 +8,9 @@ setup(
     packages=find_packages('src'),
     zip_safe = True,
     include_package_data = False,
-    install_requires = ['twitter'],
+    install_requires = [
+        'lovely.gae',
+        'Tenjin',
+    ],
     extras_require = dict(test=['zope.testing', 'webtest']),
 )
