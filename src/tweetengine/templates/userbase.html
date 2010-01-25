@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block menu %}
+  <li class="active"><a href="/{{current_account}}/">Home</a></li>
+  <li><a href="/{{current_account}}/manage">Manage</a></li>
+{% endblock %}
+{% block sidebar %}
+  <h2>Accounts</h2>
+  <table>
+    {% for permission in permissions %}
+      <tr>
+        <td><img src="{{permission.account.picture}}" alt=""/></td>
+        <td><a href="/{{permission.account.username}}">{{permission.account.name}} ({{permission.account.username}})</a></td>
+      </tr>
+    {% endfor %}
+  </table>
+{% endblock %}

@@ -29,11 +29,10 @@ Description: A two-column fixed-width template suitable for small websites.
         <!-- end div#logo -->
         <div id="menu">
             <ul>
-                {% block menu %}{% endblock %}
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">Products</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
+                {% block menu %}
+                    <li class="active"><a href="/">Home</a></li>
+                    <li><a href="/about">About</a></li>
+                {% endblock %}
             </ul>
         </div>
         <!-- end div#menu -->
