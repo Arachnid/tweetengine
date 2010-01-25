@@ -16,7 +16,7 @@ Description: A two-column fixed-width template suitable for small websites.
 <title>{% block title %}Tweet Engine{% endblock %}</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
-<link href="static/default.css" rel="stylesheet" type="text/css" />
+<link href="/static/default.css" rel="stylesheet" type="text/css" />
 {% block head %}{% endblock %}
 </head>
 <body>
@@ -29,11 +29,9 @@ Description: A two-column fixed-width template suitable for small websites.
         <!-- end div#logo -->
         <div id="menu">
             <ul>
-                {% block menu %}{% endblock %}
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">Products</a></li>
+                <li class="active"><a href="#">Tweet</a></li>
+                <li><a href="#">My Account</a></li>
                 <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
             </ul>
         </div>
         <!-- end div#menu -->
