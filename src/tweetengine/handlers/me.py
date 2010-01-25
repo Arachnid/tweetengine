@@ -10,8 +10,7 @@ from tweetengine import oauth
 class MeHandler(base.BaseHandler):
     @base.requires_login
     def get(self):
-        user = users.get_current_user()
-        permissions = model.Permission.all().filter('user =', user).fetch(100)
+        permissions = model.Permission.all().filter('user =', self.user_account).fetch(100)
         self.render_template("me.html", {"permissions": permissions})
 
 
@@ -29,9 +28,23 @@ class CallbackHandler(base.BaseHandler):
     @base.requires_login
     def get(self):
         config = model.Configuration.instance()
-        client = oauth.TwitterClient(config.oauth_key, config.oauth_secret,
-                                     callback_url)
+        client = oauth.TwitterClient(config.oauth_key, config.oauth_secret, "")
         auth_token = self.request.get("oauth_token")
         auth_verifier = self.request.get("oauth_verifier")
         user_info = client.get_user_info(auth_token, auth_verifier=auth_verifier)
         
+        # Create the twitter account
+        account = model.TwitterAccount.get_or_insert(
+            user_info["username"],
+            oauth_token=user_info["token"],
+            oauth_secret=user_info["secret"],
+            name=user_info["name"],
+            picture=user_info["picture"])
+        # Add the user as an admin of the account
+        permission = model.Permission(
+            user=self.user_account,
+            account=account,
+            role=model.ROLE_ADMINISTRATOR)
+        permission.put()
+        
+        self.render_template("added.html", {"account": account})

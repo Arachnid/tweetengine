@@ -154,7 +154,8 @@ class OAuthClient():
 
     headers = {"Authorization": "OAuth"} if protected else {}
     payload = urlencode(params) if method == urlfetch.POST else None
-    return urlfetch.fetch(url, method=method, headers=headers, payload=payload)
+    return urlfetch.fetch(url, method=method, headers=headers, payload=payload,
+                          deadline=10.0)
 
   def get_authorization_url(self):
     """Get Authorization URL.

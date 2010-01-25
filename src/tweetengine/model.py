@@ -43,8 +43,8 @@ class OutgoingTweet(db.Model):
 
 
 class Configuration(db.Model):
-    oauthsecret = db.StringProperty()
-    oauthkey = db.StringProperty()
+    oauth_secret = db.StringProperty()
+    oauth_key = db.StringProperty()
     
     @classmethod
     def instance(cls):
