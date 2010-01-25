@@ -7,18 +7,11 @@ from tweetengine import model
 from tweetengine import oauth
 
 
-class MeHandler(base.BaseHandler):
-    @base.requires_login
-    def get(self):
-        permissions = model.Permission.all().filter('user =', self.user_account).fetch(100)
-        self.render_template("me.html", {"permissions": permissions})
-
-
 class AddHandler(base.BaseHandler):
     @base.requires_login
     def get(self):
         config = model.Configuration.instance()
-        callback_url = urlparse.urljoin(self.request.url, "/_oauth/callback")
+        callback_url = urlparse.urljoin(self.request.url, "/add/callback")
         client = oauth.TwitterClient(config.oauth_key, config.oauth_secret,
                                      callback_url)
         self.redirect(client.get_authorization_url())
