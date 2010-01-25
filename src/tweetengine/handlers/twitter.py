@@ -15,5 +15,4 @@ class TweetHandler(base.BaseHandler):
                                     approved_by=self.user_account,
                                     message=self.request.get("tweet"))
         tweet.put()
-        
-        self.render_template("me.html", {"account": self.current_account})
+        self.redirect("/%s/" % (current_account,))
