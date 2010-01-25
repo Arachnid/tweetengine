@@ -26,19 +26,60 @@ def requires_account(func):
             return func(self, current_account, *args, **kwargs)
     return decorate
 
+class Menu(object):
+    
+    
+    def __init__(self):
+        self.keys = list()
+        self.items = dict()
+    
+    def add(self, name, url):
+        if name in self.keys:
+            raise ValueError, "Name already registered"
+        self.keys.append(name)
+        self.items[name] = {'name': name, 'url': url, 'active': False}
+
+    def activate(self, name):
+        self.items[name]['active'] = True
+        
+    @property
+    def rendered(self):   
+        path = os.path.join(os.path.dirname(__file__), "..", "templates",
+                            'menu.html')     
+        return template.render(path, {'menu': self})
+    
+    def __iter__(self):
+        def _iterator():
+            for key in self.keys:
+                yield self.items[key]
+        return _iterator()
+    
 
 class BaseHandler(webapp.RequestHandler):
     def initialize(self, request, response):
+        self.menu = Menu()
         super(BaseHandler, self).initialize(request, response)
         self.user = users.get_current_user()
         if self.user:
             self.user_account = model.GoogleUserAccount.get_or_insert(
                 self.user.user_id(),
                 user=self.user)
+        self.init_menu()
+            
+    def init_menu(self):
+        if not self.user:
+            self.menu.add('login', '#')
+        else:
+            self.menu.add('dashboard', '#')
+            self.menu.add('manage', '#')
+            if users.is_current_user_admin:
+                 self.menu.add('admin', '#')
+            self.menu.add('logout', '#')
 
     def render_template(self, template_path, template_vars=None):
         if not template_vars:
             template_vars = {}
+        template_vars['menu'] = self.menu
         path = os.path.join(os.path.dirname(__file__), "..", "templates",
                                                 template_path)
         self.response.out.write(template.render(path, template_vars))
