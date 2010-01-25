@@ -18,12 +18,12 @@ def requires_login(func):
 def requires_account(func):
     """A decorator that requires a logged in user and a current account."""
     @requires_login
-    def decorate(self, current_account, *args, **kwargs):
-        self.current_account = model.TwitterAccount.get_by_key_name(current_account)
+    def decorate(self, account_name, *args, **kwargs):
+        self.current_account = model.TwitterAccount.get_by_key_name(account_name)
         if not self.current_account:
             self.redirect('/')
         else:
-            return func(self, current_account, *args, **kwargs)
+            return func(self, account_name, *args, **kwargs)
     return decorate
 
 

@@ -3,5 +3,5 @@ from tweetengine import model
 
 class DashboardHandler(base.UserHandler):
     @base.requires_account
-    def get(self, current_account):
+    def get(self, account_name):
         self.render_template("me.html")
