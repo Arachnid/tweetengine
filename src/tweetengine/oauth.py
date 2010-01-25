@@ -150,10 +150,13 @@ class OAuthClient():
     params["oauth_signature"] = digest_base64
 
     # Construct and fetch the URL and return the result object.
-    url = "%s?%s" % (url, urlencode(params))
+    if method == urlfetch.POST:
+        payload = urlencode(params)
+    else:
+        url = "%s?%s" % (url, urlencode(params))
+        payload = None
 
     headers = {"Authorization": "OAuth"} if protected else {}
-    payload = urlencode(params) if method == urlfetch.POST else None
     return urlfetch.fetch(url, method=method, headers=headers, payload=payload,
                           deadline=10.0)
 
