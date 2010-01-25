@@ -37,4 +37,5 @@ class CallbackHandler(base.UserHandler):
             role=model.ROLE_ADMINISTRATOR)
         permission.put()
         
+        self.current_account = account
         self.render_template("added.html", {"account": account})
