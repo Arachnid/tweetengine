@@ -11,7 +11,14 @@ class GoogleUserAccount(UserAccount):
 
 
 class TwitterAccount(db.Model):
-    username = db.StringProperty(required=True)
+    oauth_token = db.TextProperty(required=True)
+    oauth_secret = db.TextProperty(required=True)
+    name = db.TextProperty()
+    picture = db.TextProperty()
+
+    @property
+    def username(self):
+        return self.key().name()
 
 
 ROLE_USER = 1
