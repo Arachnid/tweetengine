@@ -35,9 +35,9 @@ class OutgoingTweet(db.Model):
   timestamp = db.DateTimeProperty(required=True, auto_now_add=True)
 
 class Configuration(db.Model):
-    secret = db.StringProperty()
-    key = db.StringProperty()
+    oauthsecret = db.StringProperty()
+    oauthkey = db.StringProperty()
     
     @classmethod
     def instance(cls):
-        return cls.get_or_insert('key')
+        return cls.get_or_insert('oauthkey')
