@@ -1,0 +1,7 @@
+parts
+bin
+eggs
+downloads
+src/tweetengine.egg-info
+develop-eggs
+.installed.cfg
