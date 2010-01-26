@@ -25,3 +25,6 @@ div.field.submit {
 	clear: both;
 	padding-left: 140px;
 }
+img {
+	border: none;
+}

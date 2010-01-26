@@ -12,7 +12,6 @@ class AdminForm(forms.Form):
 class SettingsHandler(base.BaseHandler):
     @base.requires_admin
     def get(self):
-        self.menu.activate('admin')      
         cfg = Configuration.instance()
         form = AdminForm(initial={
                 "oauth_key": cfg.oauth_key,
