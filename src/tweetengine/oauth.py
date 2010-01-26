@@ -109,16 +109,16 @@ class OAuthClient():
     self.access_url = access_url
     self.callback_url = callback_url
 
-  def make_request(self, url, token="", secret="", additional_params={},
-                   protected=False, method=urlfetch.GET):
-    """Make Request.
+  def prepare_request(self, url, token="", secret="", additional_params={},
+                      protected=False, method=urlfetch.GET):
+    """Prepare Request.
 
-    Make an authenticated request to any OAuth protected resource. At present
+    Prapres an authenticated request to any OAuth protected resource. At present
     only GET requests are supported.
 
     If protected is equal to True, the Authorization: OAuth header will be set.
 
-    A urlfetch response object is returned.
+    Tuple with url, querystring, headers, payload is returned
     """
 
     def encode(text):
@@ -153,14 +153,33 @@ class OAuthClient():
     digest_base64 = signature.digest().encode("base64").strip()
     params["oauth_signature"] = digest_base64
 
-    # Construct and fetch the URL and return the result object.
+    # Construct and fetch the URL and return the result object.    
     if method == urlfetch.POST:
         payload = urlencode(params)
+        querystring = None
     else:
-        url = "%s?%s" % (url, urlencode(params))
+        querystring = urlencode(params)
         payload = None
-
     headers = {"Authorization": "OAuth"} if protected else {}
+    return url, querystring, headers, payload
+    
+    
+  def make_request(self, url, token="", secret="", additional_params={},
+                   protected=False, method=urlfetch.GET):
+    """Make Request.
+
+    Make an authenticated request to any OAuth protected resource. At present
+    only GET requests are supported.
+
+    If protected is equal to True, the Authorization: OAuth header will be set.
+
+    A urlfetch response object is returned.
+    """      
+    url, query, headers, payload = self.prepare_request(url, token, secret, 
+                                                        additional_params, 
+                                                        protected, method)
+    if query is not None:
+        url = '%s?%s' % (url, query)
     return urlfetch.fetch(url, method=method, headers=headers, payload=payload,
                           deadline=10.0)
 
