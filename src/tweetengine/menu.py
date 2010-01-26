@@ -42,13 +42,22 @@ def login(handler):
     
 mainmenu.add('login', login)
 
+def dashboard(handler):
+    if not handler.user or not handler.current_account:
+        return dict(visible=False, active=False, url='')
+    import tweetengine.handlers
+    active = isinstance(handler, tweetengine.handlers.DashboardHandler)
+    url = '/%s' % handler.current_account.username
+    return dict(visible=True, active=active, url=url)
+
+mainmenu.add('dashboard', dashboard)
+
 def manage(handler):
-    if not handler.user or (getattr(handler, 'current_account') and 
-                            not handler.current_account):
+    if not handler.user or not handler.current_account:
         return dict(visible=False, active=False, url='')
     import tweetengine.handlers
     active = isinstance(handler, tweetengine.handlers.ManageHandler)
-    url = '/TODO' # what do we need here?
+    url = '/%s/manage' % handler.current_account.username
     return dict(visible=True, active=active, url=url)
 
 mainmenu.add('manage', manage)
