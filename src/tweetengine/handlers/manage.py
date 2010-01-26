@@ -14,8 +14,8 @@ from tweetengine import model
 class ManageHandler(base.UserHandler):
     @base.requires_account_admin
     def get(self, account_name):
-        permissions = model.Permission.all().filter("account =", self.current_account).fetch(100)
-        my_key = self.account_admin.key()
+        permissions = self.current_account.permission_set.fetch(100)
+        my_key = self.current_permission.key()
         self.render_template("manage.html", {
             "acct_permissions": permissions,
             "my_key": my_key,
@@ -24,9 +24,9 @@ class ManageHandler(base.UserHandler):
 
     @base.requires_account_admin
     def post(self, account_name):
-        permissions = model.Permission.all().filter("account =", self.current_account).fetch(100)
+        permissions = self.current_account.permission_set.fetch(100)
         permission_map = dict((x.key().id(), x) for x in permissions)
-        my_id = self.account_admin.key().id()
+        my_id = self.current_permission.key().id()
         
         # Handle deletion
         to_delete = [permission_map[int(x)]
@@ -108,10 +108,8 @@ class InviteHandler(base.UserHandler):
             return
         
         # Add the permission record
-        q = model.Permission.all()
-        q.filter("user =", self.user_account)
-        q.filter("account =", self.current_account)
-        if q.count() == 0:
+        permission = model.Permission.find(self.user_account, self.current_account)
+        if not permission:
             permission = model.Permission(
                 user=self.user_account,
                 account=self.current_account,

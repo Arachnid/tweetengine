@@ -13,3 +13,4 @@ src/index.yaml
 .project
 var
 .DS_Store
+*#*
