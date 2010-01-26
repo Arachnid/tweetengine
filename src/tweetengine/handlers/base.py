@@ -71,6 +71,7 @@ class Menu(object):
 
 class BaseHandler(webapp.RequestHandler):
     def initialize(self, request, response):
+        self.current_account = None
         self.menu = Menu()
         super(BaseHandler, self).initialize(request, response)
         self.user = users.get_current_user()
@@ -107,8 +108,10 @@ class UserHandler(BaseHandler):
                                                 self.user_account).fetch(100)
         template_vars.update({
             "permissions": permissions,
-            #"current_account": self.current_account,
+            "current_account": self.current_account,
             "logout_url": users.create_logout_url("/"),
             "menu": self.menu,
+            "user": users.get_current_user(),
+            "is_admin": users.is_current_user_admin(),
         })
         super(UserHandler, self).render_template(template_path, template_vars)
