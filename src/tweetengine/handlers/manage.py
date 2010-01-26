@@ -57,7 +57,7 @@ class ManageHandler(base.UserHandler):
         if invites:
             self.redirect("/%s/manage?sent=true" % (self.current_account.username,))
         else:
-            self.redirect("/%s/manage")
+            self.redirect("/%s/manage" % (self.current_account.username,))
 
     def send_invites(self, invites):
         config = model.Configuration.instance()

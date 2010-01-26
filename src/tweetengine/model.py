@@ -55,7 +55,7 @@ class OutgoingTweet(db.Model):
     account = db.ReferenceProperty(TwitterAccount, required=True)
     user = db.ReferenceProperty(UserAccount, required=True,
                                 collection_name='tweets')
-    approved_by = db.ReferenceProperty(UserAccount, required=True,
+    approved_by = db.ReferenceProperty(UserAccount,
                                        collection_name='approved_tweets')
     message = db.TextProperty(required=True)
     timestamp = db.DateTimeProperty(required=True, auto_now_add=True)

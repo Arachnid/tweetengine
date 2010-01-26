@@ -10,12 +10,16 @@ from tweetengine import oauth
 class TweetHandler(base.BaseHandler):
     @base.requires_account
     def post(self, account_name):
+        permission = model.Permission.all().filter('account =', self.current_account).filter('user =', self.user_account).get()
         tweet = model.OutgoingTweet(account=self.current_account,
                                     user=self.user_account,
-                                    approved_by=self.user_account,
                                     message=self.request.get("tweet"))
-        response = tweet.send()
-        if response.status_code != 200:
-            self.error(500)
-            logging.error(response.content)
+        if permission and permission.role == model.ROLE_ADMINISTRATOR:
+            tweet.approved_by=self.user_account
+            response = tweet.send()
+            if response.status_code != 200:
+                self.error(500)
+                logging.error(response.content)
+        else:
+            tweet.put()
         self.redirect("/%s/" % (account_name,))
