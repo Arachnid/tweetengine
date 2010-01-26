@@ -43,6 +43,23 @@ def requires_account(func):
             return func(self, account_name, *args, **kwargs)
     return decorate
 
+
+def requires_account_admin(func):
+    """A decorator that requires a logged in user who admins the current account."""
+    @requires_account
+    def decorate(self, account_name, *args, **kwargs):
+        q = model.Permission.all()
+        q.filter("account =", self.current_account)
+        q.filter("user =", self.user_account)
+        q.filter("role =", model.ROLE_ADMINISTRATOR)
+        self.account_admin = q.get()
+        if not self.account_admin:
+            self.error(403)
+        else:
+            return func(self, account_name, *args, **kwargs)
+    return decorate
+
+
 class BaseHandler(webapp.RequestHandler):
     def initialize(self, request, response):
         self.current_account = None
