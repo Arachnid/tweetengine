@@ -7,7 +7,7 @@
   <h2>Manage Account {{current_account.username}}</h2>
   <form method="POST" action="/{{current_account.username}}/manage">
       <table class="display">
-        <tr><th>Delete</th><th>Username</th><th>User</th><th>Admin</th></tr>
+        <tr><th>Delete</th><th>Email</th><th>User</th><th>Admin</th></tr>
         {% for permission in acct_permissions %}
             <tr>
               <td class="field"><input type="checkbox" name="delete" value="{{permission.key.id}}" {% ifequal permission.key my_key %}disabled="disabled" {% endifequal %}/></td>
