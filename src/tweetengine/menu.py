@@ -47,7 +47,7 @@ def dashboard(handler):
         return dict(visible=False, active=False, url='')
     import tweetengine.handlers
     active = isinstance(handler, tweetengine.handlers.DashboardHandler)
-    url = '/%s' % handler.current_account.username
+    url = '/%s/' % handler.current_account.username
     return dict(visible=True, active=active, url=url)
 
 mainmenu.add('dashboard', dashboard)
