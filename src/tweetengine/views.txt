@@ -1,0 +1,25 @@
+=========================
+Example application views
+=========================
+
+We use webtest to test browser views.
+
+    >>> from webtest import TestApp
+
+Get the application that is normally started via the appserver.
+
+    >>> from tweetengine import application as app
+
+And create a testing app.
+
+    >>> app = TestApp(app)
+
+
+We have one view to test - the actual start page. It returns very
+impressive contents :-).
+
+    >>> res = app.get('/tweet_engine/')
+
+
+
+
