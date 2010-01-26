@@ -43,12 +43,39 @@ ROLE_USER = 1
 ROLE_ADMINISTRATOR = 2
 
 
+def _normalize_key_name(key):
+    if isinstance(key, db.Model):
+        key = key.key()
+    if isinstance(key, db.Key):
+        key = key.id_or_name()
+    return key
+
+
 class Permission(db.Model):
     user = db.ReferenceProperty(UserAccount, required=True)
     account = db.ReferenceProperty(TwitterAccount, required=True)
     role = db.IntegerProperty(required=True,
                               choices=[ROLE_USER, ROLE_ADMINISTRATOR])
     invite_nonce = db.StringProperty()
+
+    @classmethod
+    def create(cls, user, account, role, invite_nonce=None):
+        user_name = _normalize_key_name(user)
+        account_name = _normalize_key_name(account)
+        key_name = "%s:%s" % (user_name, account_name)
+        return cls(
+            key_name=key_name,
+            user=user,
+            account=account,
+            role=role,
+            invite_nonce=invite_nonce)
+
+    @classmethod
+    def find(cls, user, account):
+        user = _normalize_key_name(user)
+        account = _normalize_key_name(account)
+        key_name = "%s:%s" % (user, account)
+        return cls.get_by_key_name(key_name)
 
 
 class OutgoingTweet(db.Model):

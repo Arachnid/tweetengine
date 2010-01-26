@@ -32,6 +32,8 @@ def requires_account(func):
     @requires_login
     def decorate(self, account_name, *args, **kwargs):
         self.current_account = model.TwitterAccount.get_by_key_name(account_name)
+        self.current_permission = model.Permission.find(self.user_account,
+                                                        self.current_account)
         if not self.current_account:
             self.redirect('/')
         else:
@@ -43,12 +45,7 @@ def requires_account_admin(func):
     """A decorator that requires a logged in user who admins the current account."""
     @requires_account
     def decorate(self, account_name, *args, **kwargs):
-        q = model.Permission.all()
-        q.filter("account =", self.current_account)
-        q.filter("user =", self.user_account)
-        q.filter("role =", model.ROLE_ADMINISTRATOR)
-        self.account_admin = q.get()
-        if not self.account_admin:
+        if not self.current_permission or self.current_permission.role != model.ROLE_ADMINISTRATOR:
             self.error(403)
         else:
             return func(self, account_name, *args, **kwargs)
@@ -58,6 +55,7 @@ def requires_account_admin(func):
 class BaseHandler(webapp.RequestHandler):
     def initialize(self, request, response):
         self.current_account = None
+        self.current_permission = None
         super(BaseHandler, self).initialize(request, response)
         self.user = users.get_current_user()
         if self.user:
@@ -78,11 +76,11 @@ class UserHandler(BaseHandler):
     def render_template(self, template_path, template_vars=None):
         if not template_vars:
             template_vars = {}
-        permissions = model.Permission.all().filter('user =', 
-                                                self.user_account).fetch(100)
+        permissions = self.user_account.permission_set.fetch(100)
         template_vars.update({
             "permissions": permissions,
             "current_account": self.current_account,
+            "current_permission": self.current_permission,
             "logout_url": users.create_logout_url("/"),
             "mainmenu": mainmenu(self),
             "user": users.get_current_user(),

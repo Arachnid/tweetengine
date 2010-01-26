@@ -10,7 +10,7 @@ from tweetengine import oauth
 class TweetHandler(base.BaseHandler):
     @base.requires_account
     def post(self, account_name):
-        permission = model.Permission.all().filter('account =', self.current_account).filter('user =', self.user_account).get()
+        permission = self.current_permission
         tweet = model.OutgoingTweet(account=self.current_account,
                                     user=self.user_account,
                                     message=self.request.get("tweet"))

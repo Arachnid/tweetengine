@@ -34,11 +34,8 @@ class CallbackHandler(base.UserHandler):
             name=user_info["name"],
             picture=user_info["picture"])
         # Add the user as an admin of the account
-        permission = model.Permission(
-            user=self.user_account,
-            account=account,
-            role=model.ROLE_ADMINISTRATOR)
+        permission = model.Permission.create(self.user_account, account,
+                                             model.ROLE_ADMINISTRATOR)
         permission.put()
-        
         self.current_account = account
         self.render_template("added.html", {"account": account})

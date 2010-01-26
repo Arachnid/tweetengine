@@ -6,7 +6,7 @@ from tweetengine import model
 class HomepageHandler(base.BaseHandler):
     def get(self):
         if self.user:
-            permission = model.Permission.all().filter("user =", self.user_account).get()
+            permission = self.user_account.permission_set.get()
             if permission:
                 self.redirect("/%s/" % (permission.account.username,))
             else:

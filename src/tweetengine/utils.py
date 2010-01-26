@@ -31,8 +31,8 @@ def addUsers():
         usr = model.GoogleUserAccount(user=user)
         usr.put()
         
-    permission = model.Permission(
-        user=usr,
-        account=model.TwitterAccount.get_by_key_name('tweet_engine'),
-        role=model.ROLE_ADMINISTRATOR)
+    permission = model.Permission.create(
+        usr,
+        model.TwitterAccount.get_by_key_name('tweet_engine'),
+        model.ROLE_ADMINISTRATOR)
     permission.put()

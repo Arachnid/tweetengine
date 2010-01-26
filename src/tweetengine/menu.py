@@ -56,11 +56,7 @@ mainmenu.add('dashboard', dashboard)
 def manage(handler):
     if not handler.user or not handler.current_account:
         return dict(visible=False, active=False, url='')
-    q = model.Permission.all()
-    q.filter("user =", handler.user_account)
-    q.filter("account =", handler.current_account)
-    q.filter("role =", model.ROLE_ADMINISTRATOR)
-    if q.count() == 0:
+    if not handler.current_permission or handler.current_permission.role != model.ROLE_ADMINISTRATOR:
         return dict(visible=False, active=False, url='')
     import tweetengine.handlers
     active = isinstance(handler, tweetengine.handlers.ManageHandler)
