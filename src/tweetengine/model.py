@@ -48,6 +48,7 @@ class Permission(db.Model):
     account = db.ReferenceProperty(TwitterAccount, required=True)
     role = db.IntegerProperty(required=True,
                               choices=[ROLE_USER, ROLE_ADMINISTRATOR])
+    invite_nonce = db.StringProperty()
 
 
 class OutgoingTweet(db.Model):
@@ -75,6 +76,7 @@ class Configuration(db.Model):
     
     oauth_secret = db.StringProperty()
     oauth_key = db.StringProperty()
+    mail_from = db.StringProperty()
     
     @classmethod
     def instance(cls):

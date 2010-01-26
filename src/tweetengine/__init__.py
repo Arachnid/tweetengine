@@ -7,6 +7,7 @@ application = webapp.WSGIApplication([
         ('/', handlers.HomepageHandler),
         ('/([a-zA-Z_]+)/', handlers.DashboardHandler),
         ('/([a-zA-Z_]+)/manage', handlers.ManageHandler),
+        ('/([a-zA-Z_]+)/invite', handlers.InviteHandler),
         ('/add/callback', handlers.CallbackHandler),
         ('/add', handlers.AddHandler),
         ('/admin', handlers.SettingsHandler),
