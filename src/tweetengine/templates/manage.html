@@ -1,10 +1,25 @@
 {% extends "userbase.html" %}
 {% block title %}{{current_account.username}} - Manage Account{% endblock %}
 {% block body %}
-  <h2>Submit a Tweet</h2>
-  <form action="/{{current_account.username}}/tweet" method="post">
-   <div> <textarea cols="40" rows="2" name="tweet" ></textarea>
-    <input type="submit" value="Submit" /></div>
+  <h2>Manage Account {{current_account.username}}</h2>
+  <form method="POST" action="/{{current_account.username}}/manage">
+      <table class="display">
+        <tr><th>Delete</th><th>Username</th><th>User</th><th>Admin</th></tr>
+        {% for permission in permissions %}
+            <tr>
+              <td class="field"><input type="checkbox" name="delete" value="{{permission.key.id}}" /></td>
+              <td>{{permission.user.get_username}}</td>
+              <td class="field"><input type="radio" name="permission.{{permission.key.id}}" value="1" {% ifequal permission.role 1 %}checked="checked"{% endifequal %} /></td>
+              <td class="field"><input type="radio" name="permission.{{permission.key.id}}" value="2" {% ifequal permission.role 2 %}checked="checked"{% endifequal %} /></td>
+            </tr>
+        {% endfor %}
+        <tr>
+          <td></td>
+          <td><input type="text" name="username" /></td>
+          <td class="field"><input type="radio" name="new_permission" value="1" /></td>
+          <td class="field"><input type="radio" name="new_permission" value="2" /></td>
+        </tr>
+      </table>
+      <input type="submit" value="Update" />
   </form>
 {% endblock %}
-  

@@ -12,5 +12,5 @@ class HomepageHandler(base.BaseHandler):
             else:
                 self.render_template("gettingstarted.html")
         else:
-            main_url = users.create_login_url("/me/")
+            main_url = users.create_login_url("/")
             self.render_template("index.html", {"main_url": main_url})

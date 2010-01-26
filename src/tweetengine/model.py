@@ -5,11 +5,15 @@ from google.appengine.ext.db import polymodel
 from tweetengine import oauth
 
 class UserAccount(polymodel.PolyModel):
-    pass
+    def get_username(self):
+        raise NotImplementedError()
 
 
 class GoogleUserAccount(UserAccount):
     user = db.UserProperty(required=True)
+
+    def get_username(self):
+        return self.user.email()
 
 
 class TwitterAccount(db.Model):

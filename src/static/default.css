@@ -42,6 +42,14 @@ p {
 blockquote {
 }
 
+th, td.field {
+  text-align: center;
+}
+
+table.display td {
+    padding: 5px;
+}
+
 li {
   margin-left: 1.5em;
 }
