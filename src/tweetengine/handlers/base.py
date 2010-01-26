@@ -96,7 +96,8 @@ class UserHandler(BaseHandler):
                                                 self.user_account).fetch(100)
         template_vars.update({
             "permissions": permissions,
-            "current_account": self.current_account,
+            #"current_account": self.current_account,
             "logout_url": users.create_logout_url("/"),
+            "menu": self.menu,
         })
         super(UserHandler, self).render_template(template_path, template_vars)
