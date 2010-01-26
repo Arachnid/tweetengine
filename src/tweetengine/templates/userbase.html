@@ -8,7 +8,7 @@
   <h2>Accounts</h2>
   <table>
     {% for permission in permissions %}
-      <tr>
+      <tr{% ifequal permission.account.key current_account.key %} class="selected"{% endifequal %}>
         <td><a href="/{{permission.account.username}}/"><img src="{{permission.account.picture}}" alt=""/></a></td>
         <td><a href="/{{permission.account.username}}/">{{permission.account.name}} ({{permission.account.username}})</a></td>
       </tr>

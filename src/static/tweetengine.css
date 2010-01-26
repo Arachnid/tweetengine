@@ -31,3 +31,6 @@ img {
 label.tweet-oversize {
 	color: red;
 }
+.selected {
+	background: #CCCCCC;
+}
