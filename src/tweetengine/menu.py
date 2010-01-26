@@ -44,11 +44,14 @@ def login(handler):
 mainmenu.add('login', login)
 
 def dashboard(handler):
-    if not handler.user or not handler.current_account:
-        return dict(visible=False, active=False, url='')
     import tweetengine.handlers
+    if not handler.user or not handler.current_account and \
+       not isinstance(handler, tweetengine.handlers.SettingsHandler):
+        return dict(visible=False, active=False, url='')
     active = isinstance(handler, tweetengine.handlers.DashboardHandler)
-    url = '/%s/' % handler.current_account.username
+    url = '/'
+    if not isinstance(handler, tweetengine.handlers.SettingsHandler):
+        url = '/%s/' % handler.current_account.username
     return dict(visible=True, active=active, url=url)
 
 mainmenu.add('dashboard', dashboard)
