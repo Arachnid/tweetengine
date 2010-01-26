@@ -10,9 +10,12 @@ from tweetengine import oauth
 class AddHandler(base.UserHandler):
     @base.requires_login
     def get(self):
-        callback_url = urlparse.urljoin(self.request.url, "/add/callback")
-        client = model.Configuration.instance().get_client(callback_url)
-        self.redirect(client.get_authorization_url())
+        try:
+            callback_url = urlparse.urljoin(self.request.url, "/add/callback")
+            client = model.Configuration.instance().get_client(callback_url)
+            self.redirect(client.get_authorization_url())
+        except oauth.OAuthException, e:
+            self.render_template("invalid_configuration.html")
 
 
 class CallbackHandler(base.UserHandler):
@@ -37,4 +40,5 @@ class CallbackHandler(base.UserHandler):
             role=model.ROLE_ADMINISTRATOR)
         permission.put()
         
+        self.current_account = account
         self.render_template("added.html", {"account": account})

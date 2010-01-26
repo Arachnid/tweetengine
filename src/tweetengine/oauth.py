@@ -60,6 +60,10 @@ from urllib import unquote as urlunquote
 import logging
 
 
+class OAuthException(Exception):
+    pass
+
+
 def get_oauth_client(service, key, secret, callback_url):
   """Get OAuth Client.
 
@@ -261,7 +265,7 @@ class OAuthClient():
 
     if not (token and secret) or result.status_code != 200:
       logging.error("Could not extract token/secret: %s" % result.content)
-      raise Exception, "Problem talking to the service"
+      raise OAuthException("Problem talking to the service")
 
     return {
       "service": self.service_name,

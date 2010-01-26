@@ -42,10 +42,8 @@ p {
 blockquote {
 }
 
-ul, ol, li {
-	margin: 0px;
-	padding: 0px;
-	list-style: none;
+li {
+  margin-left: 1.5em;
 }
 
 a {

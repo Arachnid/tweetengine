@@ -4,4 +4,4 @@ from tweetengine import model
 class ManageHandler(base.UserHandler):
     @base.requires_account
     def get(self, account_name):
-        self.render_template("me.html")
+        self.render_template("manage.html")

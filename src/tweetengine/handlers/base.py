@@ -21,6 +21,17 @@ def requires_login(func):
     return decorate
 
 
+def requires_admin(func):
+    def decorate(self, *args, **kwargs):
+        if not self.user:
+            self.redirect(users.create_login_url(self.request.url))
+        elif not users.is_current_user_admin():
+            self.error(403)
+        else:
+            return func(self, *args, **kwargs)
+    return decorate
+
+
 def requires_account(func):
     """A decorator that requires a logged in user and a current account."""
     @requires_login
@@ -34,6 +45,7 @@ def requires_account(func):
 
 class BaseHandler(webapp.RequestHandler):
     def initialize(self, request, response):
+        self.current_account = None
         super(BaseHandler, self).initialize(request, response)
         self.user = users.get_current_user()
         if self.user:
@@ -58,8 +70,10 @@ class UserHandler(BaseHandler):
                                                 self.user_account).fetch(100)
         template_vars.update({
             "permissions": permissions,
-            #"current_account": self.current_account,
+            "current_account": self.current_account,
             "logout_url": users.create_logout_url("/"),
             "mainmenu": mainmenu(self),
+            "user": users.get_current_user(),
+            "is_admin": users.is_current_user_admin(),
         })
         super(UserHandler, self).render_template(template_path, template_vars)

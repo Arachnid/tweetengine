@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Invalid Configuration{% endblock %}
+{% block body %}
+  <h2>Invalid Configuration</h2>
+  <p>We were unable to communicate with the Twitter server. This is probably
+  because the administrator of this app has not set up the Twitter OAuth settings
+  correctly.</p>
+  
+  {% if is_admin %}
+    <p><a href="/admin">Click here</a> to set the OAuth settings.</p>
+  {% else %}
+    <p>Ask your administrator to set up the OAuth settings on the admin page.</p>
+  {% endif %}
+{% endblock %}

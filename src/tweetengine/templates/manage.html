@@ -1,5 +1,5 @@
 {% extends "userbase.html" %}
-{% block title %}{{current_account.username}} - Account Info{% endblock %}
+{% block title %}{{current_account.username}} - Manage Account{% endblock %}
 {% block body %}
   <h2>Submit a Tweet</h2>
   <form action="/{{current_account.username}}/tweet" method="post">
