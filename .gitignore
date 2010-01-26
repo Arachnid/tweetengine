@@ -12,3 +12,4 @@ src/index.yaml
 .pydevproject
 .project
 var
+.DS_Store
