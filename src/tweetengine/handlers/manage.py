@@ -32,6 +32,7 @@ class ManageHandler(base.UserHandler):
         db.update(to_update)
 
         # Handle new users
-        for new_user in self.request.POST.getall("username"):
+        for new_user, role in zip(self.request.POST.getall("username"), self.request.POST.getall("new_permission")):
+            pass
         
         self.redirect(self.url)
