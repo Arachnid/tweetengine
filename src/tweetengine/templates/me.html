@@ -3,8 +3,10 @@
 {% block body %}
   <h2>Submit a Tweet</h2>
   <form action="/{{current_account.username}}/tweet" method="post">
-   <div> <textarea cols="40" rows="2" name="tweet" ></textarea>
-    <input type="submit" value="Submit" /></div>
+   <div> 
+     <textarea id="tweetarea" cols="40" rows="4" name="tweet" ></textarea>
+     <label id="tweetlabel" for="tweet">140</label>
+     <input type="submit" value="Submit" /></div>
   </form>
 {% endblock %}
   

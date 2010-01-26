@@ -20,6 +20,7 @@ if os.path.isdir(LIB_DIR):
     sys.path[0:0] = [p for p in _paths if p not in sys.path]
 
 from lovely.gae.environment import setUp
+
 # this adds the sdk librarires to the path if not already there
 setUp(PROJECT_DIR)
 
