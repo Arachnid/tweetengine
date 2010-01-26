@@ -67,12 +67,16 @@ class OutgoingTweet(db.Model):
 
 
 class Configuration(db.Model):
+    INSTANCE = None
+    
     oauth_secret = db.StringProperty()
     oauth_key = db.StringProperty()
     
     @classmethod
     def instance(cls):
-        return cls.get_or_insert('oauthkey')
+        if not cls.INSTANCE:
+            cls.INSTANCE = cls.get_or_insert('oauthkey')
+        return cls.INSTANCE
 
     def get_client(self, callback_url):
         return oauth.TwitterClient(self.oauth_key, self.oauth_secret,
