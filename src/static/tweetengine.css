@@ -28,7 +28,19 @@ div.field.submit {
 img {
 	border: none;
 }
-label.tweet-oversize {
+#tweetbox {
+    width: 500px;
+}
+#tweetarea {
+    width: 500px;
+    height: 50px;
+    font-size: 1.3em;
+}
+#tweetlabel {
+    float: right;
+    margin: 0;
+}
+#tweetlabel.tweet-oversize {
 	color: red;
 }
 .selected {

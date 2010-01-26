@@ -1,5 +1,5 @@
 jQuery(document).ready(function() {
-	jQuery("#tweetarea").keyup(function(event){
+	jQuery("#tweetarea").keypress(function(event){
 		var length = 140 - jQuery(this).val().length;
 		if (length < 0) {
 			jQuery("#tweetsubmit").attr('disabled', 'disabled');
