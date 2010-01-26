@@ -1,34 +1,33 @@
 import logging
+from django import newforms as forms
 from google.appengine.api import users
 from tweetengine.handlers import base
 from tweetengine.model import Configuration
 
+class AdminForm(forms.Form):
+    oauth_key = forms.CharField()
+    oauth_secret = forms.CharField()
+
+
 class SettingsHandler(base.BaseHandler):
-    
+    @base.requires_admin
     def get(self):
-        if not users.is_current_user_admin():
-            self.error(403)
-            return
         self.menu.activate('admin')      
         cfg = Configuration.instance()
-        self.render_template("settings.html", {'saved': False, 'cfg': cfg})
+        form = AdminForm(initial={
+                "oauth_key": cfg.oauth_key,
+                "oauth_secret": cfg.oauth_secret
+        })
+        self.render_template("settings.html", {'form': form})
         
+    @base.requires_admin
     def post(self):
-        if not users.is_current_user_admin:
-            self.error(403)
-            return
-
+        form = AdminForm(self.request.POST)
         saved = False
-        logging.info(self.request.params)
-        cfg = Configuration.instance()
-        params = self.request.params
-        if params.get('settings', False):
-            cfg.oauth_secret = params.get('twitterapisecret')
-            cfg.oauth_key = params.get('twitterapikey')
+        if form.is_valid():
+            cfg = Configuration.instance()
+            cfg.oauth_key = form.clean_data['oauth_key']
+            cfg.oauth_secret = form.clean_data['oauth_secret']
             cfg.put()
-            logging.info('Global settings changed!')
             saved = True
-        if params.get('settings.cancel', False):
-            self.redirect('/')
-            return
-        self.render_template("settings.html", {'saved': saved, 'cfg': cfg})
+        self.render_template("settings.html", {'form': form, 'saved': saved})

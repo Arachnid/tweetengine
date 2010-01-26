@@ -20,6 +20,17 @@ def requires_login(func):
     return decorate
 
 
+def requires_admin(func):
+    def decorate(self, *args, **kwargs):
+        if not self.user:
+            self.redirect(users.create_login_url(self.request.url))
+        elif not users.is_current_user_admin():
+            self.error(403)
+        else:
+            return func(self, *args, **kwargs)
+    return decorate
+
+
 def requires_account(func):
     """A decorator that requires a logged in user and a current account."""
     @requires_login

@@ -6,17 +6,9 @@
   <p class="notification">Settings saved.</p>
   {% endif %}
   <form action="/admin" method="post" id="global-settings-form">
-      <div class="field">
-          <label for="twitterapisecret">Twitter API Secret</label>
-          <input type="text" name="twitterapisecret" value="{{cfg.oauth_secret}}"/>
-      </div>
-      <div class="field">
-          <label for="twitterapikey">Twitter API Key</label>
-          <input type="text" name="twitterapikey" value="{{cfg.oauth_key}}"/>
-      </div>
-      <div class="field submit">
-           <input name="settings" type="submit" value="save" />
-           <input name="settings.cancel" type="submit" value="cancel" />
-      </div>      
+      <table>
+          {{form}}
+          <tr><th></th><td><input name="settings" type="submit" value="save" /></td></tr>
+      </table>
   </form>
 {% endblock %}
