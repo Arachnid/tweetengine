@@ -1,11 +1,16 @@
 {% extends "userbase.html" %}
 {% block title %}{{current_account.username}} - Account Info{% endblock %}
 {% block body %}
-  <h2>Submit a Tweet</h2>
-  <form action="/{{current_account.username}}/tweet" method="post">
-   <div> <textarea cols="40" rows="2" name="tweet" ></textarea>
-    <input type="submit" value="Submit" /></div>
-  </form>
+  <div id="tweetbox">
+      <p id="tweetlabel">140</p>
+      <h2>What's happening with {{current_account.username}}?</h2>
+      <form action="/{{current_account.username}}/tweet" method="post">
+       <div> 
+         <textarea id="tweetarea" name="tweet" ></textarea>
+         <input id="tweetsubmit" type="submit" value="Submit" />
+       </div>
+      </form>
+  </div>
 
   <h2>Unsent tweets</h2>
   <form method="POST" action="/{{current_account.username}}/">
