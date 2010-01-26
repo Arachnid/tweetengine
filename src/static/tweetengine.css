@@ -28,3 +28,7 @@ div.field.submit {
 img {
 	border: none;
 }
+
+.selected {
+	background: #CCCCCC;
+}
