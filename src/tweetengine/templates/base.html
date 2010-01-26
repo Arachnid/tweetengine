@@ -25,18 +25,10 @@ Description: A two-column fixed-width template suitable for small websites.
     <div id="header">
         <div id="logo">
             <h1><a href="#">tweet engine</a></h1>
-            <h2><a href="#">control and share twitter posts</a></h2>
+            <h2><a href="#">share accounts, control tweets</a></h2>
         </div>
         <!-- end div#logo -->
-        <div id="menu">
-            <ul>
-                {% block menu %}
-                    <li class="active"><a href="/">Home</a></li>
-                    <li><a href="/about">About</a></li>
-                    <li><a href="{{main_url}}">Log In</a></li>
-                {% endblock %}
-            </ul>
-        </div>
+        {{menu.rendered}}
         <!-- end div#menu -->
     </div>
     <!-- end div#header -->

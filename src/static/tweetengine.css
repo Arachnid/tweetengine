@@ -1,3 +1,10 @@
+#logo {
+	padding-top: 10px;
+	height: 81px;
+}
+#logo h2 {
+	margin: 0;
+}
 div.field {
     clear: right;
     float: left;

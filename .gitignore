@@ -9,3 +9,6 @@ develop-eggs
 src/packages
 src/index.yaml
 *~
+.pydevproject
+.project
+var
