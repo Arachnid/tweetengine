@@ -28,3 +28,6 @@ div.field.submit {
 img {
 	border: none;
 }
+label.tweet-oversize {
+	color: red;
+}
