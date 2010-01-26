@@ -9,7 +9,6 @@ class SettingsHandler(base.BaseHandler):
         if not users.is_current_user_admin():
             self.error(403)
             return
-        self.menu.activate('admin')      
         cfg = Configuration.instance()
         self.render_template("settings.html", {'saved': False, 'cfg': cfg})
         
