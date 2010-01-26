@@ -16,7 +16,8 @@ class SettingsHandler(base.BaseHandler):
         cfg = Configuration.instance()
         form = AdminForm(initial={
                 "oauth_key": cfg.oauth_key,
-                "oauth_secret": cfg.oauth_secret
+                "oauth_secret": cfg.oauth_secret,
+                "mail_from": cfg.mail_from,
         })
         self.render_template("settings.html", {'form': form})
         
