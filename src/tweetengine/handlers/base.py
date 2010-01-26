@@ -1,6 +1,4 @@
 import os
-import tenjin
-from tenjin.helpers import *
 
 from google.appengine.api import users
 from google.appengine.ext import webapp
@@ -8,9 +6,6 @@ from google.appengine.ext.webapp import template
 
 from tweetengine import model
 from tweetengine.menu import mainmenu
-
-shared_cache = tenjin.GaeMemcacheCacheStorage()
-tengine = tenjin.Engine(cache=shared_cache)
 
 def requires_login(func):
     def decorate(self, *args, **kwargs):
