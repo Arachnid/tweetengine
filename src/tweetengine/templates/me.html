@@ -3,7 +3,7 @@
 {% block body %}
   <div id="tweetbox">
       <p id="tweetlabel">140</p>
-      <h2>Submit a tweet</h2>
+      <h2>What's happening with {{current_account.username}}?</h2>
       <form action="/{{current_account.username}}/tweet" method="post">
        <div> 
          <textarea id="tweetarea" name="tweet" ></textarea>
