@@ -78,7 +78,10 @@ class UserHandler(BaseHandler):
         if not template_vars:
             template_vars = {}
         permissions = self.user_account.permission_set.fetch(100)
+        my_acct_keys = set(x.account.key() for x in permissions)
         public_accts = model.TwitterAccount.all().filter("public =", True).fetch(100)
+        public_accts = [x for x in public_accts
+                        if x.key() not in my_acct_keys]
         logging.warn(public_accts)
         template_vars.update({
             "permissions": permissions,
