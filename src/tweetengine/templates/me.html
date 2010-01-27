@@ -7,17 +7,19 @@
 <script type="text/javascript" src="/static/tweetengine.js"></script>
 {% endblock %}
 {% block body %}
-  <div id="tweetbox">
-      <p id="tweetlabel">140</p>
-      <h2>What's happening with {{current_account.username}}?</h2>
-      <form action="/{{current_account.username}}/tweet" method="post">
-       <div> 
-         <textarea id="tweetarea" name="tweet" ></textarea>
-         <input id="tweetsubmit" type="submit" value="Submit" />
-       </div>
-      </form>
+  <div class="section">
+      <div id="tweetbox">
+          <p id="tweetlabel">140</p>
+          <h2>What's happening with {{current_account.username}}?</h2>
+          <form action="/{{current_account.username}}/tweet" method="post">
+           <div> 
+             <textarea id="tweetarea" name="tweet" ></textarea>
+             <input id="tweetsubmit" type="submit" value="Submit" />
+           </div>
+          </form>
+      </div>
   </div>
-
+  
   {% if tweets %}
       <div class="section">
           <h2>Pending tweets</h2>
