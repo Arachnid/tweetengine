@@ -14,7 +14,7 @@
       <form action="/{{current_account.username}}/tweet" method="post">
        <div> 
          <textarea id="tweetarea" name="tweet" ></textarea>
-         <input id="tweetsubmit" type="submit" value="Submit" />
+         <input id="tweetsubmit" type="submit" value="Submit" disabled="disabled" />
        </div>
       </form>
   </div>
@@ -68,19 +68,15 @@
     </ul>
     <div id="tabs-mytweets">
         <span class="loading-timeline">Loading {{current_account.username}} tweets...</span>
-        <a href=""></a>
     </div>
     <div id="tabs-friends">
         <span class="loading-timeline">Loading friends tweets...</span>
-        <a href=""></a>
     </div>
     <div id="tabs-mentions">
         <span class="loading-timeline">Loading mentions...</span>
-        <a href=""></a>
     </div>
     <div id="tabs-direct">
         <span class="loading-timeline">Loading direct messages...</span>
-        <a href=""></a>
     </div>
     
   </div>
