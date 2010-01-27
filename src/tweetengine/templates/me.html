@@ -17,7 +17,8 @@
        </div>
       </form>
   </div>
-
+</div>
+<div class="post">
   <h2>Unsent tweets</h2>
   <form method="POST" action="/{{current_account.username}}/">
       <table class="display">
@@ -33,16 +34,32 @@
       </table>
       <input type="submit" value="Submit" />
   </form>
-  
+</div>
+<div class="post">  
   <h2>Timeline</h2>
+  
+  <ol id="tweet-template">
+    <li>
+        <span class="tweet-thumb"><a href="USERURL"><img width="48" height="48" src="IMGAGEURL" alt="IMAGEALT"/></a></span>  
+        <span class="tweet-user"><a title="TITLE" href="TWEETURL">TWEETUSERNAME</a></span>
+        <span class="tweet-content">TWEETCONTENT</span>
+        <span class="tweet-meta">
+            <a class="tweet-dateurl" href="TWEETURL" rel="bookmark" class="entry-date">DATE</a>
+            from 
+            <span class="tweet-source">SOURCE</span>
+        </span>
+    </li>
+  </ol>  
+  
+              
   <div id="timeline">
     <ul>
-        <li><a href="#tabs-tweets">{{current_account.username}}</a></li>
+        <li><a href="#tabs-mytweets">{{current_account.username}}</a></li>
         <li><a href="#tabs-friends">friends</a></li>
         <li><a href="#tabs-mentions">mentions</a></li>
         <li><a href="#tabs-direct">direct messages</a></li>
     </ul>
-    <div id="tabs-tweets">
+    <div id="tabs-mytweets">
         <span class="loading-timeline">Loading {{current_account.username}} tweets...</span>
         <a href=""></a>
     </div>

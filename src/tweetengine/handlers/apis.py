@@ -3,7 +3,10 @@ from google.appengine.api import urlfetch
 from tweetengine.handlers import base
 from tweetengine import model
 
-ALLOWED_ENDPOINTS = set(["statuses/mentions"])
+ALLOWED_ENDPOINTS = set(["statuses/user_timeline", 
+                         "statuses/friends_timeline", 
+                         "statuses/mentions",
+                         "direct_messages"])
 
 class TwitterApiHandler(base.UserHandler):
     @base.requires_account

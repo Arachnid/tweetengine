@@ -46,3 +46,7 @@ img {
 .selected {
 	background: #CCCCCC;
 }
+#tweet-template {
+	display: none;
+	visibility: hidden;
+}
