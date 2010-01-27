@@ -67,6 +67,7 @@ ol.tweetlist li {
 }
 .tweet-thumb img {
 	padding: 0 5px 0 0;
+    float: left;
 }
 .tweet-meta {
 	font-size: 80%;
