@@ -50,3 +50,30 @@ img {
 	display: none;
 	visibility: hidden;
 }
+ol.tweetlist {
+    font-size: 14px;
+    list-style-image: none;
+    list-style-position: outside;
+    list-style-type: none;
+    text-align: left;
+    line-height: normal;
+    
+}
+.tweet-user {
+	font-weight: bold;
+}
+.tweet-thumb img {
+	padding: 0 5px 0 0;
+}
+.tweet-meta {
+	font-size: 80%;
+	display: block;
+}
+.post {
+    margin-bottom: 2em;
+    padding-bottom: 1em;
+/*    border-bottom: 1px solid #AA2808; */
+}
+.ui-widget-content {
+	border: 0px;
+}

@@ -7,6 +7,7 @@
 <script type="text/javascript" src="/static/tweetengine.js"></script>
 {% endblock %}
 {% block body %}
+
   <div id="tweetbox">
       <p id="tweetlabel">140</p>
       <h2>What's happening with {{current_account.username}}?</h2>
@@ -18,8 +19,11 @@
       </form>
   </div>
 </div>
+
+{% if tweets %}
 <div class="post">
-  <h2>Unsent tweets</h2>
+
+  <h2>Pending tweets</h2>
   <form method="POST" action="/{{current_account.username}}/">
       <table class="display">
         <tr><th>Send</th><th>Delete</th><th>Leave</th><th>Tweet message</th></tr>
@@ -34,11 +38,14 @@
       </table>
       <input type="submit" value="Submit" />
   </form>
+
 </div>
+{% endif %}
 <div class="post">  
+
   <h2>Timeline</h2>
-  
-  <ol id="tweet-template">
+    
+  <ol id="tweet-template" class="tweetlist">
     <li>
         <span class="tweet-thumb"><a href="USERURL"><img width="48" height="48" src="IMGAGEURL" alt="IMAGEALT"/></a></span>  
         <span class="tweet-user"><a title="TITLE" href="TWEETURL">TWEETUSERNAME</a></span>
@@ -77,6 +84,5 @@
     </div>
     
   </div>
-
-{% endblock %}
   
+{% endblock %}
