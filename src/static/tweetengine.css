@@ -69,11 +69,6 @@ ol.tweetlist {
 	font-size: 80%;
 	display: block;
 }
-.post {
-    margin-bottom: 2em;
-    padding-bottom: 1em;
-/*    border-bottom: 1px solid #AA2808; */
-}
 .ui-widget-content {
 	border: 0px;
 }

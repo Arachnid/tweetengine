@@ -6,7 +6,7 @@
   {% endif %}
   <h2>Manage Account {{current_account.username}}</h2>
   
-  <div class="section">
+  <div class="post">
       <h3>Users</h3>
       <form method="POST" action="/{{current_account.username}}/manage_users">
           <table class="display">
@@ -30,7 +30,7 @@
       </form>
   </div>
   
-  <div class="section">
+  <div class="post">
       <h3>Settings</h3>
       <form method="POST" action="/{{current_account.username}}/manage">
         <table>

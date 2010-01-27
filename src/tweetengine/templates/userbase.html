@@ -5,7 +5,7 @@
   <li><a href="{{logout_url}}">Log Out</a></li>
 {% endblock %}
 {% block sidebar %}
-  <div class="section">
+  <div class="post">
       <h2>Your Accounts</h2>
       <table>
         {% for permission in permissions %}
@@ -19,7 +19,7 @@
   </div>
   
   {% if public_accounts %}
-    <div class="section">
+    <div class="post">
         <h2>Public Accounts</h2>
         <table>
             {% for account in public_accounts %}
