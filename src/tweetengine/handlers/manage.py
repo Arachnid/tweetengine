@@ -5,23 +5,48 @@ import os
 import urllib
 import uuid
 import urlparse
+from django import newforms as forms
 from google.appengine.api import mail
 from google.appengine.ext import db
 from google.appengine.ext.webapp import template
 from tweetengine.handlers import base
 from tweetengine import model
 
+
+class SettingsForm(forms.Form):
+    public = forms.BooleanField(required=False)
+
+
 class ManageHandler(base.UserHandler):
     @base.requires_account_admin
-    def get(self, account_name):
+    def get(self, account_name, settings_form=None):
+        if not settings_form:
+            settings_form = SettingsForm(initial={
+                "public": self.current_account.public,
+            })
         permissions = self.current_account.permission_set.fetch(100)
         my_key = self.current_permission.key()
         self.render_template("manage.html", {
             "acct_permissions": permissions,
             "my_key": my_key,
             "sent": self.request.GET.get("sent", False),
+            "settings_form": settings_form,
+            "allow_public": model.Configuration.instance().allow_public
         })
 
+    @base.requires_account_admin
+    def post(self, account_name):
+        settings_form = SettingsForm(self.request.POST)
+        if settings_form.is_valid():
+            if model.Configuration.instance().allow_public:
+                self.current_account.public = settings_form.clean_data['public']
+            self.current_account.put()
+            self.redirect("/%s/manage?saved=true" % (self.current_account.username,))
+        else:
+            self.get(account_name, settings_form)
+        
+
+class ManageUsersHandler(base.UserHandler):
     @base.requires_account_admin
     def post(self, account_name):
         permissions = self.current_account.permission_set.fetch(100)
@@ -53,7 +78,7 @@ class ManageHandler(base.UserHandler):
                       self.request.POST.getall("new_permission"))
         invites = [x for x in invites if x[0]]
         self.send_invites(invites)
-        
+                
         if invites:
             self.redirect("/%s/manage?sent=true" % (self.current_account.username,))
         else:

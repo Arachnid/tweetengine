@@ -5,14 +5,30 @@
   <li><a href="{{logout_url}}">Log Out</a></li>
 {% endblock %}
 {% block sidebar %}
-  <h2>Accounts</h2>
-  <table>
-    {% for permission in permissions %}
-      <tr{% ifequal permission.account.key current_account.key %} class="selected"{% endifequal %}>
-        <td><a href="/{{permission.account.username}}/"><img src="{{permission.account.picture}}" alt=""/></a></td>
-        <td><a href="/{{permission.account.username}}/">{{permission.account.name}} ({{permission.account.username}})</a></td>
-      </tr>
-    {% endfor %}
-  </table>
-  <p><a href="/add">Add a new account</a></p>
+  <div class="section">
+      <h2>Your Accounts</h2>
+      <table>
+        {% for permission in permissions %}
+          <tr{% ifequal permission.account.key current_account.key %} class="selected"{% endifequal %}>
+            <td><a href="/{{permission.account.username}}/"><img src="{{permission.account.picture}}" alt=""/></a></td>
+            <td><a href="/{{permission.account.username}}/">{{permission.account.name}} ({{permission.account.username}})</a></td>
+          </tr>
+        {% endfor %}
+      </table>
+      <p><a href="/add">Add a new account</a></p>
+  </div>
+  
+  {% if public_accounts %}
+    <div class="section">
+        <h2>Public Accounts</h2>
+        <table>
+            {% for account in public_accounts %}
+              <tr{% ifequal account.key current_account.key %} class="selected"{% endifequal %}>
+                <td><a href="/{{account.username}}/"><img src="{{account.picture}}" alt=""/></a></td>
+                <td><a href="/{{account.username}}/">{{account.name}} ({{account.username}})</a></td>
+              </tr>
+            {% endfor %}
+        </table>
+    </div>
+  {% endif %}
 {% endblock %}
