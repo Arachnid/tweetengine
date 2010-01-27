@@ -11,7 +11,8 @@ handlers:
   script: $PYTHON_LIB/google/appengine/ext/remote_api/handler.py
   login: admin
 
+- url: /stats.*
+  script: appstats/ui.py
+    
 - url: /.*
   script: /request.py
-  
- 
