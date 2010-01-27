@@ -3,7 +3,7 @@ jQuery(document).ready(function() {
             ajaxOptions, thrownError) {
     		var msg = 'An error occurred while requesting "' + ajaxOptions.url; 
     		msg += '" Could not continue.';
-    		alert(msg);
+    		/* alert(msg); enable for debugging */
     });	
 	jQuery("#tweetarea").keypress(function(event){
 		var length = 140 - jQuery(this).val().length;
