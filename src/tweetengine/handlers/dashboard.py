@@ -10,6 +10,7 @@ class DashboardHandler(base.UserHandler):
         q = model.OutgoingTweet.all()
         q.filter("account =", self.current_account)
         q.filter("sent =", False)
+        return q.fetch(20)
 
     @base.requires_account
     def get(self, account_name):        
