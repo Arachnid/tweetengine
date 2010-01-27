@@ -1,5 +1,7 @@
+import logging
 from google.appengine.ext import db
 from tweetengine.handlers import base
+from tweetengine.oauth import TwitterClient
 from tweetengine import model
 
 class DashboardHandler(base.UserHandler):
@@ -13,6 +15,7 @@ class DashboardHandler(base.UserHandler):
     def get(self, account_name):        
         self.render_template("me.html", {
             "tweets": self.get_tweets(),
+            "mentionsurl": self.twitter_api_url('statuses/mentions'),
         })
 
     @base.requires_account_admin
@@ -37,3 +40,9 @@ class DashboardHandler(base.UserHandler):
                     logging.error(response.content)
 
         self.redirect('/%s/' % account_name)
+
+    def twitter_api_url(self, service):
+        url = 'http://twitter.com/%s.json' % service
+        url, querystring, h, p = self.current_account.prepare_request(url)
+        logging.info('%s?%s' % (url, querystring))
+        return '%s?%s' % (url, querystring)

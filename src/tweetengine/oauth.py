@@ -125,7 +125,7 @@ class OAuthClient():
       return urlquote(str(text), "")
 
     params = {
-      "oauth_consumer_key": self.consumer_key,
+      "oauth_consumer_key": self.consumer_key or '',
       "oauth_signature_method": "HMAC-SHA1",
       "oauth_timestamp": str(int(time())),
       "oauth_nonce": str(getrandbits(64)),

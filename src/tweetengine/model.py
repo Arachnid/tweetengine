@@ -37,6 +37,19 @@ class TwitterAccount(db.Model):
             additional_params=additional_params,
             protected=True,
             method=method)
+        
+    def prepare_request(self, url, additional_params=None, 
+                        method=urlfetch.GET):
+        if not additional_params:
+            additional_params = {}
+        client = Configuration.instance().get_client("")
+        return client.prepare_request(
+            url,
+            token=self.oauth_token,
+            secret=self.oauth_secret,
+            additional_params=additional_params,
+            protected=True,
+            method=method)
 
 
 ROLE_USER = 1
