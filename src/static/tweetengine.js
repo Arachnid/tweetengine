@@ -18,8 +18,36 @@ jQuery(document).ready(function() {
 		jQuery("#tweetlabel").text(length);
 	});
 	jQuery("#timeline").tabs();
+	
 	var mentionsurl = jQuery("#mentionsurl").attr('href');
-	jQuery.getJSON("/" + account_name + "/api/statuses/mentions.json", function(data){
-		jQuery("#tabs-mentions").text(data);
-	})
+	function fill_tweets(apicall, region) {
+		var selector = "#tabs-" + region;
+		jQuery.getJSON("/" + account_name + "/api/"+apicall+".json", function(data){
+			jQuery(selector).empty();
+			if (data.length > 0) {
+				jQuery.each(data, function() {
+					var entry = jQuery("#tweet-template").clone();
+					entry.attr('id', 'status-' + this.id);
+					var userurl = 'http://twitter.com/' + this.user.screen_name;
+					entry.find(".tweet-thumb").find('a').attr('href', userurl);
+					entry.find(".tweet-thumb").find('a img').attr('src', this.user.profile_image_url);
+					entry.find(".tweet-thumb").find('a img').attr('title', this.user.name);
+					entry.find(".tweet-user").find('a').text(this.user.screen_name);
+					entry.find(".tweet-user").find('a').attr('href', userurl);
+					entry.find(".tweet-user").find('a').attr('title', this.user.name);
+					entry.find(".tweet-content").text(this.text);
+					entry.find(".tweet-dateurl").text(this.created_at);
+					entry.find(".tweet-dateurl").attr('href', userurl + "/status/" + this.id);
+					entry.find(".tweet-source").html(this.source);
+					jQuery(selector).append(entry);
+				});
+			} else {
+				jQuery(selector).text('No tweets so far.')
+			}
+		});
+	}
+	fill_tweets('statuses/user_timeline', 'mytweets');
+	fill_tweets('statuses/friends_timeline', 'friends');
+	fill_tweets('statuses/mentions', 'mentions');
+	fill_tweets('direct_messages', 'direct');
 });
