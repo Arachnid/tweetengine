@@ -93,7 +93,7 @@ class UserHandler(BaseHandler):
         if not template_vars:
             template_vars = {}
         permissions = self.user_account.permission_set.fetch(100)
-        prefetch_refprop(permissions, model.Permission.account)
+        prefetch_refprops(permissions, model.Permission.account)
         my_acct_keys = set(x.account.key() for x in permissions)
         public_accts = model.TwitterAccount.all().filter("public =", True).fetch(100)
         public_accts = [x for x in public_accts

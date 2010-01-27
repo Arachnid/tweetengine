@@ -25,7 +25,7 @@ class ManageHandler(base.UserHandler):
                 "public": self.current_account.public,
             })
         permissions = self.current_account.permission_set.fetch(100)
-        base.prefetch_refprop(permissions, model.Permission.user)
+        base.prefetch_refprops(permissions, model.Permission.user)
         my_key = self.current_permission.key()
         self.render_template("manage.html", {
             "acct_permissions": permissions,
