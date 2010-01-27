@@ -5,18 +5,23 @@ jQuery(document).ready(function() {
     		msg += '" Could not continue.';
     		/* alert(msg); enable for debugging */
     });	
-	jQuery("#tweetarea").keypress(function(event){
+    function counter(event) {
 		var length = 140 - jQuery(this).val().length;
-		if (length < 0 ) {
+		if (length < 0 || length >= 139) {
 			jQuery("#tweetsubmit").attr('disabled', 'disabled');
 			jQuery("#tweetlabel").attr('class', 'tweet-oversize');
 		};
-		if (length == 0) {
+		if (length >= 0 && length < 140) {
 			jQuery("#tweetsubmit").removeAttr('disabled');
 			jQuery("#tweetlabel").removeAttr('class');
 		};
 		jQuery("#tweetlabel").text(length);
-	});
+    }
+	jQuery("#tweetarea").keypress(counter);
+	jQuery("#tweetarea").keyup(counter);
+	jQuery("#tweetarea").keydown(counter);
+	jQuery("#tweetarea").bind('input paste', counter);
+
 	jQuery("#timeline").tabs();
 	
 	function fill_tweets(apicall, region) {
@@ -50,7 +55,8 @@ jQuery(document).ready(function() {
 						entry.find(".tweet-source").text('direct message');
 					} else {
 						entry.find(".tweet-source").html(this.source);
-					}					
+					}
+					
 					jQuery(selector).append(entry);
 				});
 			} else {
