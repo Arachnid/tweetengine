@@ -109,23 +109,20 @@ class OAuthClient():
     self.access_url = access_url
     self.callback_url = callback_url
 
-  def prepare_request(self, url, token="", secret="", additional_params={},
-                      protected=False, method=urlfetch.GET):
+  def prepare_request(self, url, token="", secret="", additional_params=None,
+                      method=urlfetch.GET):
     """Prepare Request.
 
-    Prapres an authenticated request to any OAuth protected resource. At present
-    only GET requests are supported.
+    Prepares an authenticated request to any OAuth protected resource.
 
-    If protected is equal to True, the Authorization: OAuth header will be set.
-
-    Tuple with url, querystring, headers, payload is returned
+    Returns the payload of the request.
     """
 
     def encode(text):
       return urlquote(str(text), "")
 
     params = {
-      "oauth_consumer_key": self.consumer_key or '',
+      "oauth_consumer_key": self.consumer_key,
       "oauth_signature_method": "HMAC-SHA1",
       "oauth_timestamp": str(int(time())),
       "oauth_nonce": str(getrandbits(64)),
@@ -137,7 +134,8 @@ class OAuthClient():
     elif self.callback_url:
       params["oauth_callback"] = self.callback_url
 
-    params.update(additional_params)
+    if additional_params:
+        params.update(additional_params)
 
     # Join all of the params together.
     params_str = "&".join(["%s=%s" % (encode(k), encode(params[k]))
@@ -153,33 +151,26 @@ class OAuthClient():
     digest_base64 = signature.digest().encode("base64").strip()
     params["oauth_signature"] = digest_base64
 
-    # Construct and fetch the URL and return the result object.    
-    if method == urlfetch.POST:
-        payload = urlencode(params)
-        querystring = None
-    else:
-        querystring = urlencode(params)
-        payload = None
-    headers = {"Authorization": "OAuth"} if protected else {}
-    return url, querystring, headers, payload
+    # Construct the request payload and return it
+    return urlencode(params)
     
     
-  def make_request(self, url, token="", secret="", additional_params={},
+  def make_request(self, url, token="", secret="", additional_params=None,
                    protected=False, method=urlfetch.GET):
     """Make Request.
 
-    Make an authenticated request to any OAuth protected resource. At present
-    only GET requests are supported.
+    Make an authenticated request to any OAuth protected resource.
 
     If protected is equal to True, the Authorization: OAuth header will be set.
 
     A urlfetch response object is returned.
     """      
-    url, query, headers, payload = self.prepare_request(url, token, secret, 
-                                                        additional_params, 
-                                                        protected, method)
-    if query is not None:
-        url = '%s?%s' % (url, query)
+    payload = self.prepare_request(url, token, secret, additional_params,
+                                   method)
+    if method == urlfetch.GET:
+        url = "%s?%s" % (url, payload)
+        payload = None
+    headers = {"Authorization": "OAuth"} if protected else {}
     return urlfetch.fetch(url, method=method, headers=headers, payload=payload,
                           deadline=10.0)
 

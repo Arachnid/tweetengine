@@ -19,8 +19,7 @@ jQuery(document).ready(function() {
 	});
 	jQuery("#timeline").tabs();
 	var mentionsurl = jQuery("#mentionsurl").attr('href');
-	alert(mentionsurl);
-	jQuery.getJSON(mentionsurl, function(data){
+	jQuery.getJSON("/" + account_name + "/api/statuses/mentions.json", function(data){
 		jQuery("#tabs-mentions").text(data);
-	});
+	})
 });

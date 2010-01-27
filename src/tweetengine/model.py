@@ -27,8 +27,6 @@ class TwitterAccount(db.Model):
         return self.key().name()
 
     def make_request(self, url, additional_params=None, method=urlfetch.POST):
-        if not additional_params:
-            additional_params = {}
         client = Configuration.instance().get_client("")
         return client.make_request(
             url,
@@ -40,15 +38,12 @@ class TwitterAccount(db.Model):
         
     def prepare_request(self, url, additional_params=None, 
                         method=urlfetch.GET):
-        if not additional_params:
-            additional_params = {}
         client = Configuration.instance().get_client("")
         return client.prepare_request(
             url,
             token=self.oauth_token,
             secret=self.oauth_secret,
             additional_params=additional_params,
-            protected=True,
             method=method)
 
 

@@ -8,9 +8,10 @@ application = webapp.WSGIApplication([
         ('/([a-zA-Z_]+)/', handlers.DashboardHandler),
         ('/([a-zA-Z_]+)/manage', handlers.ManageHandler),
         ('/([a-zA-Z_]+)/invite', handlers.InviteHandler),
+        ('/([a-zA-Z_]+)/tweet', handlers.TweetHandler),
+        ('/([a-zA-Z_]+)/api/(.*).json', handlers.TwitterApiHandler),
         ('/add/callback', handlers.CallbackHandler),
         ('/add', handlers.AddHandler),
         ('/admin', handlers.SettingsHandler),
-        ('/([a-zA-Z_]+)/tweet', handlers.TweetHandler),
 ], debug=True)
 
