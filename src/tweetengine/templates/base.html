@@ -24,12 +24,13 @@ Description: A two-column fixed-width template suitable for small websites.
     {% endif %}
     {% block head %}{% endblock %}
     <link href="/static/tweetengine.css" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" type="image/png" href="/static/images/favicon.png" />
 </head>
 <body>
 <div id="wrapper">
     <div id="header">
         <div id="logo">
-            <h1><a href="/">tweet engine</a></h1>
+            <h1><a href="/"><img src="/static/images/logo.png" /></a></h1>
             <h2><a href="/">share accounts, control tweets</a></h2>
         </div>
         <!-- end div#logo -->
