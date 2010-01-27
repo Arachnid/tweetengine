@@ -2,6 +2,7 @@ import logging
 import os
 
 from google.appengine.api import users
+from google.appengine.ext import db
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import template
 
@@ -53,6 +54,14 @@ def requires_account_admin(func):
     return decorate
 
 
+def prefetch_refprop(entities, prop):
+    keys = [prop.get_value_for_datastore(x) for x in entities]
+    ref_entities = db.get(keys)
+    for entity, ref_entity in zip(entities, ref_entities):
+        prop.__set__(entity, ref_entity)
+    return entities
+
+
 class BaseHandler(webapp.RequestHandler):
     def initialize(self, request, response):
         self.current_account = None
@@ -78,6 +87,7 @@ class UserHandler(BaseHandler):
         if not template_vars:
             template_vars = {}
         permissions = self.user_account.permission_set.fetch(100)
+        prefetch_refprop(permissions, model.Permission.account)
         my_acct_keys = set(x.account.key() for x in permissions)
         public_accts = model.TwitterAccount.all().filter("public =", True).fetch(100)
         public_accts = [x for x in public_accts
