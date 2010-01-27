@@ -14,7 +14,7 @@ class TweetHandler(base.BaseHandler):
         tweet = model.OutgoingTweet(account=self.current_account,
                                     user=self.user_account,
                                     message=self.request.get("tweet"))
-        if permission and permission.role == model.ROLE_ADMINISTRATOR:
+        if permission:
             tweet.approved_by=self.user_account
             response = tweet.send()
             if response.status_code != 200:
