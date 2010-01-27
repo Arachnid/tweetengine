@@ -5,24 +5,47 @@
     <p>Invites sent!</p>
   {% endif %}
   <h2>Manage Account {{current_account.username}}</h2>
-  <form method="POST" action="/{{current_account.username}}/manage">
-      <table class="display">
-        <tr><th>Delete</th><th>Email</th><th>User</th><th>Admin</th></tr>
-        {% for permission in acct_permissions %}
+  
+  <div class="post">
+      <h3>Users</h3>
+      <form method="POST" action="/{{current_account.username}}/manage_users">
+          <table class="display">
+            <tr><th>Delete</th><th>Email</th><th>User</th><th>Admin</th></tr>
+            {% for permission in acct_permissions %}
+                <tr>
+                  <td class="field"><input type="checkbox" name="delete" value="{{permission.key.id}}" {% ifequal permission.key my_key %}disabled="disabled" {% endifequal %}/></td>
+                  <td>{{permission.user.get_username}}</td>
+                  <td class="field"><input type="radio" name="permission.{{permission.key.id}}" value="1" {% ifequal permission.role 1 %}checked="checked"{% endifequal %} {% ifequal permission.key my_key %}disabled="disabled" {% endifequal %}/></td>
+                  <td class="field"><input type="radio" name="permission.{{permission.key.id}}" value="2" {% ifequal permission.role 2 %}checked="checked"{% endifequal %} {% ifequal permission.key my_key %}disabled="disabled" {% endifequal %}/></td>
+                </tr>
+            {% endfor %}
             <tr>
-              <td class="field"><input type="checkbox" name="delete" value="{{permission.key.id}}" {% ifequal permission.key my_key %}disabled="disabled" {% endifequal %}/></td>
-              <td>{{permission.user.get_username}}</td>
-              <td class="field"><input type="radio" name="permission.{{permission.key.id}}" value="1" {% ifequal permission.role 1 %}checked="checked"{% endifequal %} {% ifequal permission.key my_key %}disabled="disabled" {% endifequal %}/></td>
-              <td class="field"><input type="radio" name="permission.{{permission.key.id}}" value="2" {% ifequal permission.role 2 %}checked="checked"{% endifequal %} {% ifequal permission.key my_key %}disabled="disabled" {% endifequal %}/></td>
+              <td></td>
+              <td><input type="text" name="username" /></td>
+              <td class="field"><input type="radio" name="new_permission" value="1" checked="checked" /></td>
+              <td class="field"><input type="radio" name="new_permission" value="2" /></td>
             </tr>
-        {% endfor %}
-        <tr>
-          <td></td>
-          <td><input type="text" name="username" /></td>
-          <td class="field"><input type="radio" name="new_permission" value="1" checked="checked" /></td>
-          <td class="field"><input type="radio" name="new_permission" value="2" /></td>
-        </tr>
-      </table>
-      <input type="submit" value="Update" />
-  </form>
+          </table>
+          <input type="submit" value="Update" />
+      </form>
+  </div>
+  
+  <div class="post">
+      <h3>Settings</h3>
+      <form method="POST" action="/{{current_account.username}}/manage">
+        <table>
+          {% if allow_public %}
+              <tr>
+                <th><label for="public">Public:</label></th>
+                <td>
+                    {{settings_form.public}}{{settings_form.public.errors}}
+                    <p>Public accounts appear on everyone's list of accounts, and
+                    anyone can suggest tweets on them.</p>
+                </td>
+              </tr>
+          {% endif %}
+        </table>
+        <input type="submit" value="Update" />
+      </form>
+  </div>
 {% endblock %}

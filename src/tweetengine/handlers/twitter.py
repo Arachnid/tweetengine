@@ -20,6 +20,6 @@ class TweetHandler(base.BaseHandler):
             if response.status_code != 200:
                 self.error(500)
                 logging.error(response.content)
-        else:
+        elif self.current_account.public:
             tweet.put()
         self.redirect("/%s/" % (account_name,))

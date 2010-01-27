@@ -21,6 +21,7 @@ class TwitterAccount(db.Model):
     oauth_secret = db.TextProperty(required=True)
     name = db.TextProperty()
     picture = db.TextProperty()
+    public = db.BooleanProperty(required=True, default=False)
 
     @property
     def username(self):
@@ -112,6 +113,7 @@ class Configuration(db.Model):
     oauth_secret = db.StringProperty()
     oauth_key = db.StringProperty()
     mail_from = db.StringProperty()
+    allow_public = db.BooleanProperty(required=True, default=False)
     
     @classmethod
     def instance(cls):
