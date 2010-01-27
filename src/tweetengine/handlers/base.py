@@ -54,12 +54,12 @@ def requires_account_admin(func):
     return decorate
 
 
-def prefetch_refprop(entities, prop):
-    keys = [prop.get_value_for_datastore(x) for x in entities]
-    ref_entities = db.get(keys)
-    for entity, ref_entity in zip(entities, ref_entities):
-        prop.__set__(entity, ref_entity)
-    return entities
+def prefetch_refprops(entities, *props):
+    fields = [(entity, prop) for entity in entities for prop in props]
+    ref_keys = [prop.get_value_for_datastore(x) for x, prop in fields]
+    ref_entities = dict((x.key(), x) for x in db.get(set(ref_keys)))
+    for (entity, prop), ref_key in zip(fields, ref_keys):
+        prop.__set__(entity, ref_entities[ref_key])
 
 
 class BaseHandler(webapp.RequestHandler):
@@ -87,7 +87,7 @@ class UserHandler(BaseHandler):
         if not template_vars:
             template_vars = {}
         permissions = self.user_account.permission_set.fetch(100)
-        prefetch_refprop(permissions, model.Permission.account)
+        prefetch_refprops(permissions, model.Permission.account)
         my_acct_keys = set(x.account.key() for x in permissions)
         public_accts = model.TwitterAccount.all().filter("public =", True).fetch(100)
         public_accts = [x for x in public_accts
