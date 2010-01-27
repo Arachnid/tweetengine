@@ -59,6 +59,9 @@ ol.tweetlist {
     line-height: normal;
     
 }
+ol.tweetlist li {
+	margin-left: 0px;
+}
 .tweet-user {
 	font-weight: bold;
 }
