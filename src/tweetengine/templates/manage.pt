@@ -1,0 +1,62 @@
+<metal:master use-macro="master">
+
+  <metal:title fill-slot="title">${current_account.username} &ndash; Manage Account</metal:title>
+
+  <metal:sidebar fill-slot="sidebar">
+    <metal:use metal:use-macro="macros['sidebar-accounts']"  />
+  </metal:sidebar>
+  
+  <metal:body fill-slot="body">
+  
+    <div class="post">
+    
+      <p tal:condition="sent" class="notification">Invites sent!</p>
+
+      <h2>Manage Account ${current_account.username}</h2>
+  
+ 
+      <h3>Users</h3>
+      <form method="POST" action="/${current_account.username}/manage_users">
+          <table class="display">
+            <tr><th>Delete</th><th>Email</th><th>User</th><th>Admin</th></tr>
+
+            <tr tal:repeat="permission permissions">
+              <td class="field">
+                  <input tal:condition="permission.key()==my_key"
+                    type="checkbox" name="delete" 
+                    value="${permission.key().id}" 
+                    disabled="disabled" />
+                  <input tal:condition="permission.key()!=my_key"
+                    type="checkbox" name="delete" 
+                    value="${permission.key().id}" />
+              </td>
+              <td>${permission.user.get_username()}</td>
+              <td class="field">
+                  <input type="radio" name="permission.${permission.key().id}" value="1" 
+                    tal:attributes="checked permission.role==1 and 'checked' or '';
+                                    disabled permission.key()==my_key and 'disabled' or ''"/> 
+                    
+               </td>
+              <td class="field">
+                  <input type="radio" name="permission.${permission.key().id}" value="2" 
+                    tal:attributes="checked permission.role==2 and 'checked' or '';
+                                    disabled permission.key()==my_key and 'disabled' or ''"/>
+                     
+              </td>
+                
+            </tr>
+
+            <tr>
+              <td></td>
+              <td><input type="text" name="username" /></td>
+              <td class="field"><input type="radio" name="new_permission" value="1" checked="checked" /></td>
+              <td class="field"><input type="radio" name="new_permission" value="2" /></td>
+            </tr>
+          </table>
+          <input type="submit" value="Update" />
+      </form>
+    </div>
+  
+
+  </metal:body>
+</metal:master>
