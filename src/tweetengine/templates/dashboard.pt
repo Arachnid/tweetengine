@@ -85,20 +85,20 @@
     <div id="timeline">
       <ul>
         <li><a href="#tabs-mytweets">${current_account.username}</a></li>
-        <li><a href="#tabs-friends">friends</a></li>
+        <li><a href="#tabs-friends" tal:condition="current_permission.role!=0">friends</a></li>
         <li><a href="#tabs-mentions">mentions</a></li>
-        <li><a href="#tabs-direct">direct messages</a></li>
+        <li tal:condition="current_permission.role!=0"><a href="#tabs-direct">direct messages</a></li>
       </ul>
       <div id="tabs-mytweets">
         <span class="loading-timeline">Loading ${current_account.username} tweets...</span>
       </div>
-      <div id="tabs-friends">
+      <div id="tabs-friends" tal:condition="current_permission.role!=0">
         <span class="loading-timeline">Loading friends tweets...</span>
       </div>
       <div id="tabs-mentions">
         <span class="loading-timeline">Loading mentions...</span>
       </div>
-      <div id="tabs-direct">
+      <div id="tabs-direct" tal:condition="current_permission.role!=0">
         <span class="loading-timeline">Loading direct messages...</span>
       </div>
     
