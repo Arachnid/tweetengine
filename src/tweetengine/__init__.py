@@ -1,5 +1,5 @@
 from google.appengine.ext import webapp
-
+import patches
 from tweetengine import handlers
 
 
@@ -17,4 +17,14 @@ application = webapp.WSGIApplication([
         ('/add', handlers.AddHandler),
         ('/admin', handlers.SettingsHandler),
 ], debug=True)
+
+# bootstrap the zope zcml crap
+import patches
+from zope.configuration.xmlconfig import XMLConfig
+import zope.component
+import zope.i18n
+ 
+XMLConfig('meta.zcml', zope.component)
+XMLConfig('configure.zcml', zope.component)
+XMLConfig('configure.zcml', zope.i18n)
 
