@@ -41,9 +41,9 @@
         <tr><th>Send</th><th>Delete</th><th>Leave</th><th>Tweet message</th></tr>
         
             <tr tal:repeat="tweet tweets">
-              <td class="field"><input type="radio" name="tweet.${tweet.key.id}" value="send" /></td>
-              <td class="field"><input type="radio" name="tweet.${tweet.key.id}" value="delete" /></td>
-              <td class="field"><input type="radio" name="tweet.${tweet.key.id}" value="leave" /></td>
+              <td class="field"><input type="radio" name="tweet.${tweet.key().id}" value="send" /></td>
+              <td class="field"><input type="radio" name="tweet.${tweet.key().id}" value="delete" /></td>
+              <td class="field"><input type="radio" name="tweet.${tweet.key().id}" value="leave" /></td>
               <td tal:content="structure tweet.message">MESSAGE</td>
             </tr>
 
