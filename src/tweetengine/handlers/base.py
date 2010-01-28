@@ -76,6 +76,7 @@ class BaseHandler(webapp.RequestHandler):
         self.current_permission = None
         super(BaseHandler, self).initialize(request, response)
         self.user = users.get_current_user()
+        self.user_account = None
         if self.user:
             self.user_account = model.GoogleUserAccount.get_or_insert(
                 self.user.user_id(),
@@ -99,15 +100,20 @@ class UserHandler(BaseHandler):
     def render_template(self, template_path, template_vars=None):
         if not template_vars:
             template_vars = {}
-        permissions = self.user_account.permission_set.fetch(100)
-        prefetch_refprops(permissions, model.Permission.account)
-        my_acct_keys = set(x.account.key() for x in permissions)
+        if self.user_account:
+            permissions = self.user_account.permission_set.fetch(100)
+            prefetch_refprops(permissions, model.Permission.account)
+            my_acct_keys = set(x.account.key() for x in permissions)
+        else:
+            permissions = []
+            my_acct_keys = set([])
         public_accts = []
         if model.Configuration.instance().allow_public:
             q = model.TwitterAccount.all()
             q.filter("suggest_tweets =", model.ROLE_ANYONE)
             public_accts = [x for x in q.fetch(100)
                             if x.key() not in my_acct_keys]
+            logging.warn(public_accts)
         template_vars.update({
             "permissions": permissions,
             "public_accounts": public_accts,
