@@ -1,3 +1,4 @@
+import datetime
 from google.appengine.api import urlfetch
 from google.appengine.ext import db
 from google.appengine.ext.db import polymodel
@@ -118,8 +119,9 @@ class OutgoingTweet(db.Model):
     approved_by = db.ReferenceProperty(UserAccount,
                                        collection_name='approved_tweets')
     message = db.TextProperty(required=True)
-    timestamp = db.DateTimeProperty(required=True, auto_now_add=True)
+    timestamp = db.DateTimeProperty()
     sent = db.BooleanProperty(required=True, default=False)
+    approved = db.BooleanProperty(required=True, default=False)
 
     def send(self):
         response = self.account.make_request(
@@ -127,6 +129,7 @@ class OutgoingTweet(db.Model):
             additional_params={"status": self.message})
         if response.status_code == 200:
             self.sent = True
+            self.timestamp = datetime.datetime.now()
             self.put()
         return response
 

@@ -1,3 +1,5 @@
+import datetime
+import logging
 import urlparse
 
 from google.appengine.api import users
@@ -5,7 +7,6 @@ from google.appengine.api import users
 from tweetengine.handlers import base
 from tweetengine import model
 from tweetengine import oauth
-
 
 class TweetHandler(base.BaseHandler):
     @base.requires_account
@@ -23,3 +24,13 @@ class TweetHandler(base.BaseHandler):
         elif permission.can_suggest():
             tweet.put()
         self.redirect("/%s/" % (account_name,))
+
+
+def publishApprovedTweets():
+    q = model.OutgoingTweet.all()
+    q.filter("approved =", True)
+    q.filter("sent =", False)
+    q.filter("timestamp <", datetime.datetime.now())
+    for tweet in q.fetch(20):
+        tweet.send()
+        logging.error('sending tweet %s' % tweet.message)
