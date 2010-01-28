@@ -31,7 +31,7 @@ Description: A two-column fixed-width template suitable for small websites.
 <div id="wrapper">
     <div id="header">
         <div id="logo">
-            <h1><a href="/">tweet engine</a></h1>
+            <h1><a href="/"><img src="/static/images/logo.png" /></a></h1>
             <h2><a href="/">share accounts, control tweets</a></h2>
         </div>
         <!-- end div#logo -->

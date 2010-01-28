@@ -84,6 +84,8 @@ class BaseHandler(webapp.RequestHandler):
         template_vars['mainmenu'] = mainmenu(self)
         tpl = tpl_loader.load('base.pt')
         template_vars['master'] = tpl.macros['master']
+        tpl = tpl_loader.load('macros.pt')
+        template_vars['macros'] = tpl.macros
         tpl = tpl_loader.load(template_file)
         self.response.out.write(tpl(**template_vars))
 

@@ -10,7 +10,7 @@ class HomepageHandler(base.BaseHandler):
             if permission:
                 self.redirect("/%s/" % (permission.account.username,))
             else:
-                self.render_template("gettingstarted.html")
+                self.render_template("gettingstarted.pt")
         else:
             main_url = users.create_login_url("/")
-            self.render_template("index.html", {"main_url": main_url})
+            self.render_template("index.pt", {"main_url": main_url})
