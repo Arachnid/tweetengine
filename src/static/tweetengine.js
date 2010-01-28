@@ -32,14 +32,18 @@ jQuery(document).ready(function() {
 
 	jQuery("#timeline").tabs();
 	
-	function fill_tweets(apicall, region) {
+	function fill_tweets(region) {
 		var selector = "#tabs-" + region;
 		if (jQuery(selector).find('.loading-timeline') == undefined) {
 			return;
 		}
-		jQuery.getJSON("/" + account_name + "/api/"+apicall+".json", function(data){
+		jQuery.getJSON("/" + account_name + "/api/"+region+".json", function(data){
 			jQuery(selector).empty();
 			if (data.length > 0) {
+				var orderedlist = jQuery("#tweet-template").clone();
+				orderedlist.empty();
+				orderedlist.attr('id', 'orderedlist'+region);
+				jQuery(selector).append(orderedlist);
 				jQuery.each(data, function() {
 					var user = this.user;
 					var is_direct = false;
@@ -47,7 +51,7 @@ jQuery(document).ready(function() {
 						user = this.sender;
 						is_direct = true;
 					}
-					var entry = jQuery("#tweet-template").clone();
+					var entry = jQuery("#tweet-template li").clone();
 					entry.attr('id', 'status-' + this.id);
 					var userurl = 'http://twitter.com/' + user.screen_name;
 					entry.find(".tweet-thumb").find('a').attr('href', userurl);
@@ -63,27 +67,26 @@ jQuery(document).ready(function() {
 						entry.find(".tweet-source").text('direct message');
 					} else {
 						entry.find(".tweet-source").html(this.source);
-					}
-					
-					jQuery(selector).append(entry);
+					}					
+					orderedlist.append(entry);
 				});
 			} else {
 				jQuery(selector).text('No tweets so far.')
 			}
 		});
 	}
-	fill_tweets('statuses/user_timeline', 'mytweets');
+	fill_tweets('mytweets');
 	jQuery('#timeline').bind('tabsselect', function(event, ui) {
 		switch(jQuery(ui.tab).attr('href').slice(6)) 
 		{
 		case 'friends': 
-		    fill_tweets('statuses/friends_timeline', 'friends');
+		    fill_tweets('friends');
 		    break;
 		case 'mentions':
-			fill_tweets('statuses/mentions', 'mentions');
+			fill_tweets('mentions');
             break;
 		case 'direct':
-			fill_tweets('direct_messages', 'direct');
+			fill_tweets('direct');
 			break;
 		}		
 	});

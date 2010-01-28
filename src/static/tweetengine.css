@@ -51,7 +51,7 @@ img {
 	visibility: hidden;
 }
 ol.tweetlist {
-    font-size: 14px;
+    font-size: 13px;
     list-style-image: none;
     list-style-position: outside;
     list-style-type: none;
@@ -61,6 +61,7 @@ ol.tweetlist {
 }
 ol.tweetlist li {
 	margin-left: 0px;
+	margin-bottom: 1.2em;
 }
 .tweet-user {
 	font-weight: bold;
