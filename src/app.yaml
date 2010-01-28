@@ -20,3 +20,6 @@ handlers:
 
 - url: /.*
   script: /request.py
+
+inbound_services:
+- xmpp_message
