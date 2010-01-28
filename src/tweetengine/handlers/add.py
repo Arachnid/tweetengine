@@ -15,7 +15,7 @@ class AddHandler(base.UserHandler):
             client = model.Configuration.instance().get_client(callback_url)
             self.redirect(client.get_authorization_url())
         except oauth.OAuthException, e:
-            self.render_template("invalid_configuration.html")
+            self.render_template("invalid_configuration.pt")
 
 
 class CallbackHandler(base.UserHandler):
@@ -38,4 +38,4 @@ class CallbackHandler(base.UserHandler):
                                              model.ROLE_ADMINISTRATOR)
         permission.put()
         self.current_account = account
-        self.render_template("added.html", {"account": account})
+        self.render_template("added.pt", {"account": account})

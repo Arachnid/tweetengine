@@ -1,0 +1,14 @@
+<metal:master use-macro="master">
+
+  <metal:title fill-slot="title">Account added</metal:title>
+
+  <metal:body fill-slot="body">
+	  <h2>Account added</h2>
+	  
+	  <p>You successfully added the account "${account.name} (${account.username})"
+	  to TweetEngine.</p>
+	  
+	  <p>Go back to <a href="/${account.username}/">your account</p>
+  </metal:body>
+  
+</metal:master>
