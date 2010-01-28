@@ -89,3 +89,7 @@ ol.tweetlist li {
     bottom: 0;
     right: 0;
 }
+
+#pendingTweets .odd {
+    background: #ddd;
+}
