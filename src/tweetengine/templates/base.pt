@@ -19,6 +19,7 @@ Description: A two-column fixed-width template suitable for small websites.
     <title><metal:define define-slot="title">Tweet Engine</metal:define> &ndash; Tweet Engine</title>
     <meta name="keywords" content="" />
     <meta name="description" content="" />
+    <link rel="shortcut icon" type="image/png" href="/static/images/favicon.png" />
     <link href="/static/default.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" tal:condition="current_account">
         account_name = "${current_account.username}";
