@@ -24,6 +24,7 @@
       <form action="/${current_account.username}/tweet" method="post">
        <div> 
          <textarea id="tweetarea" name="tweet" ></textarea>
+         <input id="in-reply-to" type="hidden" name="in_reply_to_status_id" />
          <input id="tweetsubmit" type="submit" value="Submit" disabled="disabled" />
        </div>
       </form>
@@ -76,7 +77,7 @@
 	            <span class="tweet-source">SOURCE</span>
 	        </div>
             <div class="tweet-actions">
-                <a class="tweet-reply">Reply</a>
+                <a href="#" class="tweet-reply">Reply</a>
                 <a class="tweet-retweet">Retweet</a>
             </div>
 	    </li>

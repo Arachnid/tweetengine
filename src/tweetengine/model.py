@@ -120,11 +120,14 @@ class OutgoingTweet(db.Model):
     message = db.TextProperty(required=True)
     timestamp = db.DateTimeProperty(required=True, auto_now_add=True)
     sent = db.BooleanProperty(required=True, default=False)
+    in_reply_to = db.StringProperty()
 
     def send(self):
         response = self.account.make_request(
             "http://twitter.com/statuses/update.json",
-            additional_params={"status": self.message})
+            additional_params={
+                "status": self.message,
+                "in_reply_to_status_id": self.in_reply_to})
         if response.status_code == 200:
             self.sent = True
             self.put()

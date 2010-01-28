@@ -53,6 +53,7 @@ jQuery(document).ready(function() {
 						is_direct = true;
 					}
 					var entry = jQuery("#tweet-template li").clone();
+                    entry.data("status_id", this.id);
 					entry.attr('id', 'status-' + this.id);
 					var userurl = 'http://twitter.com/' + user.screen_name;
 					entry.find(".tweet-thumb").find('a').attr('href', userurl);
@@ -70,18 +71,21 @@ jQuery(document).ready(function() {
 						entry.find(".tweet-source").html(this.source);
 					}					
 					if (region!='mytweets') {
-						entry.find(".tweet-reply").click(function() {
-	                        var user = $(this).parents("li").find(".tweet-user a").text();
-	                        tweetarea.text("@" + user + " ");
-	                        tweetarea.focus();
-	                        counter();
+						entry.find(".tweet-reply").unbind("click").click(function() {
+                            var tweet = jQuery(this).parents("li");
+                            var user = tweet.find(".tweet-user a").text();
+                            tweetarea.text("@" + user + " ");
+                            tweetarea.focus();
+                            counter();
+                            jQuery("#in-reply-to").attr("value", tweet.data("status_id"));
 	                    });
-	                    entry.find(".tweet-retweet").click(function() {
-	                        var user = $(this).parents("li").find(".tweet-user a").text();
-	                        var text = $(this).parents("li").find(".tweet-content").text();
-	                        tweetarea.text("RT @" + user + " " + text);
-	                        tweetarea.focus();
-	                        counter();
+	                    entry.find(".tweet-retweet").unbind("click").click(function() {
+                            var tweet = jQuery(this).parents("li");
+                            var user = tweet.find(".tweet-user a").text();
+                            var text = tweet.find(".tweet-content").text();
+                            tweetarea.text("RT @" + user + " " + text);
+                            tweetarea.focus();
+                            counter();
 	                    });
 					} else {
 						jQuery(entry).find('.tweet-actions').remove();
