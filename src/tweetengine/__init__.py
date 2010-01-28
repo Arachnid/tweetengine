@@ -27,4 +27,6 @@ import zope.i18n
 XMLConfig('meta.zcml', zope.component)
 XMLConfig('configure.zcml', zope.component)
 XMLConfig('configure.zcml', zope.i18n)
+import tweetengine
+XMLConfig('i18n.zcml', tweetengine)
 
