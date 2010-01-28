@@ -3,7 +3,7 @@ from google.appengine.api import users
 from tweetengine.handlers import base
 from tweetengine import model
 
-class HomepageHandler(base.BaseHandler):
+class HomepageHandler(base.UserHandler):
     def get(self):
         if self.user:
             permission = self.user_account.permission_set.get()

@@ -26,21 +26,21 @@
 	              <td class="field">
 	                  <input tal:condition="permission.key()==my_key"
 	                    type="checkbox" name="delete" 
-	                    value="${permission.key().name}" 
+	                    value="${permission.key().name()}" 
 	                    disabled="disabled" />
 	                  <input tal:condition="permission.key()!=my_key"
 	                    type="checkbox" name="delete" 
-	                    value="${permission.key().name}" />
+	                    value="${permission.key().name()}" />
 	              </td>
 	              <td>${permission.user.get_username()}</td>
 	              <td class="field">
-	                  <input type="radio" name="permission.${permission.key().name}" value="1" 
+	                  <input type="radio" name="permission.${permission.key().name()}" value="1" 
 	                    tal:attributes="checked permission.role==1 and 'checked' or '';
 	                                    disabled permission.key()==my_key and 'disabled' or ''"/> 
 	                    
 	               </td>
 	              <td class="field">
-	                  <input type="radio" name="permission.${permission.key().name}" value="2" 
+	                  <input type="radio" name="permission.${permission.key().name()}" value="2" 
 	                    tal:attributes="checked permission.role==2 and 'checked' or '';
 	                                    disabled permission.key()==my_key and 'disabled' or ''"/>
 	                     
