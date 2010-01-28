@@ -7,10 +7,13 @@ from tweetengine import model
 class DashboardHandler(base.UserHandler):
 
     def get_tweets(self):
-        q = model.OutgoingTweet.all()
-        q.filter("account =", self.current_account)
-        q.filter("sent =", False)
-        return q.fetch(20)
+        if self.current_permission.can_review():
+            q = model.OutgoingTweet.all()
+            q.filter("account =", self.current_account)
+            q.filter("sent =", False)
+            return q.fetch(20)
+        else:
+            return []
 
     @base.requires_account
     def get(self, account_name):        

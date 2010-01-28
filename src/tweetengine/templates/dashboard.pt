@@ -68,13 +68,17 @@
 	            <a title="TITLE" href="TWEETURL">TWEETUSERNAME</a>
 	        </span>
 	        <span class="tweet-content">TWEETCONTENT</span> 
-	        <span class="tweet-meta">
+	        <div class="tweet-meta">
 
                 <a class="tweet-dateurl" href="#" rel="bookmark">DATE</a>
 
 	            from 
 	            <span class="tweet-source">SOURCE</span>
-	        </span>
+	        </div>
+            <div class="tweet-actions">
+                <a class="tweet-reply">Reply</a>
+                <a class="tweet-retweet">Retweet</a>
+            </div>
 	    </li>
 	</ol>
                 
