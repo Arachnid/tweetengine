@@ -1,0 +1,18 @@
+<metal:master use-macro="master">
+
+  <metal:title fill-slot="title">Getting started</metal:title>
+
+
+  <metal:body fill-slot="body">
+    <h2>Getting started</h2>
+    <p>Congruatulations! You've logged in to Tweet Engine.</p>
+    <p>What now, you may ask? You have two options:</p>
+  
+    <ul>
+      <li>Ask your friend/boss/spouse to add you as a user on one of their Twitter
+      accounts, OR</li>
+      <li><a href="/add">Add your own account</a></li>
+    </ul>
+  </metal:body>
+  
+</metal:master>

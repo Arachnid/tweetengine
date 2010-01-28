@@ -1,0 +1,30 @@
+<metal:macro metal:define-macro="sidebar-accounts">
+  <div class="post">
+      <h2>Your Accounts</h2>
+      <table>
+          <tr tal:repeat="permission permissions"
+              tal:attributes="class permission.account.key==current_account.key and 'selected' or ''">
+            <td><a tal:attributes="href '/%s/' % permission.account.username"><img 
+                tal:attributes="src permission.account.picture;
+                                alt permission.account.username" /></a></td>
+            <td><a tal:attributes="href '/%s/' % permission.account.name">
+                ${permission.account.name} (${permission.account.username})</a></td>
+          </tr>
+      </table>
+      <p><a href="/add">Add a new account</a></p>
+  </div>
+    <div class="post"
+         tal:condition="public_accounts">
+        <h2>Public Accounts</h2>
+        <table>
+              <tr tal:repeat="account public_accounts"
+                  tal:attributes="class account.key==current_account.key and 'selected' or ''">
+                <td><a tal:attributes="href '/%s/' % account.username"><img 
+                    tal:attributes="src account.picture;
+                                    alt account.username" /></a></td>
+                <td><a tal:attributes="href '/%s/' % account.name">
+                    ${account.name} (${account.username})</a></td>
+              </tr>
+        </table>
+    </div>
+</metal:macro>
