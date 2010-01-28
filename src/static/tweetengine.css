@@ -78,7 +78,13 @@ ol.tweetlist li {
 .tweetlist li {
     margin-left: 52px;
     clear: both;
+    position: relative;
 }
 .ui-widget-content {
 	border: 0px;
+}
+.tweet-actions {
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }

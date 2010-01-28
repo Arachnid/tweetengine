@@ -7,6 +7,7 @@ jQuery(document).ready(function() {
         return text;
     }
 
+    var tweetarea = jQuery("#tweetarea");
     jQuery(document).ajaxError(function (event, XMLHttpRequest,
             ajaxOptions, thrownError) {
     		var msg = 'An error occurred while requesting "' + ajaxOptions.url; 
@@ -14,7 +15,7 @@ jQuery(document).ready(function() {
     		/* alert(msg); enable for debugging */
     });	
     function counter(event) {
-		var length = 140 - jQuery(this).val().length;
+		var length = 140 - tweetarea.val().length;
 		if (length <= 0 || length >= 139) {
 			jQuery("#tweetsubmit").attr('disabled', 'disabled');
 			jQuery("#tweetlabel").attr('class', 'tweet-oversize');
@@ -64,6 +65,20 @@ jQuery(document).ready(function() {
 					} else {
 						entry.find(".tweet-source").html(this.source);
 					}
+                    
+                    entry.find(".tweet-reply").click(function() {
+                        var user = $(this).parents("li").find(".tweet-user a").text();
+                        tweetarea.text("@" + user + " ");
+                        tweetarea.focus();
+                        counter();
+                    });
+                    entry.find(".tweet-retweet").click(function() {
+                        var user = $(this).parents("li").find(".tweet-user a").text();
+                        var text = $(this).parents("li").find(".tweet-content").text();
+                        tweetarea.text("RT @" + user + " " + text);
+                        tweetarea.focus();
+                        counter();
+                    });
 					
 					jQuery(selector).append(entry);
 				});
