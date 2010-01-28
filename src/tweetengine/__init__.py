@@ -16,5 +16,6 @@ application = webapp.WSGIApplication([
         ('/add/callback', handlers.CallbackHandler),
         ('/add', handlers.AddHandler),
         ('/admin', handlers.SettingsHandler),
+        ('/_ah/xmpp/message/chat/', handlers.XMPPHandler),
 ], debug=True)
 

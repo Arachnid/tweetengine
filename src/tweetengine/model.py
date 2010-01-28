@@ -100,7 +100,10 @@ class Permission(db.Model):
         user = _normalize_key_name(user)
         account = _normalize_key_name(account)
         key_name = "%s:%s" % (user, account)
-        return cls.get_by_key_name(key_name)
+        permission = cls.get_by_key_name(key_name)
+        if not permission:
+            permission = cls(user=user, account=account, role=ROLE_ANYONE)
+        return permission
 
     def can_suggest(self):
         return self.role >= self.account.suggest_tweets
@@ -131,6 +134,7 @@ class OutgoingTweet(db.Model):
                 "status": self.message,
                 "in_reply_to_status_id": self.in_reply_to})
         if response.status_code == 200:
+            self.approved = True
             self.sent = True
             self.timestamp = datetime.datetime.now()
             self.put()
