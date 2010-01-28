@@ -11,8 +11,10 @@ from chameleon.zpt.loader import TemplateLoader
 from tweetengine import model
 from tweetengine.menu import mainmenu
 
+DEBUG = os.environ['SERVER_SOFTWARE'].startswith("Dev")
+
 tpl_path = os.path.join(os.path.dirname(__file__), "..", "templates")
-tpl_loader = TemplateLoader(tpl_path, auto_reload=True)
+tpl_loader = TemplateLoader(tpl_path, auto_reload=DEBUG)
 
 def requires_login(func):
     def decorate(self, *args, **kwargs):
