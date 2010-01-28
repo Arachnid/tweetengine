@@ -97,9 +97,9 @@ class Permission(db.Model):
 
     @classmethod
     def find(cls, user, account):
-        user = _normalize_key_name(user)
-        account = _normalize_key_name(account)
-        key_name = "%s:%s" % (user, account)
+        user_name = _normalize_key_name(user)
+        account_name = _normalize_key_name(account)
+        key_name = "%s:%s" % (user_name, account_name)
         permission = cls.get_by_key_name(key_name)
         if not permission:
             permission = cls(user=user, account=account, role=ROLE_ANYONE)
