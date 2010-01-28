@@ -1,11 +1,13 @@
 import hashlib
 import hmac
+import itertools
 import logging
 import os
 import urllib
 import uuid
 import urlparse
 from django import newforms as forms
+from django.newforms import widgets
 from google.appengine.api import mail
 from google.appengine.ext import db
 from google.appengine.ext.webapp import template
@@ -13,8 +15,35 @@ from tweetengine.handlers import base
 from tweetengine import model
 
 
+class TabularRadioInput(widgets.RadioInput):
+    def __unicode__(self):
+        return self.tag()
+
+
+class TabularRadioFieldRenderer(widgets.RadioFieldRenderer):
+    def __iter__(self):
+        for i, choice in enumerate(self.choices):
+            yield TabularRadioInput(self.name, self.value,
+                                    self.attrs.copy(), choice, i)
+
+    def __unicode__(self):
+        return u'</td><td>'.join([unicode(x) for x in self])
+
+
+class TabularRadioSelect(widgets.RadioSelect):
+    """A radio select widget that outputs table cells."""
+    def render(self, name, value, attrs=None, choices=()):
+        if value is None: value = ''
+        str_value = widgets.smart_unicode(value)
+        attrs = attrs or {}
+        return TabularRadioFieldRenderer(
+            name, str_value, attrs, list(itertools.chain(self.choices, choices)))
+
+
 class SettingsForm(forms.Form):
-    public = forms.BooleanField(required=False)
+    suggest_tweets = forms.ChoiceField(choices=model.ROLES, widget=TabularRadioSelect)
+    review_tweets = forms.ChoiceField(choices=model.ROLES, widget=TabularRadioSelect)
+    send_tweets = forms.ChoiceField(choices=model.ROLES, widget=TabularRadioSelect)
 
 
 class ManageHandler(base.UserHandler):
@@ -22,7 +51,9 @@ class ManageHandler(base.UserHandler):
     def get(self, account_name, settings_form=None):
         if not settings_form:
             settings_form = SettingsForm(initial={
-                "public": self.current_account.public,
+                "suggest_tweets": self.current_account.suggest_tweets,
+                "send_tweets": self.current_account.send_tweets,
+                "review_tweets": self.current_account.review_tweets,
             })
         permissions = self.current_account.permission_set.fetch(100)
         base.prefetch_refprops(permissions, model.Permission.user)
@@ -39,8 +70,8 @@ class ManageHandler(base.UserHandler):
     def post(self, account_name):
         settings_form = SettingsForm(self.request.POST)
         if settings_form.is_valid():
-            if model.Configuration.instance().allow_public:
-                self.current_account.public = settings_form.clean_data['public']
+            for k, v in settings_form.clean_data.items():
+                setattr(self.current_account, k, int(v))
             self.current_account.put()
             self.redirect("/%s/manage?saved=true" % (self.current_account.username,))
         else:

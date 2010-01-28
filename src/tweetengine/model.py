@@ -16,12 +16,31 @@ class GoogleUserAccount(UserAccount):
         return self.user.email()
 
 
+ROLE_ANYONE = 0
+ROLE_USER = 1
+ROLE_ADMINISTRATOR = 2
+
+ROLES = [
+    (ROLE_ANYONE, "Anyone"),
+    (ROLE_USER, "User"),
+    (ROLE_ADMINISTRATOR, "Administrator")
+]
+ROLE_IDS = [id for id,name in ROLES]
+
+
 class TwitterAccount(db.Model):
     oauth_token = db.TextProperty(required=True)
     oauth_secret = db.TextProperty(required=True)
     name = db.TextProperty()
     picture = db.TextProperty()
-    public = db.BooleanProperty(required=True, default=False)
+    
+    # Permission levels
+    suggest_tweets = db.IntegerProperty(required=True, choices=ROLE_IDS,
+                                        default=ROLE_ANYONE)
+    send_tweets = db.IntegerProperty(required=True, choices=ROLE_IDS,
+                                     default=ROLE_USER)
+    review_tweets = db.IntegerProperty(required=True, choices=ROLE_IDS,
+                                       default=ROLE_USER)
 
     @property
     def username(self):
@@ -48,10 +67,6 @@ class TwitterAccount(db.Model):
             method=method)
 
 
-ROLE_USER = 1
-ROLE_ADMINISTRATOR = 2
-
-
 def _normalize_key_name(key):
     if isinstance(key, db.Model):
         key = key.key()
@@ -64,7 +79,7 @@ class Permission(db.Model):
     user = db.ReferenceProperty(UserAccount, required=True)
     account = db.ReferenceProperty(TwitterAccount, required=True)
     role = db.IntegerProperty(required=True,
-                              choices=[ROLE_USER, ROLE_ADMINISTRATOR])
+                              choices=ROLE_IDS)
     invite_nonce = db.StringProperty()
 
     @classmethod
@@ -85,6 +100,15 @@ class Permission(db.Model):
         account = _normalize_key_name(account)
         key_name = "%s:%s" % (user, account)
         return cls.get_by_key_name(key_name)
+
+    def can_suggest(self):
+        return self.role >= self.account.suggest_tweets
+    
+    def can_send(self):
+        return self.role >= self.account.send_tweets
+    
+    def can_review(self):
+        return self.role >= self.account.review_tweets
 
 
 class OutgoingTweet(db.Model):

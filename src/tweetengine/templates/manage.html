@@ -10,7 +10,9 @@
       <h3>Users</h3>
       <form method="POST" action="/{{current_account.username}}/manage_users">
           <table class="display">
-            <tr><th>Delete</th><th>Email</th><th>User</th><th>Admin</th></tr>
+            <thead>
+              <tr><th>Delete</th><th>Email</th><th>User</th><th>Admin</th></tr>
+            </thead>
             {% for permission in acct_permissions %}
                 <tr>
                   <td class="field"><input type="checkbox" name="delete" value="{{permission.key.name}}" {% ifequal permission.key my_key %}disabled="disabled" {% endifequal %}/></td>
@@ -31,19 +33,13 @@
   </div>
   
   <div class="post">
-      <h3>Settings</h3>
+      <h3>Permissions</h3>
       <form method="POST" action="/{{current_account.username}}/manage">
-        <table>
-          {% if allow_public %}
-              <tr>
-                <th><label for="public">Public:</label></th>
-                <td>
-                    {{settings_form.public}}{{settings_form.public.errors}}
-                    <p>Public accounts appear on everyone's list of accounts, and
-                    anyone can suggest tweets on them.</p>
-                </td>
-              </tr>
-          {% endif %}
+        <table class="display grid">
+          <thead>
+            <tr><th></th><th>Anyone</th><th>Users</th><th>Administrators</th></tr>
+          </thead>
+          {{settings_form}}
         </table>
         <input type="submit" value="Update" />
       </form>

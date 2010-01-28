@@ -41,7 +41,7 @@ p {
 blockquote {
 }
 
-th, td.field {
+thead th, td.field, .grid td {
   text-align: center;
 }
 

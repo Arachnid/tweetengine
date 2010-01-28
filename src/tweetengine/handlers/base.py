@@ -89,10 +89,12 @@ class UserHandler(BaseHandler):
         permissions = self.user_account.permission_set.fetch(100)
         prefetch_refprops(permissions, model.Permission.account)
         my_acct_keys = set(x.account.key() for x in permissions)
-        public_accts = model.TwitterAccount.all().filter("public =", True).fetch(100)
-        public_accts = [x for x in public_accts
-                        if x.key() not in my_acct_keys]
-        logging.warn(public_accts)
+        public_accts = []
+        if model.Configuration.instance().allow_public:
+            q = model.TwitterAccount.all()
+            q.filter("suggest_tweets =", model.ROLE_ANYONE)
+            public_accts = [x for x in q.fetch(100)
+                            if x.key() not in my_acct_keys]
         template_vars.update({
             "permissions": permissions,
             "public_accounts": public_accts,

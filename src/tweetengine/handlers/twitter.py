@@ -14,12 +14,12 @@ class TweetHandler(base.BaseHandler):
         tweet = model.OutgoingTweet(account=self.current_account,
                                     user=self.user_account,
                                     message=self.request.get("tweet"))
-        if permission:
+        if permission.can_send():
             tweet.approved_by=self.user_account
             response = tweet.send()
             if response.status_code != 200:
                 self.error(500)
                 logging.error(response.content)
-        elif self.current_account.public:
+        elif permission.can_suggest():
             tweet.put()
         self.redirect("/%s/" % (account_name,))

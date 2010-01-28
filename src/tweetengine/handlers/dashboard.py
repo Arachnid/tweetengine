@@ -18,8 +18,11 @@ class DashboardHandler(base.UserHandler):
             "tweets": self.get_tweets(),
         })
 
-    @base.requires_account_admin
+    @base.requires_account
     def post(self, account_name):
+        if not self.current_permission.can_review():
+            self.error(403)
+            return
         q = self.get_tweets()
         tweet_map = dict((x.key().id(), x) for x in tweets)
 
