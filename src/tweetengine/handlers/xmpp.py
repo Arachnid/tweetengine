@@ -5,7 +5,7 @@ from google.appengine.ext.webapp import xmpp_handlers
 class XMPPHandler(xmpp_handlers.BaseHandler):
     def message_received(self, message):
         twitter_account = model.TwitterAccount.get_by_key_name(message.to.split("@")[0])
-        user = users.User(message.sender)
+        user = users.User(message.sender.split('/')[0])
         user_account = model.GoogleUserAccount.all().filter("user =", user).get()
         if not user_account or not twitter_account:
             self.not_allowed(message)
@@ -24,7 +24,7 @@ class XMPPHandler(xmpp_handlers.BaseHandler):
             self.sent(message)
         elif permission.can_suggest():
             tweet.put()
-            self.submitted()
+            self.submitted(message)
         else:
             self.not_allowed(message)
 
