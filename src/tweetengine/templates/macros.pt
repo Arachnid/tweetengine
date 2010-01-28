@@ -28,3 +28,6 @@
         </table>
     </div>
 </metal:macro>
+<metal:macro metal:define-macro="sidebar-logo">
+   <img src="/static/images/logo-bird-200w.png" alt="Logo" />
+</metal:macro>

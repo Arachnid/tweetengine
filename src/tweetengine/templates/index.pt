@@ -1,6 +1,18 @@
 <metal:master use-macro="master">
 
   <metal:title fill-slot="title">Welcome!</metal:title>
+  
+  <metal:head fill-slot="head">
+     <style type="text/css">
+         #page {
+             background-image: none;
+         }
+     </style>
+  </metal:head>
+
+  <metal:sidebar fill-slot="sidebar">
+    <metal:use metal:use-macro="macros['sidebar-logo']"  />
+  </metal:sidebar>
 
   <metal:body fill-slot="body">
    <div class="post">  
