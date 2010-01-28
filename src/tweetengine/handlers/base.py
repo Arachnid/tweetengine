@@ -43,6 +43,9 @@ def requires_account(func):
         self.current_account = model.TwitterAccount.get_by_key_name(account_name)
         self.current_permission = model.Permission.find(self.user_account,
                                                         self.current_account)
+        if not self.current_permission:
+            self.current_permission = model.Permission.create(
+                self.user_account, self.current_account, model.ROLE_ANYONE)
         if not self.current_account:
             self.redirect('/')
         else:
