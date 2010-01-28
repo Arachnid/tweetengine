@@ -1,5 +1,6 @@
 <metal:macro metal:define-macro="sidebar-accounts">
-  <div class="post">
+  <div class="post"
+       tal:condition="permissions">
       <h2>Your Accounts</h2>
       <table>
           <tr tal:repeat="permission permissions"
@@ -18,16 +19,23 @@
         <h2>Public Accounts</h2>
         <table>
               <tr tal:repeat="account public_accounts"
-                  tal:attributes="class account.key==current_account.key and 'selected' or ''">
+                  tal:attributes="class current_account and account.key==current_account.key and 'selected' or ''">
                 <td><a tal:attributes="href '/%s/' % account.username"><img 
                     tal:attributes="src account.picture;
                                     alt account.username" /></a></td>
-                <td><a tal:attributes="href '/%s/' % account.name">
+                <td><a tal:attributes="href '/%s/' % account.username">
                     ${account.name} (${account.username})</a></td>
               </tr>
         </table>
     </div>
 </metal:macro>
 <metal:macro metal:define-macro="sidebar-logo">
+  <metal:head fill-slot="head">
+     <style type="text/css">
+         #page {
+             background-image: none;
+         }
+     </style>
+  </metal:head>
    <img src="/static/images/logo-bird-200w.png" alt="Logo" />
 </metal:macro>

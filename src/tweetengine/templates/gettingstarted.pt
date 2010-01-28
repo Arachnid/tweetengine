@@ -2,16 +2,8 @@
 
   <metal:title fill-slot="title">Getting started</metal:title>
   
-  <metal:head fill-slot="head">
-     <style type="text/css">
-         #page {
-             background-image: none;
-         }
-     </style>
-  </metal:head>
-
   <metal:sidebar fill-slot="sidebar">
-    <metal:use use-macro="macros['sidebar-logo']"  />
+    <metal:use metal:use-macro="macros['sidebar-accounts'] if public_accounts else macros['sidebar-logo']"  />
   </metal:sidebar>
 
   <metal:body fill-slot="body">
@@ -25,6 +17,8 @@
     <ul>
       <li>Ask your friend/boss/spouse to add you as a user on one of their Twitter
       accounts, OR</li>
+      <li tal:condition="public_accounts">Suggest tweets for one of the public
+      accounts on the right, OR</li>
       <li><a href="/add">Add your own account</a></li>
     </ul>
 
