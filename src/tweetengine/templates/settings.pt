@@ -1,0 +1,23 @@
+<metal:master use-macro="master">
+
+  <metal:title fill-slot="title">Global Settings</metal:title>
+
+  <metal:body fill-slot="body">
+  
+   <div class="post">  
+  
+    <h2>Global Settings</h2>
+
+    <p tal:condition="saved" 
+       class="notification">Settings saved.</p>
+
+    <form action="/admin" method="post" id="global-settings-form">
+      <table>
+        <tal tal:replace="structure form" />
+        <tr><th></th><td><input name="settings" type="submit" value="save" /></td></tr>
+      </table>
+    </form>
+   </div>  
+    
+  </metal:body>
+</metal:master>

@@ -58,12 +58,12 @@ def requires_account_admin(func):
             return func(self, account_name, *args, **kwargs)
     return decorate
 
-def prefetch_refprop(entities, prop):
-    keys = [prop.get_value_for_datastore(x) for x in entities]
-    ref_entities = db.get(keys)
-    for entity, ref_entity in zip(entities, ref_entities):
-        prop.__set__(entity, ref_entity)
-    return entities
+def prefetch_refprops(entities, *props):
+    fields = [(entity, prop) for entity in entities for prop in props]
+    ref_keys = [prop.get_value_for_datastore(x) for x, prop in fields]
+    ref_entities = dict((x.key(), x) for x in db.get(set(ref_keys)))
+    for (entity, prop), ref_key in zip(fields, ref_keys):
+        prop.__set__(entity, ref_entities[ref_key])
 
 class BaseHandler(webapp.RequestHandler):
     def initialize(self, request, response):

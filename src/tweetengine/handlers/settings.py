@@ -21,7 +21,7 @@ class SettingsHandler(base.BaseHandler):
                 "mail_from": cfg.mail_from,
                 "allow_public": cfg.allow_public,
         })
-        self.render_template("settings.html", {'form': form})
+        self.render_template("settings.pt", {'form': form, 'saved': False})
         
     @base.requires_admin
     def post(self):
@@ -35,4 +35,4 @@ class SettingsHandler(base.BaseHandler):
             cfg.allow_public = form.clean_data['allow_public']
             cfg.put()
             saved = True
-        self.render_template("settings.html", {'form': form, 'saved': saved})
+        self.render_template("settings.pt", {'form': form, 'saved': saved})

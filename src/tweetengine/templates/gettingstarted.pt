@@ -2,8 +2,10 @@
 
   <metal:title fill-slot="title">Getting started</metal:title>
 
-
   <metal:body fill-slot="body">
+  
+   <div class="post">  
+  
     <h2>Getting started</h2>
     <p>Congruatulations! You've logged in to Tweet Engine.</p>
     <p>What now, you may ask? You have two options:</p>
@@ -13,6 +15,9 @@
       accounts, OR</li>
       <li><a href="/add">Add your own account</a></li>
     </ul>
+
+   </div>
+
   </metal:body>
-  
+
 </metal:master>

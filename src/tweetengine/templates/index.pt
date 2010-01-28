@@ -3,11 +3,15 @@
   <metal:title fill-slot="title">Welcome!</metal:title>
 
   <metal:body fill-slot="body">
+   <div class="post">  
     <h2>Welcome to TweetEngine</h2>
-      <p>TweetEngine enables Twitter account sharing without sharing the Twitter 
-      password. Additional and optional you can control tweets by a n with  
-      simple review process.</p>
-      <p>Login with your Google account and start.</p>
+    
+    <p>TweetEngine enables Twitter account sharing without sharing the Twitter 
+    password. Additional and optional you can control tweets by a n with  
+    simple review process.</p>
+    
+    <p>Login with your Google account and start.</p>
+   </div> 
   </metal:body>
   
 </metal:master>

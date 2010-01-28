@@ -14,7 +14,7 @@ class DashboardHandler(base.UserHandler):
 
     @base.requires_account
     def get(self, account_name):        
-        self.render_template("me.html", {
+        self.render_template("dashboard.pt", {
             "tweets": self.get_tweets(),
         })
 
