@@ -1,4 +1,12 @@
 jQuery(document).ready(function() {
+    url_re = /\b(https?|ftp|file):\/\/[-A-Z0-9+&@#/%?=~_|!:,.;]*[-A-Z0-9+&@#/%=~_|]/i;
+    username_re = /(?:^|\b)@([A-Z0-9_]+)/i;
+    function linkify(text) {
+        text = text.replace(url_re, "<a href=\"$&\">$&</a>");
+        text = text.replace(username_re, "<a href=\"http://twitter.com/$1\">@$1</a>");
+        return text;
+    }
+
     jQuery(document).ajaxError(function (event, XMLHttpRequest,
             ajaxOptions, thrownError) {
     		var msg = 'An error occurred while requesting "' + ajaxOptions.url; 
@@ -7,11 +15,11 @@ jQuery(document).ready(function() {
     });	
     function counter(event) {
 		var length = 140 - jQuery(this).val().length;
-		if (length < 0 || length >= 139) {
+		if (length <= 0 || length >= 139) {
 			jQuery("#tweetsubmit").attr('disabled', 'disabled');
 			jQuery("#tweetlabel").attr('class', 'tweet-oversize');
 		};
-		if (length >= 0 && length < 140) {
+		if (length > 0 && length < 140) {
 			jQuery("#tweetsubmit").removeAttr('disabled');
 			jQuery("#tweetlabel").removeAttr('class');
 		};
@@ -48,7 +56,7 @@ jQuery(document).ready(function() {
 					entry.find(".tweet-user").find('a').text(user.screen_name);
 					entry.find(".tweet-user").find('a').attr('href', userurl);
 					entry.find(".tweet-user").find('a').attr('title', user.name);
-					entry.find(".tweet-content").text(this.text);
+					entry.find(".tweet-content").html(linkify(this.text));
 					entry.find(".tweet-dateurl").text(this.created_at);
 					entry.find(".tweet-dateurl").attr('href', userurl + "/status/" + this.id);
 					if (is_direct) {
