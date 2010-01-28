@@ -6,11 +6,15 @@
    <div class="post">  
     <h2>Welcome to TweetEngine</h2>
     
-    <p>TweetEngine enables Twitter account sharing without sharing the Twitter 
-    password. Additional and optional you can control tweets by a n with  
-    simple review process.</p>
-    
-    <p>Login with your Google account and start.</p>
+    <p>TweetEngine makes it possible to share a Twitter account without giving
+    out the password. Now, managing shared twitter accounts is easy!</p>
+    <p>With TweetEngine, you can control what access rights other users have
+    over your account, allowing them to administer the account or just to send
+    tweets. You can even allow outside users to suggest tweets, which you can
+    approve or decline.</p>
+
+    <p>To get started, simply log in above.</p>
+
    </div> 
   </metal:body>
   
