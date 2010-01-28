@@ -41,9 +41,9 @@
         <tr><th>Send</th><th>Delete</th><th>Leave</th><th>Tweet message</th></tr>
         
             <tr tal:repeat="tweet tweets">
-              <td class="field"><input type="radio" name="tweet.${tweet.key().id}" value="send" /></td>
-              <td class="field"><input type="radio" name="tweet.${tweet.key().id}" value="delete" /></td>
-              <td class="field"><input type="radio" name="tweet.${tweet.key().id}" value="leave" /></td>
+              <td class="field"><input type="radio" name="tweet.${tweet.key.id}" value="send" /></td>
+              <td class="field"><input type="radio" name="tweet.${tweet.key.id}" value="delete" /></td>
+              <td class="field"><input type="radio" name="tweet.${tweet.key.id}" value="leave" /></td>
               <td tal:content="structure tweet.message">MESSAGE</td>
             </tr>
 
@@ -60,20 +60,20 @@
 
 	<ol id="tweet-template" class="tweetlist">
 	    <li>
-	        <div class="tweet-thumb"> <a href="USERURL"><img
+	        <span class="tweet-thumb"> <a href="USERURL"><img
 	          width="48" height="48" src="" alt="IMAGEALT" /></a>
-	        </div> 
+	        </span> 
 	        <span class="tweet-user">
 	            <a title="TITLE" href="TWEETURL">TWEETUSERNAME</a>
 	        </span>
 	        <span class="tweet-content">TWEETCONTENT</span> 
-	        <div class="tweet-meta">
+	        <span class="tweet-meta">
 
                 <a class="tweet-dateurl" href="#" rel="bookmark">DATE</a>
 
 	            from 
 	            <span class="tweet-source">SOURCE</span>
-	        </div>
+	        </span>
 	    </li>
 	</ol>
                 

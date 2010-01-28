@@ -193,7 +193,7 @@ a:hover {
 #page {
 	width: 892px;
 	margin: 0 auto;
-	background: url(images/img03.jpg) repeat-y left top;
+	background: white url(images/img03.jpg) repeat-y left top;
 }
 
 #page-bgtop {
