@@ -60,20 +60,20 @@
 
 	<ol id="tweet-template" class="tweetlist">
 	    <li>
-	        <span class="tweet-thumb"> <a href="USERURL"><img
+	        <div class="tweet-thumb"> <a href="USERURL"><img
 	          width="48" height="48" src="" alt="IMAGEALT" /></a>
-	        </span> 
+	        </div> 
 	        <span class="tweet-user">
 	            <a title="TITLE" href="TWEETURL">TWEETUSERNAME</a>
 	        </span>
 	        <span class="tweet-content">TWEETCONTENT</span> 
-	        <span class="tweet-meta">
+	        <div class="tweet-meta">
 
                 <a class="tweet-dateurl" href="#" rel="bookmark">DATE</a>
 
 	            from 
 	            <span class="tweet-source">SOURCE</span>
-	        </span>
+	        </div>
 	    </li>
 	</ol>
                 

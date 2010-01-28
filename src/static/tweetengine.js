@@ -1,6 +1,6 @@
 jQuery(document).ready(function() {
-    url_re = /\b(https?|ftp|file):\/\/[-A-Z0-9+&@#/%?=~_|!:,.;]*[-A-Z0-9+&@#/%=~_|]/i;
-    username_re = /(?:^|\b)@([A-Z0-9_]+)/i;
+    url_re = /\b(https?|ftp|file):\/\/[-A-Z0-9+&@#/%?=~_|!:,.;]*[-A-Z0-9+&@#/%=~_|]/ig;
+    username_re = /@([A-Z0-9_]+)/ig;
     function linkify(text) {
         text = text.replace(url_re, "<a href=\"$&\">$&</a>");
         text = text.replace(username_re, "<a href=\"http://twitter.com/$1\">@$1</a>");

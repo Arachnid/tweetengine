@@ -65,13 +65,19 @@ ol.tweetlist li {
 .tweet-user {
 	font-weight: bold;
 }
+.tweet-thumb {
+    float: left;
+}
 .tweet-thumb img {
 	padding: 0 5px 0 0;
-    float: left;
 }
 .tweet-meta {
 	font-size: 80%;
-	display: block;
+    margin-left: 52px;
+}
+.tweetlist li {
+    margin-left: 52px;
+    clear: both;
 }
 .ui-widget-content {
 	border: 0px;
