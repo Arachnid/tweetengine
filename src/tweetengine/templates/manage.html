@@ -13,10 +13,10 @@
             <tr><th>Delete</th><th>Email</th><th>User</th><th>Admin</th></tr>
             {% for permission in acct_permissions %}
                 <tr>
-                  <td class="field"><input type="checkbox" name="delete" value="{{permission.key.id}}" {% ifequal permission.key my_key %}disabled="disabled" {% endifequal %}/></td>
+                  <td class="field"><input type="checkbox" name="delete" value="{{permission.key.name}}" {% ifequal permission.key my_key %}disabled="disabled" {% endifequal %}/></td>
                   <td>{{permission.user.get_username}}</td>
-                  <td class="field"><input type="radio" name="permission.{{permission.key.id}}" value="1" {% ifequal permission.role 1 %}checked="checked"{% endifequal %} {% ifequal permission.key my_key %}disabled="disabled" {% endifequal %}/></td>
-                  <td class="field"><input type="radio" name="permission.{{permission.key.id}}" value="2" {% ifequal permission.role 2 %}checked="checked"{% endifequal %} {% ifequal permission.key my_key %}disabled="disabled" {% endifequal %}/></td>
+                  <td class="field"><input type="radio" name="permission.{{permission.key.name}}" value="1" {% ifequal permission.role 1 %}checked="checked"{% endifequal %} {% ifequal permission.key my_key %}disabled="disabled" {% endifequal %}/></td>
+                  <td class="field"><input type="radio" name="permission.{{permission.key.name}}" value="2" {% ifequal permission.role 2 %}checked="checked"{% endifequal %} {% ifequal permission.key my_key %}disabled="disabled" {% endifequal %}/></td>
                 </tr>
             {% endfor %}
             <tr>
