@@ -38,15 +38,15 @@
     <h2>Pending tweets</h2>
 
     <form method="POST" action="/${current_account.username}/">
-      <table class="display" id="pending-tweets">
+      <table class="display" id="pendingTweets">
         <tr><th>Send</th><th>Delete</th><th>No change</th><th>Tweet message</th><th>Postpone until</th></tr>
         
             <tr tal:repeat="tweet tweets">
-              <td class="field"><input type="radio" name="tweet.${tweet.key().id()}" value="send" /></td>
+              <td class="field"><input type="radio" name="tweet.${tweet.key().id()}" value="send" checked="${tweet.approved and 'checked'}"/></td>
               <td class="field"><input type="radio" name="tweet.${tweet.key().id()}" value="delete" /></td>
               <td class="field"><input type="radio" name="tweet.${tweet.key().id()}" value="leave" /></td>
               <td tal:content="structure tweet.message">MESSAGE</td>
-              <td><input type="text" name="timestamp.${tweet.key().id()}" value="${tweet.timestamp}" class="timestamp" />TIMESTAMP</td>
+              <td class="timestamp"><input type="text" name="timestamp.${tweet.key().id()}" value="${tweet.timestamp}" /></td>
             </tr>
 
       </table>
