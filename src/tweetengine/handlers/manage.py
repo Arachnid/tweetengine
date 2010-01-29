@@ -82,24 +82,24 @@ class ManageUsersHandler(base.UserHandler):
     @base.requires_account_admin
     def post(self, account_name):
         permissions = self.current_account.permission_set.fetch(100)
-        permission_map = dict((x.key().id(), x) for x in permissions)
-        my_id = self.current_permission.key().id()
+        permission_map = dict((x.key().name(), x) for x in permissions)
+        my_key_name = self.current_permission.key().name()
         
         # Handle deletion
-        to_delete = [permission_map[int(x)]
+        to_delete = [permission_map[x]
                      for x in self.request.POST.getall("delete")
-                     if int(x) in permission_map and x != my_id]
+                     if x in permission_map and x != my_key_name]
         db.delete(to_delete)
         
         # Handle permission changes
-        new_permissions = [(int(k.split(".")[1]), int(v))
+        new_permissions = [(k.split(".")[1], int(v))
                            for k, v in self.request.POST.iteritems()
                            if k.startswith("permission.")]
         to_update = []
-        for perm_id, role in new_permissions:
-            if perm_id == my_id:
+        for perm_name, role in new_permissions:
+            if perm_name == my_key_name:
                 continue
-            permission = permission_map[perm_id]
+            permission = permission_map[perm_name]
             if permission.role != role:
                 permission.role = role
                 to_update.append(permission)
