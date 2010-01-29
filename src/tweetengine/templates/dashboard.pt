@@ -6,6 +6,10 @@
     <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.0/jquery.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
+    <link href="/static/dateentry/jquery.dateentry.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="/static/dateentry/jquery.dateentry.pack.js"></script>
+    <link href="/static/dateentry/jquery.timeentry.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="/static/dateentry/jquery.timeentry.pack.js"></script>
     <script type="text/javascript" src="/static/tweetengine.js"></script>
   </metal:head>
   
@@ -24,6 +28,7 @@
       <form action="/${current_account.username}/tweet" method="post">
        <div> 
          <textarea id="tweetarea" name="tweet" ></textarea>
+         <input id="in-reply-to" type="hidden" name="in_reply_to_status_id" />
          <input id="tweetsubmit" type="submit" value="Submit" disabled="disabled" />
        </div>
       </form>
@@ -38,16 +43,19 @@
 
     <form method="POST" action="/${current_account.username}/">
       <table class="display" id="pendingTweets">
-        <tr><th>Send</th><th>Delete</th><th>No change</th><th>Tweet message</th><th>Postpone until</th></tr>
-        
-            <tr tal:repeat="tweet tweets">
+        <tr><th>Send</th><th>Delete</th><th>No change</th><th>Tweet message</th></tr>
+          <tal:tweets tal:repeat="tweet tweets">
+            <tr tal:attributes="class python:repeat.tweet.odd() and 'odd' or 'even'">
               <td class="field"><input type="radio" name="tweet.${tweet.key().id()}" value="send" checked="${tweet.approved and 'checked'}"/></td>
               <td class="field"><input type="radio" name="tweet.${tweet.key().id()}" value="delete" /></td>
               <td class="field"><input type="radio" name="tweet.${tweet.key().id()}" value="leave" /></td>
               <td tal:content="structure tweet.message">MESSAGE</td>
-              <td class="timestamp"><input type="text" name="timestamp.${tweet.key().id()}" value="${tweet.timestamp}" /></td>
             </tr>
-
+            <tr tal:attributes="class python:repeat.tweet.odd() and 'odd' or 'even'">
+              <th style="text-align: right;" colspan="3">Postpone until</th>
+              <td style="white-space: nowrap;"><input type="text" name="datestamp.${tweet.key().id()}" value="${tweet.date}" class="datestamp" id="dumm" size="10"/><input type="text" name="timestamp.${tweet.key().id()}" value="${tweet.time}" class="timestamp" size="5"/></td>
+            </tr>
+	</tal:tweets>
       </table>
       <input type="submit" value="Submit" />
     </form>
@@ -76,7 +84,7 @@
 	            <span class="tweet-source">SOURCE</span>
 	        </div>
             <div class="tweet-actions">
-                <a class="tweet-reply">Reply</a>
+                <a href="#" class="tweet-reply">Reply</a>
                 <a class="tweet-retweet">Retweet</a>
             </div>
 	    </li>

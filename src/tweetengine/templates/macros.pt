@@ -4,11 +4,11 @@
       <h2>Your Accounts</h2>
       <table>
           <tr tal:repeat="permission permissions"
-              tal:attributes="class permission.account.key==current_account.key and 'selected' or ''">
+              tal:attributes="class permission.account.key()==current_account.key() and 'selected' or ''">
             <td><a tal:attributes="href '/%s/' % permission.account.username"><img 
                 tal:attributes="src permission.account.picture;
                                 alt permission.account.username" /></a></td>
-            <td><a tal:attributes="href '/%s/' % permission.account.name">
+            <td><a tal:attributes="href '/%s/' % permission.account.username">
                 ${permission.account.name} (${permission.account.username})</a></td>
           </tr>
       </table>
@@ -19,7 +19,7 @@
         <h2>Public Accounts</h2>
         <table>
               <tr tal:repeat="account public_accounts"
-                  tal:attributes="class current_account and account.key==current_account.key and 'selected' or ''">
+                  tal:attributes="class current_account and account.key()==current_account.key() and 'selected' or ''">
                 <td><a tal:attributes="href '/%s/' % account.username"><img 
                     tal:attributes="src account.picture;
                                     alt account.username" /></a></td>

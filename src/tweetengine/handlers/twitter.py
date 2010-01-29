@@ -12,9 +12,11 @@ class TweetHandler(base.BaseHandler):
     @base.requires_account
     def post(self, account_name):
         permission = self.current_permission
+        in_reply_to = self.request.get("in_reply_to_status_id", None)
         tweet = model.OutgoingTweet(account=self.current_account,
                                     user=self.user_account,
-                                    message=self.request.get("tweet"))
+                                    message=self.request.get("tweet"),
+                                    in_reply_to=in_reply_to)
         if permission.can_send():
             tweet.approved_by=self.user_account
             response = tweet.send()

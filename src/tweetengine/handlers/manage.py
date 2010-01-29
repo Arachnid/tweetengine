@@ -167,10 +167,10 @@ class InviteHandler(base.UserHandler):
         # Add the permission record
         permission = model.Permission.find(self.user_account, self.current_account)
         if not permission:
-            permission = model.Permission(
-                user=self.user_account,
-                account=self.current_account,
-                role=int(role),
-                invite_nonce=nonce)
+            permission = model.Permission.create(
+                self.user_account,
+                self.current_account,
+                int(role),
+                nonce)
             permission.put()
         self.redirect("/%s/" % (self.current_account.username,))
