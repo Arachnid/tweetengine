@@ -22,7 +22,7 @@
               <tr><th>Delete</th><th>Email</th><th>User</th><th>Admin</th></tr>
             </thead>
             <tbody>
-	            <tr tal:repeat="permission permissions">
+	            <tr tal:repeat="permission acct_permissions">
 	              <td class="field">
 	                  <input tal:condition="permission.key()==my_key"
 	                    type="checkbox" name="delete" 
