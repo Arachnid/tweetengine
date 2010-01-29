@@ -161,7 +161,7 @@ class OutgoingTweet(db.Model):
 
     def send(self):
         response = self.send_async().get_result()
-        if respones.status_code == 200:
+        if response.status_code == 200:
             self.put()
         return response
     
