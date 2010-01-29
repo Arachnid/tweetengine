@@ -7,7 +7,6 @@ develop-eggs
 .installed.cfg
 *.pyc
 src/packages
-src/index.yaml
 *~
 .pydevproject
 .project

@@ -53,8 +53,8 @@
         <tr><th>Approve</th><th>Hold</th><th>Delete</th><th>Tweet message</th></tr>
           <tal:tweets tal:repeat="tweet tweets">
             <tr tal:attributes="class python:repeat.tweet.odd() and 'odd' or 'even'"> 
-              <td class="field"><input type="radio" name="tweet.${tweet.key().id()}" value="send" checked="${tweet.approved and 'checked'}"/></td>
-              <td class="field"><input type="radio" name="tweet.${tweet.key().id()}" value="leave" /></td>
+              <td class="field"><input type="radio" name="tweet.${tweet.key().id()}" value="send" tal:attributes="checked 'checked' if tweet.approved else None" /></td>
+              <td class="field"><input type="radio" name="tweet.${tweet.key().id()}" value="leave" tal:attributes="checked None if tweet.approved else 'checked'" /></td>
               <td class="field"><input type="radio" name="tweet.${tweet.key().id()}" value="delete" /></td>
               <td tal:content="structure tweet.message">MESSAGE</td>
             </tr>
