@@ -3,7 +3,6 @@ import logging
 import time
 from google.appengine.ext import db
 from google.appengine.ext import deferred
-from google.appengine.api.labs import taskqueue
 from tweetengine.handlers import base, twitter
 from tweetengine.oauth import TwitterClient
 from tweetengine import model
@@ -47,16 +46,10 @@ class DashboardHandler(base.UserHandler):
                 tweet.approved = True
                 timestamp = "%s %s" % (self.request.POST['datestamp.%s' % tweet.key().id()],
                                        self.request.POST['timestamp.%s' % tweet.key().id()])
-                now = datetime.datetime.now()
-                if timestamp:
-                    tweet.timestamp = datetime.datetime.strptime(timestamp,"%d/%m/%Y %H:%M")                
-                    if tweet.timestamp > now:
-                        tweet.put()
-                        task_name = 'tweet-%d' % (time.mktime(tweet.timestamp.timetuple())/300)
-                        try:
-                            deferred.defer(twitter.publishApprovedTweets, _eta=tweet.timestamp,_name=task_name)
-                        except taskqueue.TaskAlreadyExistsError:
-                            pass
+                if timestamp.strip():
+                    tweet.timestamp = datetime.datetime.strptime(timestamp,"%d/%m/%Y %H:%M")
+                    if tweet.timestamp > datetime.datetime.now():
+                        tweet.schedule()
                         # we have postpone the sending, continue to next tweet
                         continue
 

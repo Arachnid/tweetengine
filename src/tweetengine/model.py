@@ -1,6 +1,9 @@
 import datetime
+import time
 from google.appengine.api import urlfetch
+from google.appengine.api.labs import taskqueue
 from google.appengine.ext import db
+from google.appengine.ext import deferred
 from google.appengine.ext.db import polymodel
 
 from tweetengine import oauth
@@ -150,6 +153,16 @@ class OutgoingTweet(db.Model):
             self.put()
         return response
 
+    def schedule(self):
+        from tweetengine.handlers import twitter
+        task_name = 'tweet-%d' % (time.mktime(self.timestamp.timetuple())/300)
+        try:
+            deferred.defer(twitter.publishApprovedTweets, _eta=self.timestamp,
+                           _name=task_name)
+        except taskqueue.TaskAlreadyExistsError:
+            pass
+        self.put()
+        
 
 class Configuration(db.Model):
     INSTANCE = None

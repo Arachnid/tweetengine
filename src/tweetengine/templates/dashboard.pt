@@ -29,6 +29,11 @@
        <div> 
          <textarea id="tweetarea" name="tweet" ></textarea>
          <input id="in-reply-to" type="hidden" name="in_reply_to_status_id" />
+         <input type="radio" name="when" value="now" checked="checked" /> <label for="when">Now</label>
+         or
+         <input type="radio" name="when" id="whensched" value="schedule" />
+         <input type="text" name="datestamp" value="" class="datestamp" size="10" />
+         <input type="text" name="timestamp" value="" class="timestamp" size="5" />
          <input id="tweetsubmit" type="submit" value="Submit" disabled="disabled" />
        </div>
       </form>
@@ -45,7 +50,7 @@
       <table class="display" id="pendingTweets">
         <tr><th>Send</th><th>Delete</th><th>No change</th><th>Tweet message</th></tr>
           <tal:tweets tal:repeat="tweet tweets">
-            <tr tal:attributes="class python:repeat.tweet.odd() and 'odd' or 'even'">
+            <tr tal:attributes="class python:repeat.tweet.odd() and 'odd' or 'even'"> 
               <td class="field"><input type="radio" name="tweet.${tweet.key().id()}" value="send" checked="${tweet.approved and 'checked'}"/></td>
               <td class="field"><input type="radio" name="tweet.${tweet.key().id()}" value="delete" /></td>
               <td class="field"><input type="radio" name="tweet.${tweet.key().id()}" value="leave" /></td>
@@ -53,7 +58,7 @@
             </tr>
             <tr tal:attributes="class python:repeat.tweet.odd() and 'odd' or 'even'">
               <th style="text-align: right;" colspan="3">Postpone until</th>
-              <td style="white-space: nowrap;"><input type="text" name="datestamp.${tweet.key().id()}" value="${tweet.date}" class="datestamp" id="dumm" size="10"/><input type="text" name="timestamp.${tweet.key().id()}" value="${tweet.time}" class="timestamp" size="5"/></td>
+              <td style="white-space: nowrap;"><input type="text" name="datestamp.${tweet.key().id()}" value="${tweet.date}" class="datestamp" size="10"/><input type="text" name="timestamp.${tweet.key().id()}" value="${tweet.time}" class="timestamp" size="5"/></td>
             </tr>
 	</tal:tweets>
       </table>

@@ -36,6 +36,9 @@ img {
     height: 50px;
     font-size: 1.3em;
 }
+#tweetsubmit {
+    float: right;
+}
 #tweetlabel {
     float: right;
     margin: 0;
