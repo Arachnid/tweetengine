@@ -3,7 +3,6 @@ import time
 from google.appengine.api import urlfetch
 from google.appengine.api.labs import taskqueue
 from google.appengine.ext import db
-from google.appengine.ext import deferred
 from google.appengine.ext.db import polymodel
 
 from tweetengine import oauth
@@ -82,6 +81,10 @@ def _normalize_key_name(key):
         key = key.id_or_name()
     return key
 
+def round_time_down(ts, seconds):
+    utime = time.mktime(ts.timetuple())
+    diff = datetime.timedelta(seconds=utime % seconds)
+    return ts - diff
 
 class Permission(db.Model):
     user = db.ReferenceProperty(UserAccount, required=True)
@@ -159,16 +162,17 @@ class OutgoingTweet(db.Model):
 
     def send(self):
         response = self.send_async().get_result()
-        if respones.status_code == 200:
+        if response.status_code == 200:
             self.put()
         return response
     
     def schedule(self):
         from tweetengine.handlers import twitter
-        task_name = 'tweet-%d' % (time.mktime(self.timestamp.timetuple())/300)
+        send_time = round_time_down(self.timestamp, 300)
+        task_name = 'tweet-%d' % (time.mktime(send_time.timetuple()),)
         try:
-            deferred.defer(twitter.publishApprovedTweets, _eta=self.timestamp,
-                           _name=task_name)
+            taskqueue.Task(eta=send_time, name=task_name,
+                           url=twitter.ScheduledTweetHandler.URL_PATH).add()
         except taskqueue.TaskAlreadyExistsError:
             pass
         self.put()

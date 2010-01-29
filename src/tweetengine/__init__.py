@@ -18,4 +18,5 @@ application = webapp.WSGIApplication([
         ('/add', handlers.AddHandler),
         ('/admin', handlers.SettingsHandler),
         ('/_ah/xmpp/message/chat/', handlers.XMPPHandler),
+        (handlers.ScheduledTweetHandler.URL_PATH, handlers.ScheduledTweetHandler),
 ], debug=os.environ['SERVER_SOFTWARE'].startswith('Dev'))
