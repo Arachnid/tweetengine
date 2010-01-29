@@ -87,7 +87,12 @@ jQuery(document).ready(function() {
                             tweetarea.focus();
                             counter();
 	                    });
-					} else {
+                        entry.hover(function() {
+                            $(this).find(".tweet-actions").css("display", "block");
+                        }, function() {
+                            $(this).find(".tweet-actions").css("display", "none");
+                        });
+                    } else {
 						jQuery(entry).find('.tweet-actions').remove();
 					}
 					orderedlist.append(entry);
@@ -111,8 +116,7 @@ jQuery(document).ready(function() {
 			fill_tweets('direct');
 			break;
 		}		
-	});
-
+	});                       
     jQuery('.datestamp').dateEntry({dateFormat: 'dmy/',
 		                   spinnerImage: '/static/dateentry/spinnerDefault.png',
                            spinnerBigImage: '/static/dateentry/spinnerDefaultBig.png'});

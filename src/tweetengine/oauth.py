@@ -177,7 +177,7 @@ class OAuthClient():
 
   def make_request(self, url, token="", secret="", additional_params=None,
                                       protected=False, method=urlfetch.GET):
-      return make_async_request(url, token, secret, additional_params, protected, method).get_result()
+    return self.make_async_request(url, token, secret, additional_params, protected, method).get_result()
   
   def get_authorization_url(self):
     """Get Authorization URL.

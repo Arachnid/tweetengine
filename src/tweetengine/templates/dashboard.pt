@@ -92,7 +92,7 @@
 	        </div>
             <div class="tweet-actions">
                 <a href="#" class="tweet-reply">Reply</a>
-                <a class="tweet-retweet">Retweet</a>
+                <a href="#" class="tweet-retweet">Retweet</a>
             </div>
 	    </li>
 	</ol>

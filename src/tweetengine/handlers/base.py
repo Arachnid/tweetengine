@@ -117,7 +117,6 @@ class UserHandler(BaseHandler):
             q.filter("suggest_tweets =", model.ROLE_ANYONE)
             public_accts = [x for x in q.fetch(100)
                             if x.key() not in my_acct_keys]
-            logging.warn(public_accts)
         template_vars.update({
             "permissions": permissions,
             "public_accounts": public_accts,
