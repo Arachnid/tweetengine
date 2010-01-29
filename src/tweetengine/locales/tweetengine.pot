@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-01-29 17:13+0000\n"
+"POT-Creation-Date: 2010-01-29 19:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -55,6 +55,111 @@ msgstr ""
 
 #: tweetengine/menu.py:67
 msgid "dashboard"
+msgstr ""
+
+#. Default: "What's happening with ${username}"
+#: tweetengine/templates/dashboard.pt:29
+msgid "dashboard-happening"
+msgstr ""
+
+#. Default: "Now"
+#: tweetengine/templates/dashboard.pt:35
+msgid "dashboard-now"
+msgstr ""
+
+#. Default: "or"
+#: tweetengine/templates/dashboard.pt:36
+msgid "dashboard-or"
+msgstr ""
+
+#. Default: "Approve"
+#: tweetengine/templates/dashboard.pt:56
+msgid "dashboard-pending-approve"
+msgstr ""
+
+#. Default: "Delete"
+#: tweetengine/templates/dashboard.pt:58
+msgid "dashboard-pending-delete"
+msgstr ""
+
+#. Default: "Hold"
+#: tweetengine/templates/dashboard.pt:57
+msgid "dashboard-pending-hold"
+msgstr ""
+
+#. Default: "Postpone until"
+#: tweetengine/templates/dashboard.pt:71
+msgid "dashboard-pending-postpone"
+msgstr ""
+
+#. Default: "Pending tweets"
+#: tweetengine/templates/dashboard.pt:50
+msgid "dashboard-pending-title"
+msgstr ""
+
+#. Default: "Tweet message"
+#: tweetengine/templates/dashboard.pt:59
+msgid "dashboard-pending-tweet"
+msgstr ""
+
+#. Default: "Submit"
+#: tweetengine/templates/dashboard.pt:40
+msgid "dashboard-submit"
+msgstr ""
+
+#. Default: "direct messages"
+#: tweetengine/templates/dashboard.pt:117
+msgid "dashboard-timeline-direct"
+msgstr ""
+
+#. Default: "friends"
+#: tweetengine/templates/dashboard.pt:113
+msgid "dashboard-timeline-friends"
+msgstr ""
+
+#. Default: "Loading direct messages..."
+#: tweetengine/templates/dashboard.pt:135
+msgid "dashboard-timeline-loaddirect"
+msgstr ""
+
+#. Default: "Loading friends tweets..."
+#: tweetengine/templates/dashboard.pt:127
+msgid "dashboard-timeline-loadfriends"
+msgstr ""
+
+#. Default: "Loading mentions..."
+#: tweetengine/templates/dashboard.pt:131
+msgid "dashboard-timeline-loadmentions"
+msgstr ""
+
+#. Default: "Loading ${username}"
+#: tweetengine/templates/dashboard.pt:123
+msgid "dashboard-timeline-loadmy"
+msgstr ""
+
+#. Default: "mentions"
+#: tweetengine/templates/dashboard.pt:115
+msgid "dashboard-timeline-mentions"
+msgstr ""
+
+#. Default: "Reply"
+#: tweetengine/templates/dashboard.pt:104
+msgid "dashboard-timeline-reply"
+msgstr ""
+
+#. Default: "Retweet"
+#: tweetengine/templates/dashboard.pt:105
+msgid "dashboard-timeline-retweet"
+msgstr ""
+
+#. Default: "Timeline"
+#: tweetengine/templates/dashboard.pt:85
+msgid "dashboard-timeline-title"
+msgstr ""
+
+#. Default: "${username}Dashboard"
+#: tweetengine/templates/dashboard.pt:4
+msgid "dashboard-title"
 msgstr ""
 
 #: tweetengine/menu.py:46

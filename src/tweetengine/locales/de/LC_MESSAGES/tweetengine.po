@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TweetEngine\n"
-"POT-Creation-Date: 2010-01-29 17:13+0000\n"
+"POT-Creation-Date: 2010-01-29 19:02+0000\n"
 "PO-Revision-Date: 2010-01-28 22:44+0100\n"
 "Last-Translator: Jens W. Klein <jens@bluedynamics.com>\n"
 "Language-Team: Tweetengine <dev@tweetengine.net>\n"
@@ -53,6 +53,111 @@ msgstr "Einstellungen"
 #: tweetengine/menu.py:67
 msgid "dashboard"
 msgstr "Dashboard"
+
+#. Default: "What's happening with ${username}"
+#: tweetengine/templates/dashboard.pt:29
+msgid "dashboard-happening"
+msgstr "Was passiert mit/bei ${username}"
+
+#. Default: "Now"
+#: tweetengine/templates/dashboard.pt:35
+msgid "dashboard-now"
+msgstr "Jetzt"
+
+#. Default: "or"
+#: tweetengine/templates/dashboard.pt:36
+msgid "dashboard-or"
+msgstr "oder"
+
+#. Default: "Approve"
+#: tweetengine/templates/dashboard.pt:56
+msgid "dashboard-pending-approve"
+msgstr "Erlauben"
+
+#. Default: "Delete"
+#: tweetengine/templates/dashboard.pt:58
+msgid "dashboard-pending-delete"
+msgstr "Löschen"
+
+#. Default: "Hold"
+#: tweetengine/templates/dashboard.pt:57
+msgid "dashboard-pending-hold"
+msgstr "zurückhalten"
+
+#. Default: "Postpone until"
+#: tweetengine/templates/dashboard.pt:71
+msgid "dashboard-pending-postpone"
+msgstr "zurückstellen bis"
+
+#. Default: "Pending tweets"
+#: tweetengine/templates/dashboard.pt:50
+msgid "dashboard-pending-title"
+msgstr "Wartende Tweets"
+
+#. Default: "Tweet message"
+#: tweetengine/templates/dashboard.pt:59
+msgid "dashboard-pending-tweet"
+msgstr "Nachricht Tweeten"
+
+#. Default: "Submit"
+#: tweetengine/templates/dashboard.pt:40
+msgid "dashboard-submit"
+msgstr "Absenden"
+
+#. Default: "direct messages"
+#: tweetengine/templates/dashboard.pt:117
+msgid "dashboard-timeline-direct"
+msgstr "Direkt-Nachrichten"
+
+#. Default: "friends"
+#: tweetengine/templates/dashboard.pt:113
+msgid "dashboard-timeline-friends"
+msgstr "Freunde"
+
+#. Default: "Loading direct messages..."
+#: tweetengine/templates/dashboard.pt:135
+msgid "dashboard-timeline-loaddirect"
+msgstr "Lade Direkt-Nachrichten"
+
+#. Default: "Loading friends tweets..."
+#: tweetengine/templates/dashboard.pt:127
+msgid "dashboard-timeline-loadfriends"
+msgstr "Lade Tweets von Freunden ..."
+
+#. Default: "Loading mentions..."
+#: tweetengine/templates/dashboard.pt:131
+msgid "dashboard-timeline-loadmentions"
+msgstr "Lade Erwähnungen ..."
+
+#. Default: "Loading ${username}"
+#: tweetengine/templates/dashboard.pt:123
+msgid "dashboard-timeline-loadmy"
+msgstr "Lade ${username}"
+
+#. Default: "mentions"
+#: tweetengine/templates/dashboard.pt:115
+msgid "dashboard-timeline-mentions"
+msgstr "Erwähnungen"
+
+#. Default: "Reply"
+#: tweetengine/templates/dashboard.pt:104
+msgid "dashboard-timeline-reply"
+msgstr "Antworten"
+
+#. Default: "Retweet"
+#: tweetengine/templates/dashboard.pt:105
+msgid "dashboard-timeline-retweet"
+msgstr "Retweet"
+
+#. Default: "Timeline"
+#: tweetengine/templates/dashboard.pt:85
+msgid "dashboard-timeline-title"
+msgstr "Zeitachse"
+
+#. Default: "${username}Dashboard"
+#: tweetengine/templates/dashboard.pt:4
+msgid "dashboard-title"
+msgstr "${username} Dashboard"
 
 #: tweetengine/menu.py:46
 msgid "home"

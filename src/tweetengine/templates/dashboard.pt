@@ -1,7 +1,7 @@
-<metal:master use-macro="master">
+<metal:master use-macro="master" i18n:domain="tweetengine">
 
-  <metal:title fill-slot="title">
-    ${current_account.username} &ndash; Account Info
+  <metal:title fill-slot="title" i18n:translate="dashboard-title">
+    <span i18n:name="username" tal:omit-tag="">${current_account.username} &ndash; </span>Dashboard
   </metal:title>
 
   <metal:head fill-slot="head">
@@ -31,12 +31,13 @@
        <div> 
          <textarea id="tweetarea" name="tweet" ></textarea>
          <input id="in-reply-to" type="hidden" name="in_reply_to_status_id" />
-         <input type="radio" name="when" value="now" checked="checked" /> <label for="when">Now</label>
-         or
+         <input type="radio" name="when" value="now" checked="checked" /> 
+           <label for="when" i18n:translate="dashboard-now">Now</label>
+           <span i18n:translate="dashboard-or">or</span>
          <input type="radio" name="when" id="whensched" value="schedule" />
          <input type="text" name="datestamp" value="" class="datestamp" size="10" />
          <input type="text" name="timestamp" value="" class="timestamp" size="5" />
-         <input id="tweetsubmit" type="submit" value="Submit" disabled="disabled" />
+         <input id="tweetsubmit" type="submit" value="Submit" disabled="disabled" i18n:attributes="value dashboard-submit"/>
        </div>
       </form>
     </div>
@@ -46,11 +47,19 @@
   <div class="post"
        tal:condition="tweets">
 
-    <h2>Pending tweets</h2>
+    <h2 i18n:translate="dashboard-pending-title">Pending tweets</h2>
 
     <form method="POST" action="/${current_account.username}/">
       <table class="display" id="pendingTweets">
-        <tr><th>Approve</th><th>Hold</th><th>Delete</th><th>Tweet message</th></tr>
+        <thead>
+          <tr>
+            <th i18n:translate="dashboard-pending-approve">Approve</th>
+            <th i18n:translate="dashboard-pending-hold">Hold</th>
+            <th i18n:translate="dashboard-pending-delete">Delete</th>
+            <th i18n:translate="dashboard-pending-tweet">Tweet message</th>
+          </tr>
+        </thead>
+        <tbody>
           <tal:tweets tal:repeat="tweet tweets">
             <tr tal:attributes="class python:repeat.tweet.odd() and 'odd' or 'even'"> 
               <td class="field"><input type="radio" name="tweet.${tweet.key().id()}" value="send" tal:attributes="checked 'checked' if tweet.approved else None" /></td>
@@ -59,12 +68,13 @@
               <td tal:content="structure tweet.message">MESSAGE</td>
             </tr>
             <tr tal:attributes="class python:repeat.tweet.odd() and 'odd' or 'even'">
-              <th style="text-align: right;" colspan="3">Postpone until</th>
+              <td style="text-align: right;" colspan="3" i18n:translate="dashboard-pending-postpone">Postpone until</td>
               <td style="white-space: nowrap;"><input type="text" name="datestamp.${tweet.key().id()}" value="${tweet.date}" class="datestamp" size="10"/><input type="text" name="timestamp.${tweet.key().id()}" value="${tweet.time}" class="timestamp" size="5"/></td>
             </tr>
-	</tal:tweets>
+	      </tal:tweets>
+	    </tbody>
       </table>
-      <input type="submit" value="Submit" />
+      <input type="submit" value="Submit"  i18n:attributes="value dashboard-submit" />
     </form>
 
   </div>
@@ -72,7 +82,7 @@
 
   <div class="post">  
 
-    <h2>Timeline</h2>    
+    <h2 i18n:translate="dashboard-timeline-title">Timeline</h2>    
 
 	<ol id="tweet-template" class="tweetlist">
 	    <li>
@@ -91,8 +101,8 @@
 	            <span class="tweet-source">SOURCE</span>
 	        </div>
             <div class="tweet-actions">
-                <a href="#" class="tweet-reply">Reply</a>
-                <a href="#" class="tweet-retweet">Retweet</a>
+                <a href="#" class="tweet-reply" i18n:translate="dashboard-timeline-reply">Reply</a>
+                <a href="#" class="tweet-retweet" i18n:translate="dashboard-timeline-retweet">Retweet</a>
             </div>
 	    </li>
 	</ol>
@@ -100,21 +110,30 @@
     <div id="timeline">
       <ul>
         <li><a href="#tabs-mytweets">${current_account.username}</a></li>
-        <li><a href="#tabs-friends" tal:condition="current_permission.role!=0">friends</a></li>
-        <li><a href="#tabs-mentions">mentions</a></li>
-        <li tal:condition="current_permission.role!=0"><a href="#tabs-direct">direct messages</a></li>
+        <li><a href="#tabs-friends" tal:condition="current_permission.role!=0" 
+               i18n:translate="dashboard-timeline-friends">friends</a></li>
+        <li><a href="#tabs-mentions"
+               i18n:translate="dashboard-timeline-mentions">mentions</a></li>
+        <li tal:condition="current_permission.role!=0"><a href="#tabs-direct"
+            i18n:translate="dashboard-timeline-direct">direct messages</a></li>
       </ul>
       <div id="tabs-mytweets">
-        <span class="loading-timeline">Loading ${current_account.username} tweets...</span>
+        <span class="loading-timeline" 
+              i18n:translate="dashboard-timeline-loadmy">Loading 
+                <span i18n:name="username">${current_account.username} tweets...</span>
+        </span>
       </div>
       <div id="tabs-friends" tal:condition="current_permission.role!=0">
-        <span class="loading-timeline">Loading friends tweets...</span>
+        <span class="loading-timeline" 
+              i18n:translate="dashboard-timeline-loadfriends">Loading friends tweets...</span>
       </div>
       <div id="tabs-mentions">
-        <span class="loading-timeline">Loading mentions...</span>
+        <span class="loading-timeline" 
+              i18n:translate="dashboard-timeline-loadmentions">Loading mentions...</span>
       </div>
       <div id="tabs-direct" tal:condition="current_permission.role!=0">
-        <span class="loading-timeline">Loading direct messages...</span>
+        <span class="loading-timeline" 
+              i18n:translate="dashboard-timeline-loaddirect">Loading direct messages...</span>
       </div>
     
     </div>
