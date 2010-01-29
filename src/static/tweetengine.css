@@ -93,3 +93,8 @@ ol.tweetlist li {
 #pendingTweets .odd {
     background: #ddd;
 }
+
+#current-user {
+    font-weight: bold;
+    margin-bottom: 1em;
+}
