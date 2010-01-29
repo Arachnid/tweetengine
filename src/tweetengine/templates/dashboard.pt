@@ -36,13 +36,8 @@
            <span i18n:translate="dashboard-or">or</span>
          <input type="radio" name="when" id="whensched" value="schedule" />
          <input type="text" name="datestamp" value="" class="datestamp" size="10" />
-<<<<<<< HEAD:src/tweetengine/templates/dashboard.pt
-         <input type="text" name="timestamp" value="" class="timestamp" size="5" />
-         <input id="tweetsubmit" type="submit" value="Submit" disabled="disabled" i18n:attributes="value dashboard-submit"/>
-=======
          <input type="text" name="timestamp" value="" class="timestamp" size="5" /> UTC
-         <input id="tweetsubmit" type="submit" value="Submit" disabled="disabled" />
->>>>>>> 8931b62d97791d46e846f7e00e519c692f680797:src/tweetengine/templates/dashboard.pt
+         <input id="tweetsubmit" type="submit" value="Submit" disabled="disabled" i18n:attributes="value dashboard-submit"/>
        </div>
       </form>
     </div>
