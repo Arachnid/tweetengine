@@ -1,6 +1,6 @@
-<metal:master use-macro="master">
+<metal:master use-macro="master" i18n:domain="tweetengine">
 
-  <metal:title fill-slot="title">Welcome!</metal:title>
+  <metal:title fill-slot="title" i18n:translate="title-welcome">Welcome!</metal:title>
   
   <metal:head fill-slot="head">
      <style type="text/css">
@@ -15,17 +15,19 @@
   </metal:sidebar>
 
   <metal:body fill-slot="body">
-   <div class="post" i18n:domain="tweetengine">  
+   <div class="post">  
     <h2 i18n:translate="index-welcome">Welcome to TweetEngine</h2>
     
-    <p>TweetEngine makes it possible to share a Twitter account without giving
-    out the password. Now, managing shared twitter accounts is easy!</p>
-    <p>With TweetEngine, you can control what access rights other users have
-    over your account, allowing them to administer the account or just to send
-    tweets. You can even allow outside users to suggest tweets, which you can
-    approve or decline.</p>
+    <p i18n:translate="index-introduction-1">TweetEngine makes it possible to 
+    share a Twitter account without giving out the password. Now, managing 
+    shared twitter accounts is easy!</p>
+    <p i18n:translate="index-introduction-2">With TweetEngine, you can control 
+    what access rights other users have over your account, allowing them to 
+    administer the account or just to send tweets. You can even allow outside 
+    users to suggest tweets, which you can approve or decline.</p>
 
-    <p>To get started, simply log in above.</p>
+    <p i18n:translate="index-introduction-3">To get started, simply log in 
+    above.</p>
 
    </div> 
   </metal:body>

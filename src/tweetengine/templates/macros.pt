@@ -1,4 +1,5 @@
-<metal:macro metal:define-macro="sidebar-accounts">
+<html metal:use-macro="master">
+ <metal:macro metal:define-macro="sidebar-accounts">
   <div id="current-user">
     Logged in as ${user.email()}
   </div>
@@ -31,8 +32,8 @@
               </tr>
         </table>
     </div>
-</metal:macro>
-<metal:macro metal:define-macro="sidebar-logo">
+ </metal:macro>
+ <metal:macro metal:define-macro="sidebar-logo">
   <metal:head fill-slot="head">
      <style type="text/css">
          #page {
@@ -41,4 +42,5 @@
      </style>
   </metal:head>
    <img src="/static/images/logo-bird-200w.png" alt="Logo" />
-</metal:macro>
+ </metal:macro>
+</html>

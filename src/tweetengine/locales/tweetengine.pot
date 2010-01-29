@@ -1,70 +1,73 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
-"Project-Id-Version: TweetEngine\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2010-01-29 15:23+0000\n"
-"PO-Revision-Date: 2010-01-28 22:44+0100\n"
-"Last-Translator: Jens W. Klein <jens@bluedynamics.com>\n"
-"Language-Team: Tweetengine <dev@tweetengine.net>\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=1; plural=0\n"
 "Language-Code: en\n"
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
-"Domain: DOMAIN\n"
+"Domain: tweetengine\n"
 
 #: tweetengine/menu.py:88
 msgid "admin"
-msgstr "Einstellungen"
+msgstr ""
 
 #: tweetengine/menu.py:67
 msgid "dashboard"
-msgstr "Dashboard"
+msgstr ""
 
 #: tweetengine/menu.py:46
 msgid "home"
-msgstr "Start"
+msgstr ""
 
 #. Default: "TweetEngine makes it possible to share a Twitter account without giving out the password. Now, managing shared twitter accounts is easy!"
 #: tweetengine/templates/index.pt:21
 msgid "index-introduction-1"
-msgstr "Mit TweetEngine kann ein Twitter-Konto von vielen Personen genutzt werden, ohne das Twitter-Passwort verraten zu müssen. Damit ist das gemeinsame Nutzen eines Twitter Kontos einfach!"
+msgstr ""
 
 #. Default: "With TweetEngine, you can control what access rights other users have over your account, allowing them to administer the account or just to send tweets. You can even allow outside users to suggest tweets, which you can approve or decline."
 #: tweetengine/templates/index.pt:24
 msgid "index-introduction-2"
-msgstr "TweetEngine gibt Dir volle Kontrolle auf die Zugriffsrechte für andere Personen zu einem Twitter-Konto. Erlaube die Administration eines Kontos oder nur das Senden von Nachrichten. Du kannst sogar fremden Personen erlauben Tweets vorzuschlagen, die ein Administrator dann freigeben oder ablehnen kann."
+msgstr ""
 
 #. Default: "To get started, simply log in above."
 #: tweetengine/templates/index.pt:29
 msgid "index-introduction-3"
-msgstr "Um anzufangen, melde Dich einfach oben an!"
+msgstr ""
 
 #. Default: "Welcome to TweetEngine"
 #: tweetengine/templates/index.pt:19
 msgid "index-welcome"
-msgstr "Willkommen bei der TweetEngine"
+msgstr ""
 
 #: tweetengine/menu.py:54
 msgid "login"
-msgstr "Anmelden"
+msgstr ""
 
 #: tweetengine/menu.py:96
 msgid "logout"
-msgstr "Ausloggen"
+msgstr ""
 
 #: tweetengine/menu.py:79
 msgid "manage"
-msgstr "Verwalten"
+msgstr ""
 
 #. Default: "Collaborative tweeting"
 #: tweetengine/templates/base.pt:36
 msgid "subline"
-msgstr "gemeinschaftlich zwitschern"
+msgstr ""
 
 #. Default: "Welcome!"
 #: tweetengine/templates/index.pt:3
 msgid "title-welcome"
-msgstr "Willkommen"
+msgstr ""
 

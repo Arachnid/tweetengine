@@ -9,11 +9,15 @@ from zope.i18n.interfaces import (
 )
 from zope.i18n import interpolate
 from zope.i18n import translate
+from zope.i18n import MessageFactory
 from zope.i18n.translationdomain import TranslationDomain
 from zope.i18n.gettextmessagecatalog import GettextMessageCatalog
 from zope.i18nmessageid import Message
 from chameleon.zpt import template
 from chameleon.zpt.loader import TemplateLoader
+from google.appengine.ext.webapp import Request
+
+_ = MessageFactory('tweetengine')
 
 basepath = os.path.join(os.path.dirname(__file__), 'locales')
 gsm = getSiteManager()
@@ -44,6 +48,8 @@ class RequestNegotiator(object):
     implements(INegotiator)
     
     def getLanguage(self, available_languages, accept_languages_header):
+        if isinstance(accept_languages_header, Request):
+             accept_languages_header = accept_languages_header.headers.get('Accept-Language', '')
         logging.info(available_languages)
         accept_languages = self.accept_languages(accept_languages_header)
         logging.info(accept_languages)

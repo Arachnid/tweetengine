@@ -1,5 +1,7 @@
 from google.appengine.api import users
 from tweetengine import model
+from tweetengine.i18n import translate
+from tweetengine.i18n import _
 
 class MenuItem(object):
     
@@ -11,7 +13,7 @@ class MenuItem(object):
         item = result = self.func(handler)
         if not item['visible']:
             return u''
-        item['name'] = self.name
+        item['name'] = translate(self.name, context=handler.request)
         item['attr'] = ''
         if item['active']:
             item['attr'] = u'class="active"'
@@ -41,7 +43,7 @@ def home(handler):
     else:
         return dict(visible=False, active=False, url="/")
 
-mainmenu.add("home", home)
+mainmenu.add(_("home"), home)
 
 def login(handler):
     if not handler.user:
@@ -49,7 +51,7 @@ def login(handler):
                     url=users.create_login_url("/"))
     return dict(visible=False, active=False, url='')
     
-mainmenu.add('login', login)
+mainmenu.add(_('login'), login)
 
 def dashboard(handler):
     import tweetengine.handlers
@@ -62,7 +64,7 @@ def dashboard(handler):
         url = '/%s/' % handler.current_account.username
     return dict(visible=True, active=active, url=url)
 
-mainmenu.add('dashboard', dashboard)
+mainmenu.add(_('dashboard'), dashboard)
 
 def manage(handler):
     if not handler.user or not handler.current_account:
@@ -74,7 +76,7 @@ def manage(handler):
     url = '/%s/manage' % handler.current_account.username
     return dict(visible=True, active=active, url=url)
 
-mainmenu.add('manage', manage)
+mainmenu.add(_('manage'), manage)
 
 def admin(handler):
     if not users.is_current_user_admin():
@@ -83,7 +85,7 @@ def admin(handler):
     active = isinstance(handler, tweetengine.handlers.SettingsHandler)
     return dict(visible=True, active=active, url='/admin')
 
-mainmenu.add('admin', admin)
+mainmenu.add(_('admin'), admin)
 
 def logout(handler):
     if handler.user:                
@@ -91,4 +93,4 @@ def logout(handler):
                     url=users.create_logout_url("/"))
     return dict(visible=False, active=False, url='')    
 
-mainmenu.add('logout', logout)
+mainmenu.add(_('logout'), logout)

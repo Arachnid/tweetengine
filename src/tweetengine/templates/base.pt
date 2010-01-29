@@ -33,7 +33,7 @@ Description: A two-column fixed-width template suitable for small websites.
     <div id="header">
         <div id="logo">
             <h1><a href="/"><img src="/static/images/logo.png" /></a></h1>
-            <h2><a href="/">Collaborative tweeting</a></h2>
+            <h2><a href="/" i18n:translate="subline">Collaborative tweeting</a></h2>
         </div>
         <!-- end div#logo -->
         <div id="menu">
