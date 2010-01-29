@@ -1,6 +1,6 @@
 to rebuild the pot file by scanning the tweetengine for message string use
 
-$ ./bin/i18ndude rebuild-pot --pot tweetengine.pot --create tweetengine src/tweetengine
+$ ./bin/i18ndude rebuild-pot --pot src/tweetengine/locales/tweetengine.pot --create tweetengine src/tweetengine
 
 to sync all po file with it template pot use:
 

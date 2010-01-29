@@ -1,14 +1,18 @@
-<metal:master use-macro="master">
+<metal:master use-macro="master" i18n:domain="tweetengine">
 
-  <metal:title fill-slot="title">Account added</metal:title>
+  <metal:title fill-slot="title" i18n:translate="added-account">Account added</metal:title>
 
   <metal:body fill-slot="body">
-	  <h2>Account added</h2>
+	  <h2 i18n:translate="added-account">Account added</h2>
 	  
-	  <p>You successfully added the account "${account.name} (${account.username})"
+	  <p i18n:translate="added-message">You successfully added the account 
+	  "<span i18n:name="accountname">"${account.name}</span> 
+	  (<span i18n:name="username">${account.username}</span>)"
 	  to TweetEngine.</p>
 	  
-	  <p>Go back to <a href="/${account.username}/">your account</a></p>
+	  <p i18n:translate="added-back">Go back to 
+	   <a href="/${account.username}/" i18n:translate="added-backlink" i18n:name="backlink">your account</a>
+	  </p>
   </metal:body>
   
 </metal:master>

@@ -1,17 +1,22 @@
-<metal:master use-macro="master">
+<metal:master use-macro="master" i18n:domain="tweetengine">
 
-  <metal:title fill-slot="title">Invalid Configuration!</metal:title>
+  <metal:title fill-slot="title" i18n:translate="invalid-title">Invalid Configuration!</metal:title>
 
   <metal:body fill-slot="body">
 
-  <h2>Invalid Configuration</h2>
-  <p>We were unable to communicate with the Twitter server. This is probably
-  because the administrator of this app has not set up the Twitter OAuth settings
-  correctly.</p>
+  <h2 i18n:translate="invalid-title">Invalid Configuration!</h2>
+  <p i18n:translate="invalid-text">We were unable to communicate with the 
+  Twitter server. This is probably because the administrator of this app has 
+  not set up the Twitter OAuth settings correctly.</p>
   
-    <p><a href="/admin" tal:condition="admin">Click here</a> to set the OAuth settings.</p>
+    <p i18n:translate="invalid-what" tal:condition="admin" >
+        <a href="/admin" i18n:name="invlalid-adminlink"
+           i18n:translate="invalid-clickhere">Click here</a> 
+        to set the OAuth settings.
+    </p>
 
-    <p tal:condition="not admin">Ask your administrator to set up the OAuth settings on the admin page.</p>
+    <p tal:condition="not admin" i18n:translate="invalid-ask">Ask your 
+    administrator to set up the OAuth settings on the admin page.</p>
 
   </metal:body>
 </metal:master>

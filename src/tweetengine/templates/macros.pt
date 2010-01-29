@@ -1,4 +1,4 @@
-<html metal:use-macro="master">
+<html metal:use-macro="master" i18n:domain="tweetengine">
  <metal:macro metal:define-macro="sidebar-accounts">
   <div id="current-user">
     Logged in as ${user.email()}

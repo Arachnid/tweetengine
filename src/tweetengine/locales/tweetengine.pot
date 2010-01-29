@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-01-29 15:23+0000\n"
+"POT-Creation-Date: 2010-01-29 16:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,26 @@ msgstr ""
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: tweetengine\n"
+
+#. Default: "Account added"
+#: tweetengine/templates/added.pt:3
+msgid "added-account"
+msgstr ""
+
+#. Default: "Go back to ${backlink}"
+#: tweetengine/templates/added.pt:14
+msgid "added-back"
+msgstr ""
+
+#. Default: "your account"
+#: tweetengine/templates/added.pt:14
+msgid "added-backlink"
+msgstr ""
+
+#. Default: "You successfully added the account \"${accountname} (${username})\" to TweetEngine."
+#: tweetengine/templates/added.pt:10
+msgid "added-message"
+msgstr ""
 
 #: tweetengine/menu.py:88
 msgid "admin"
@@ -49,6 +69,31 @@ msgstr ""
 msgid "index-welcome"
 msgstr ""
 
+#. Default: "Ask your administrator to set up the OAuth settings on the admin page."
+#: tweetengine/templates/invalid_configuration.pt:18
+msgid "invalid-ask"
+msgstr ""
+
+#. Default: "Click here"
+#: tweetengine/templates/invalid_configuration.pt:13
+msgid "invalid-clickhere"
+msgstr ""
+
+#. Default: "We were unable to communicate with the Twitter server. This is probably because the administrator of this app has not set up the Twitter OAuth settings correctly."
+#: tweetengine/templates/invalid_configuration.pt:8
+msgid "invalid-text"
+msgstr ""
+
+#. Default: "Invalid Configuration!"
+#: tweetengine/templates/invalid_configuration.pt:3
+msgid "invalid-title"
+msgstr ""
+
+#. Default: "${invlalid-adminlink} to set the OAuth settings."
+#: tweetengine/templates/invalid_configuration.pt:13
+msgid "invalid-what"
+msgstr ""
+
 #: tweetengine/menu.py:54
 msgid "login"
 msgstr ""
@@ -59,6 +104,36 @@ msgstr ""
 
 #: tweetengine/menu.py:79
 msgid "manage"
+msgstr ""
+
+#. Default: "Congruatulations! You've logged in to Tweet Engine."
+#: tweetengine/templates/gettingstarted.pt:14
+msgid "started-introduction-1"
+msgstr ""
+
+#. Default: "What now, you may ask? You have some options:"
+#: tweetengine/templates/gettingstarted.pt:16
+msgid "started-introduction-2"
+msgstr ""
+
+#. Default: "Ask your friend/boss/spouse to add you as a user on one of their Twitter accounts, OR"
+#: tweetengine/templates/gettingstarted.pt:20
+msgid "started-point-1"
+msgstr ""
+
+#. Default: "Suggest tweets for one of the public accounts on the right, OR"
+#: tweetengine/templates/gettingstarted.pt:22
+msgid "started-point-2"
+msgstr ""
+
+#. Default: "Add your own account."
+#: tweetengine/templates/gettingstarted.pt:25
+msgid "started-point-3"
+msgstr ""
+
+#. Default: "Getting started"
+#: tweetengine/templates/gettingstarted.pt:3
+msgid "started-title"
 msgstr ""
 
 #. Default: "Collaborative tweeting"

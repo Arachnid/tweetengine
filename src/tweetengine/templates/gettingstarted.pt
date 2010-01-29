@@ -1,6 +1,6 @@
-<metal:master use-macro="master">
+<metal:master use-macro="master" i18n:domain="tweetengine">
 
-  <metal:title fill-slot="title">Getting started</metal:title>
+  <metal:title fill-slot="title" i18n:translate="started-title">Getting started</metal:title>
   
   <metal:sidebar fill-slot="sidebar">
     <metal:use metal:use-macro="macros['sidebar-accounts'] if public_accounts else macros['sidebar-logo']"  />
@@ -10,16 +10,19 @@
   
    <div class="post">  
   
-    <h2>Getting started</h2>
-    <p>Congruatulations! You've logged in to Tweet Engine.</p>
-    <p>What now, you may ask? You have two options:</p>
+    <h2 i18n:translate="started-title">Getting started</h2>
+    <p i18n:translate="started-introduction-1">Congruatulations! You've logged 
+    in to Tweet Engine.</p>
+    <p i18n:translate="started-introduction-2">What now, you may ask? You have
+    some options:</p>
   
     <ul>
-      <li>Ask your friend/boss/spouse to add you as a user on one of their Twitter
+      <li i18n:translate="started-point-1">Ask your friend/boss/spouse to add you as a user on one of their Twitter
       accounts, OR</li>
-      <li tal:condition="public_accounts">Suggest tweets for one of the public
+      <li tal:condition="public_accounts" 
+          i18n:translate="started-point-2">Suggest tweets for one of the public
       accounts on the right, OR</li>
-      <li><a href="/add">Add your own account</a></li>
+      <li><a href="/add" i18n:translate="started-point-3">Add your own account.</a></li>
     </ul>
 
    </div>

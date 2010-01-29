@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TweetEngine\n"
-"POT-Creation-Date: 2010-01-29 15:23+0000\n"
+"POT-Creation-Date: 2010-01-29 16:26+0000\n"
 "PO-Revision-Date: 2010-01-28 22:44+0100\n"
 "Last-Translator: Jens W. Klein <jens@bluedynamics.com>\n"
 "Language-Team: Tweetengine <dev@tweetengine.net>\n"
@@ -13,6 +13,26 @@ msgstr ""
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
+
+#. Default: "Account added"
+#: tweetengine/templates/added.pt:3
+msgid "added-account"
+msgstr "Konto hinzugefügt"
+
+#. Default: "Go back to ${backlink}"
+#: tweetengine/templates/added.pt:14
+msgid "added-back"
+msgstr "Zurück zu ${backlink}"
+
+#. Default: "your account"
+#: tweetengine/templates/added.pt:14
+msgid "added-backlink"
+msgstr "Deinem Konto"
+
+#. Default: "You successfully added the account \"${accountname} (${username})\" to TweetEngine."
+#: tweetengine/templates/added.pt:10
+msgid "added-message"
+msgstr "Du hast das Konto \"${accountname} (${username})\" erfolgreich zur TweetEngine hinzugefügt."
 
 #: tweetengine/menu.py:88
 msgid "admin"
@@ -46,6 +66,31 @@ msgstr "Um anzufangen, melde Dich einfach oben an!"
 msgid "index-welcome"
 msgstr "Willkommen bei der TweetEngine"
 
+#. Default: "Ask your administrator to set up the OAuth settings on the admin page."
+#: tweetengine/templates/invalid_configuration.pt:18
+msgid "invalid-ask"
+msgstr "Sage Deinem Administrator, er soll die OAuth Schlüssel auf der Einstellungsseite eintragen."
+
+#. Default: "Click here"
+#: tweetengine/templates/invalid_configuration.pt:13
+msgid "invalid-clickhere"
+msgstr "Klicke hier"
+
+#. Default: "We were unable to communicate with the Twitter server. This is probably because the administrator of this app has not set up the Twitter OAuth settings correctly."
+#: tweetengine/templates/invalid_configuration.pt:8
+msgid "invalid-text"
+msgstr "Es ist uns nicht möglich mit dem Twitter Server zu reden. Das ist möglicherweise, weil der Adminstrator dieser App die OAuth Schlüssel falsch oder nicht eingetragen hat."
+
+#. Default: "Invalid Configuration!"
+#: tweetengine/templates/invalid_configuration.pt:3
+msgid "invalid-title"
+msgstr "Falsche Konfiguration!"
+
+#. Default: "${invlalid-adminlink} to set the OAuth settings."
+#: tweetengine/templates/invalid_configuration.pt:13
+msgid "invalid-what"
+msgstr "${invlalid-adminlink} um die OAuth Schlüssel zu setzen."
+
 #: tweetengine/menu.py:54
 msgid "login"
 msgstr "Anmelden"
@@ -57,6 +102,36 @@ msgstr "Ausloggen"
 #: tweetengine/menu.py:79
 msgid "manage"
 msgstr "Verwalten"
+
+#. Default: "Congruatulations! You've logged in to Tweet Engine."
+#: tweetengine/templates/gettingstarted.pt:14
+msgid "started-introduction-1"
+msgstr "Gratulation! Du bist auf der TweetEngine eingeloggt."
+
+#. Default: "What now, you may ask? You have some options:"
+#: tweetengine/templates/gettingstarted.pt:16
+msgid "started-introduction-2"
+msgstr "Was jetzt, magst Du Dich fragen? Du hast mehrere Möglichkeiten:"
+
+#. Default: "Ask your friend/boss/spouse to add you as a user on one of their Twitter accounts, OR"
+#: tweetengine/templates/gettingstarted.pt:20
+msgid "started-point-1"
+msgstr "Bitte Deinen Freund, Chef, Partner, ... er möge Dich zu einem einer/ihrer Twitter Konten hinzufügen, ODER"
+
+#. Default: "Suggest tweets for one of the public accounts on the right, OR"
+#: tweetengine/templates/gettingstarted.pt:22
+msgid "started-point-2"
+msgstr "schlage Tweets für eines der öffentlichen Konten auf der rechten Seite vor, ODER"
+
+#. Default: "Add your own account."
+#: tweetengine/templates/gettingstarted.pt:25
+msgid "started-point-3"
+msgstr "Füge Dein eigenes Konto hinzu."
+
+#. Default: "Getting started"
+#: tweetengine/templates/gettingstarted.pt:3
+msgid "started-title"
+msgstr "Kurzanleitung"
 
 #. Default: "Collaborative tweeting"
 #: tweetengine/templates/base.pt:36
