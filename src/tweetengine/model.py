@@ -80,6 +80,10 @@ def _normalize_key_name(key):
         key = key.id_or_name()
     return key
 
+def round_time_down(ts, seconds):
+    utime = time.mktime(ts.timetuple())
+    diff = datetime.timedelta(seconds=utime % seconds)
+    return ts - diff
 
 class Permission(db.Model):
     user = db.ReferenceProperty(UserAccount, required=True)
@@ -163,9 +167,10 @@ class OutgoingTweet(db.Model):
     
     def schedule(self):
         from tweetengine.handlers import twitter
-        task_name = 'tweet-%d' % (time.mktime(self.timestamp.timetuple())/300)
+        send_time = round_time_down(self.timestamp, 300)
+        task_name = 'tweet-%d' % (time.mktime(send_time.timetuple()),)
         try:
-            taskqueue.Task(eta=self.timestamp, name=task_name,
+            taskqueue.Task(eta=send_time, name=task_name,
                            url=twitter.ScheduledTweetHandler.URL_PATH).add()
         except taskqueue.TaskAlreadyExistsError:
             pass
