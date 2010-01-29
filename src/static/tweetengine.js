@@ -120,7 +120,7 @@ jQuery(document).ready(function() {
     jQuery('.datestamp').dateEntry({dateFormat: 'dmy/',
 		                   spinnerImage: '/static/dateentry/spinnerDefault.png',
                            spinnerBigImage: '/static/dateentry/spinnerDefaultBig.png'});
-	jQuery('.timestamp').timeEntry({show24Hours: true, timeSteps: [1,5,60],
+    jQuery('.timestamp').timeEntry({show24Hours: true, timeSteps: [1,5,60], initialField: 1,
 		                   spinnerImage: '/static/dateentry/spinnerDefault.png',
                            spinnerBigImage: '/static/dateentry/spinnerDefaultBig.png'});
 
