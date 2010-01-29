@@ -3,7 +3,7 @@
     Logged in as ${user.email()}
   </div>
   <div class="post"
-       tal:condition="permissions">
+       tal:condition="permissions and current_account">
       <h2>Your Accounts</h2>
       <table>
           <tr tal:repeat="permission permissions"
