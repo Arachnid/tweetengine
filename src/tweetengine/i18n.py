@@ -1,14 +1,19 @@
 """ load the message catalogs and provide them as ztk utilities."""
 import os
 import logging
-from zope.component import (
-    queryUtility,
-    provideUtility,
-    getSiteManager,
+from zope.interface import implements
+from zope.component import getSiteManager
+from zope.i18n.interfaces import (
+    ITranslationDomain,
+    INegotiator,
 )
-from zope.i18n.interfaces import ITranslationDomain
+from zope.i18n import interpolate
+from zope.i18n import translate
 from zope.i18n.translationdomain import TranslationDomain
 from zope.i18n.gettextmessagecatalog import GettextMessageCatalog
+from zope.i18nmessageid import Message
+from chameleon.zpt import template
+from chameleon.zpt.loader import TemplateLoader
 
 basepath = os.path.join(os.path.dirname(__file__), 'locales')
 gsm = getSiteManager()
@@ -23,66 +28,122 @@ for lang in os.listdir(basepath):
         if not file.endswith('.mo'):
             continue
         domainname = file[:-3]
-        domain = queryUtility(ITranslationDomain, domainname)
+        domain = gsm.queryUtility(ITranslationDomain, domainname)
         if domain is None:
             domain = TranslationDomain(domainname)
             gsm.registerUtility(domain, ITranslationDomain, name=domainname)        
         domain.addCatalog(GettextMessageCatalog(lang, domainname, domainpath))
 
-def request_languages(request):
-    """Parses the request and return language list.
+# negotiation sucks :( because Chameleon never passes a context into the 
+# translate method of the template. but the target_language is passed.
+# so we need to set the target language to what comes with the request as 
+# 'Accept-Language' header. The RequestNegotiator then get this header value
+
+class RequestNegotiator(object):
     
-    Stolen from Products.PloneLanguageTool, under GPL (c) Plone Foundation
+    implements(INegotiator)
+    
+    def getLanguage(self, available_languages, accept_languages_header):
+        logging.info(available_languages)
+        accept_languages = self.accept_languages(accept_languages_header)
+        logging.info(accept_languages)
+        for accepted_language in accept_languages:
+            if accepted_language in available_languages:
+                logging.info('getLanguage returns %s' % accepted_language)
+                return accepted_language
+
+    def accept_languages(self, browser_pref_langs):
+        """Parses the request and return language list.
+        
+        browser_pref_langs is the plain Accept-Language http request header 
+        value.
+        
+        Stolen from Products.PloneLanguageTool, under GPL (c) Plone Foundation,
+        slightly modified.
+        """
+        browser_pref_langs = browser_pref_langs.split(',')
+        i = 0
+        langs = []
+        length = len(browser_pref_langs)
+    
+        # Parse quality strings and build a tuple like
+        # ((float(quality), lang), (float(quality), lang))
+        # which is sorted afterwards
+        # If no quality string is given then the list order
+        # is used as quality indicator
+        for lang in browser_pref_langs:
+            lang = lang.strip().lower().replace('_', '-')
+            if lang:
+                l = lang.split(';', 2)
+                quality = []
+    
+                if len(l) == 2:
+                    try:
+                        q = l[1]
+                        if q.startswith('q='):
+                            q = q.split('=', 2)[1]
+                            quality = float(q)
+                    except:
+                        pass
+                if quality == []:
+                    quality = float(length-i)
+    
+                language = l[0]            
+                langs.append((quality, language))
+                if '-' in language:
+                    baselanguage = language.split('-')[0]
+                    langs.append((quality-0.001, baselanguage))
+                i = i + 1
+    
+        # Sort and reverse it
+        langs.sort()
+        langs.reverse()
+        
+        # Filter quality string
+        langs = map(lambda x: x[1], langs)
+        return langs
+
+negotiator =  RequestNegotiator()
+gsm.registerUtility(negotiator, INegotiator)      
+
+# we need a smarter translation method than Chameleon default
+# maybe its slower, but we can introduce caching later
+
+def smart_translate(msgid, domain=None, mapping=None, context=None,
+                   target_language=None, default=None):
+    """ target_language is expected to be the http accept-language header
     """
+    logging.info("TRANSLATE: msgid %s, domain %s, mapping %s, context %s, target_language %s, default %s" % (msgid, domain, mapping, context, target_language, default))
+    if msgid is None:
+        return
 
-    browser_pref_langs = request.headers.get('HTTP_ACCEPT_LANGUAGE', '')
-    browser_pref_langs = browser_pref_langs.split(',')
+    if target_language is not None:
+        return translate(
+            msgid, domain=domain, mapping=mapping, context=target_language,
+            target_language=None, default=default)
 
-    i = 0
-    langs = []
-    length = len(browser_pref_langs)
+    if isinstance(msgid, Message):
+        default = msgid.default
+        mapping = msgid.mapping
 
-    # Parse quality strings and build a tuple like
-    # ((float(quality), lang), (float(quality), lang))
-    # which is sorted afterwards
-    # If no quality string is given then the list order
-    # is used as quality indicator
-    for lang in browser_pref_langs:
-        lang = lang.strip().lower().replace('_', '-')
-        if lang:
-            l = lang.split(';', 2)
-            quality = []
+    if default is None:
+        default = unicode(msgid)
 
-            if len(l) == 2:
-                try:
-                    q = l[1]
-                    if q.startswith('q='):
-                        q = q.split('=', 2)[1]
-                        quality = float(q)
-                except:
-                    pass
+    if not isinstance(default, basestring):
+        return default
 
-            if quality == []:
-                quality = float(length-i)
+    return interpolate(default, mapping)
 
-            language = l[0]
-            if baselanguage in available_languages:
-                langs.append((quality, baselanguage))
-            else:
-                baselanguage = language.split('-')[0]
-                langs.append((quality, baselanguage))
-            
-            i = i + 1
+class SmartI18nPageTemplateFile(template.PageTemplateFile):    
+    translate = staticmethod(smart_translate)
 
-    # Sort and reverse it
-    langs.sort()
-    langs.reverse()
+class SmartI18nPageTextTemplateFile(template.PageTextTemplateFile):    
+    translate = staticmethod(smart_translate)
 
-    # Filter quality string
-    langs = map(lambda x: x[1], langs)
-
-    return langs
-
+TemplateLoader.formats = { 
+    "xml"  : SmartI18nPageTemplateFile,
+    "text" : SmartI18nPageTextTemplateFile,
+}
 
 
 # not sure what this should be good for, keep it as comment for now        

@@ -85,7 +85,7 @@ class BaseHandler(webapp.RequestHandler):
         if not 'current_account' in template_vars:
             template_vars['current_account'] = None
         template_vars['mainmenu'] = mainmenu(self)
-        template_vars['target_language'] = 'de'
+        template_vars['target_language'] = self.request.headers.get('Accept-Language', None)
         tpl = tpl_loader.load('base.pt')
         template_vars['master'] = tpl.macros['master']
         tpl = tpl_loader.load('macros.pt')
