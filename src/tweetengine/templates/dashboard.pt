@@ -33,7 +33,7 @@
          or
          <input type="radio" name="when" id="whensched" value="schedule" />
          <input type="text" name="datestamp" value="" class="datestamp" size="10" />
-         <input type="text" name="timestamp" value="" class="timestamp" size="5" />
+         <input type="text" name="timestamp" value="" class="timestamp" size="5" /> UTC
          <input id="tweetsubmit" type="submit" value="Submit" disabled="disabled" />
        </div>
       </form>
@@ -58,7 +58,7 @@
             </tr>
             <tr tal:attributes="class python:repeat.tweet.odd() and 'odd' or 'even'">
               <th style="text-align: right;" colspan="3">Postpone until</th>
-              <td style="white-space: nowrap;"><input type="text" name="datestamp.${tweet.key().id()}" value="${tweet.date}" class="datestamp" size="10"/><input type="text" name="timestamp.${tweet.key().id()}" value="${tweet.time}" class="timestamp" size="5"/></td>
+              <td style="white-space: nowrap;"><input type="text" name="datestamp.${tweet.key().id()}" value="${tweet.date}" class="datestamp" size="10"/><input type="text" name="timestamp.${tweet.key().id()}" value="${tweet.time}" class="timestamp" size="5"/> UTC</td>
             </tr>
 	</tal:tweets>
       </table>
