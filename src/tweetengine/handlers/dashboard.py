@@ -45,10 +45,11 @@ class DashboardHandler(base.UserHandler):
                 tweet = tweet_map[int(k.split(".")[1])]
                 tweet.approved_by = self.user_account
                 tweet.approved = True
-                timestamp = self.request.POST['timestamp.%s' % tweet.key().id()]
+                timestamp = "%s %s" % (self.request.POST['datestamp.%s' % tweet.key().id()],
+                                       self.request.POST['timestamp.%s' % tweet.key().id()])
                 now = datetime.datetime.now()
                 if timestamp:
-                    tweet.timestamp = datetime.datetime.strptime(timestamp,"%Y-%m-%d %H:%M:%S")                
+                    tweet.timestamp = datetime.datetime.strptime(timestamp,"%d/%m/%Y %H:%M")                
                     if tweet.timestamp > now:
                         tweet.put()
                         task_name = 'tweet-%d' % (time.mktime(tweet.timestamp.timetuple())/300)

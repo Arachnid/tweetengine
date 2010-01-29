@@ -112,4 +112,9 @@ jQuery(document).ready(function() {
 			break;
 		}		
 	});
+
+	jQuery('#pendingTweets .datestamp').dateEntry({dateFormat: 'dmy/',
+		                   spinnerImage: '/static/dateentry/spinnerDefault.png'});
+	jQuery('#pendingTweets .timestamp').timeEntry({show24Hours: true,
+		                   spinnerImage: '/static/dateentry/spinnerDefault.png'});
 });
