@@ -14,6 +14,11 @@ class XMPPHandler(xmpp_handlers.BaseHandler):
         tweet = model.OutgoingTweet(account=twitter_account,
                                     user=user_account,
                                     message=message.body)
+        if permission.can_send() or permission.can_suggest():
+            tweetlen = len(message.body)
+            if tweetlen > 140:
+                self.too_long(message, tweetlen)
+                return
         if permission.can_send():
             tweet.approved_by = user_account
             response = tweet.send()
@@ -39,3 +44,6 @@ class XMPPHandler(xmpp_handlers.BaseHandler):
 
     def submitted(self, message):
         message.reply("Your tweet has been submitted for review.")
+
+    def too_long(self, message, tweetlen):
+        message.reply("Tweet too long: You sent %d characters, max is 140." % (tweetlen,))
