@@ -7,6 +7,7 @@ from google.appengine.ext import deferred
 from google.appengine.ext.db import polymodel
 
 from tweetengine import oauth
+from tweetengine.i18n import _
 
 class UserAccount(polymodel.PolyModel):
     def get_username(self):
@@ -25,9 +26,9 @@ ROLE_USER = 1
 ROLE_ADMINISTRATOR = 2
 
 ROLES = [
-    (ROLE_ANYONE, "Anyone"),
-    (ROLE_USER, "User"),
-    (ROLE_ADMINISTRATOR, "Administrator")
+    (ROLE_ANYONE, _("Anyone")),
+    (ROLE_USER, _("User")),
+    (ROLE_ADMINISTRATOR, _("Administrator"))
 ]
 ROLE_IDS = [id for id,name in ROLES]
 

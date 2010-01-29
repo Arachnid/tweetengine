@@ -1,6 +1,6 @@
-<metal:master use-macro="master">
+<metal:master use-macro="master" i18n:domain="tweetengine">
 
-  <metal:title fill-slot="title">${current_account.username} &ndash; Manage Account</metal:title>
+  <metal:title fill-slot="title" i18n:translate="manage-title">Manage Account <span tal:omit-tag="" i18n:name="username">${current_account.username}</span></metal:title>
 
   <metal:sidebar fill-slot="sidebar">
     <metal:use metal:use-macro="macros['sidebar-accounts']"  />
@@ -10,16 +10,22 @@
   
     <div class="post">
     
-      <p tal:condition="sent" class="notification">Invites sent!</p>
+      <p tal:condition="sent" class="notification" 
+         i18n:translate="manage-invites-send">Invites sent!</p>
 
-      <h2>Manage Account ${current_account.username}</h2>
+      <h2 i18n:translate="manage-title">Manage Account <span tal:omit-tag="" i18n:name="username">${current_account.username}</span></h2>
   
  
-      <h3>Users</h3>
+      <h3 i18n:translate="manage-users">Users</h3>
       <form method="POST" action="/${current_account.username}/manage_users">
           <table class="display">
             <thead>
-              <tr><th>Delete</th><th>Email</th><th>User</th><th>Admin</th></tr>
+              <tr>
+                 <th i18n:translate="manage-delete">Delete</th>
+                 <th i18n:translate="manage-email">Email</th>
+                 <th i18n:translate="manage-user">User</th>
+                 <th i18n:translate="manage-admin">Admin</th>
+              </tr>
             </thead>
             <tbody>
 	            <tr tal:repeat="permission acct_permissions">
@@ -56,38 +62,46 @@
 	            </tr>
 	        </tbody>
           </table>
-          <input type="submit" value="Update" />
+          <input type="submit" value="Update"  i18n:attributes="value manage-update-button" />
       </form>
     </div>
 
     <div class="post">
-      <h3>Permissions</h3>
+      <h3 i18n:translate="manage-permissions">Permissions</h3>
       <form method="POST" action="/${current_account.username}/manage">
         <table class="display grid">
           <thead>
-            <tr><th></th><th>Anyone</th><th>Users</th><th>Administrators</th></tr>
+            <tr>
+                <th></th>
+                <th i18n:translate="manage-anyone">Anyone</th>
+                <th i18n:translate="manage-users">Users</th>
+                <th i18n:translate="manage-administrators">Administrators</th>
+            </tr>
           </thead>
           <tal:form tal:replace="structure settings_form" />
         </table>
-        <input type="submit" value="Update" />
+        <input type="submit" value="Update" i18n:attributes="value manage-update-button" />
       </form>
     </div>  
 
     <div class="post">
-      <h3>Delete Account ${current_account.username}</h3>
+      <h3 i18n:translate="manage-delete-account">Delete Account 
+        <span i18n:name="username">${current_account.username}</span>
+      </h3>
       <form method="POST" action="/${current_account.username}/delete">
         <p>
             <input type="checkbox" name="confirm" value="yes" id="confirm" />
-            <label for="confirm">Yes, I'm really, really sure I want to remove this
-            twitter account from Tweet Engine</label>
+            <label for="confirm" i18n:translate="manage-confirm-1">Yes, I'm 
+            really, really sure I want to remove this twitter account from 
+            Tweet Engine</label>
         </p>
         <p>
             <input type="checkbox" name="confirm2" value="yes" id="confirm2" />
-            <label for="confirm2">I know this will remove this account for everyone,
-            not just me, and that if I re-add it, I will have to invite all my users
-            again.</label>
+            <label for="confirm2" i18n:translate="manage-confirm-2">I know this 
+            will remove this account for everyone, not just me, and that if I 
+            re-add it, I will have to invite all my users again.</label>
         </p>
-        <input type="submit" value="Delete" />
+        <input type="submit" value="Delete" i18n:attributes="value manage-delete-button;"/>
       </form>
     </div>
   </metal:body>

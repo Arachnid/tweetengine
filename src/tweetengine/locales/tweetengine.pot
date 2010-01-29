@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-01-29 16:26+0000\n"
+"POT-Creation-Date: 2010-01-29 17:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,18 @@ msgstr ""
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: tweetengine\n"
+
+#: tweetengine/model.py:31
+msgid "Administrator"
+msgstr ""
+
+#: tweetengine/model.py:29
+msgid "Anyone"
+msgstr ""
+
+#: tweetengine/model.py:30
+msgid "User"
+msgstr ""
 
 #. Default: "Account added"
 #: tweetengine/templates/added.pt:3
@@ -104,6 +116,101 @@ msgstr ""
 
 #: tweetengine/menu.py:79
 msgid "manage"
+msgstr ""
+
+#. Default: "Admin"
+#: tweetengine/templates/manage.pt:27
+msgid "manage-admin"
+msgstr ""
+
+#. Default: "Administrators"
+#: tweetengine/templates/manage.pt:78
+msgid "manage-administrators"
+msgstr ""
+
+#. Default: "Anyone"
+#: tweetengine/templates/manage.pt:76
+msgid "manage-anyone"
+msgstr ""
+
+#. Default: "Yes, I'm really, really sure I want to remove this twitter account from Tweet Engine"
+#: tweetengine/templates/manage.pt:94
+msgid "manage-confirm-1"
+msgstr ""
+
+#. Default: "I know this will remove this account for everyone, not just me, and that if I re-add it, I will have to invite all my users again."
+#: tweetengine/templates/manage.pt:100
+msgid "manage-confirm-2"
+msgstr ""
+
+#. Default: "Delete"
+#: tweetengine/templates/manage.pt:24
+msgid "manage-delete"
+msgstr ""
+
+#. Default: "Delete Account ${username}"
+#: tweetengine/templates/manage.pt:89
+msgid "manage-delete-account"
+msgstr ""
+
+#. Default: "Delete"
+#: tweetengine/templates/manage.pt:104
+msgid "manage-delete-button"
+msgstr ""
+
+#. Default: "Email"
+#: tweetengine/templates/manage.pt:25
+msgid "manage-email"
+msgstr ""
+
+#. Default: "Invites sent!"
+#: tweetengine/templates/manage.pt:13
+msgid "manage-invites-send"
+msgstr ""
+
+#. Default: "Permissions"
+#: tweetengine/templates/manage.pt:70
+msgid "manage-permissions"
+msgstr ""
+
+#. Default: "Manage Account ${username}"
+#: tweetengine/templates/manage.pt:3
+msgid "manage-title"
+msgstr ""
+
+#. Default: "Update"
+#: tweetengine/templates/manage.pt:65
+msgid "manage-update-button"
+msgstr ""
+
+#. Default: "User"
+#: tweetengine/templates/manage.pt:26
+msgid "manage-user"
+msgstr ""
+
+#. Default: "Users"
+#: tweetengine/templates/manage.pt:19
+msgid "manage-users"
+msgstr ""
+
+#. Default: "Add a new account"
+#: tweetengine/templates/macros.pt:19
+msgid "sbaccounts-add"
+msgstr ""
+
+#. Default: "Logged in as ${useremail}"
+#: tweetengine/templates/macros.pt:4
+msgid "sbaccounts-loggedin"
+msgstr ""
+
+#. Default: "Public Accounts"
+#: tweetengine/templates/macros.pt:23
+msgid "sbaccounts-public"
+msgstr ""
+
+#. Default: "Your Accounts"
+#: tweetengine/templates/macros.pt:8
+msgid "sbaccounts-your"
 msgstr ""
 
 #. Default: "Congruatulations! You've logged in to Tweet Engine."

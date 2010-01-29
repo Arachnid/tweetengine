@@ -25,6 +25,8 @@ gsm = getSiteManager()
 available_languages = []
 
 for lang in os.listdir(basepath):
+    if lang.endswith('.pot'):
+        continue
     langpath = os.path.join(basepath, lang, 'LC_MESSAGES')
     available_languages.append(lang)
     for file in os.listdir(langpath):

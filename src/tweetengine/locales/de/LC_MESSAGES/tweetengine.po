@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TweetEngine\n"
-"POT-Creation-Date: 2010-01-29 16:26+0000\n"
+"POT-Creation-Date: 2010-01-29 17:13+0000\n"
 "PO-Revision-Date: 2010-01-28 22:44+0100\n"
 "Last-Translator: Jens W. Klein <jens@bluedynamics.com>\n"
 "Language-Team: Tweetengine <dev@tweetengine.net>\n"
@@ -13,6 +13,18 @@ msgstr ""
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
+
+#: tweetengine/model.py:31
+msgid "Administrator"
+msgstr "Verwalter"
+
+#: tweetengine/model.py:29
+msgid "Anyone"
+msgstr "Jeder"
+
+#: tweetengine/model.py:30
+msgid "User"
+msgstr "Benutzer"
 
 #. Default: "Account added"
 #: tweetengine/templates/added.pt:3
@@ -102,6 +114,101 @@ msgstr "Ausloggen"
 #: tweetengine/menu.py:79
 msgid "manage"
 msgstr "Verwalten"
+
+#. Default: "Admin"
+#: tweetengine/templates/manage.pt:27
+msgid "manage-admin"
+msgstr "Verwalter"
+
+#. Default: "Administrators"
+#: tweetengine/templates/manage.pt:78
+msgid "manage-administrators"
+msgstr "Verwalter"
+
+#. Default: "Anyone"
+#: tweetengine/templates/manage.pt:76
+msgid "manage-anyone"
+msgstr "Jeder"
+
+#. Default: "Yes, I'm really, really sure I want to remove this twitter account from Tweet Engine"
+#: tweetengine/templates/manage.pt:94
+msgid "manage-confirm-1"
+msgstr "Ja, ich bin wirklich, wirklich sicher, dass ich dieses Konto von der Tweet Engine löschen will"
+
+#. Default: "I know this will remove this account for everyone, not just me, and that if I re-add it, I will have to invite all my users again."
+#: tweetengine/templates/manage.pt:100
+msgid "manage-confirm-2"
+msgstr "Ich weiss, dass damit das Konto für jeden entfernt wird und eben nicht nur für mich. Und wenn ich es wieder hinzufüge, so muss ich alle Benutzer erneut einladen."
+
+#. Default: "Delete"
+#: tweetengine/templates/manage.pt:24
+msgid "manage-delete"
+msgstr "Löschen"
+
+#. Default: "Delete Account ${username}"
+#: tweetengine/templates/manage.pt:89
+msgid "manage-delete-account"
+msgstr "Lösche das Konto ${username}"
+
+#. Default: "Delete"
+#: tweetengine/templates/manage.pt:104
+msgid "manage-delete-button"
+msgstr "Löschen"
+
+#. Default: "Email"
+#: tweetengine/templates/manage.pt:25
+msgid "manage-email"
+msgstr "E-Mail"
+
+#. Default: "Invites sent!"
+#: tweetengine/templates/manage.pt:13
+msgid "manage-invites-send"
+msgstr "Einladungen verschickt!"
+
+#. Default: "Permissions"
+#: tweetengine/templates/manage.pt:70
+msgid "manage-permissions"
+msgstr "Berechtigungen"
+
+#. Default: "Manage Account ${username}"
+#: tweetengine/templates/manage.pt:3
+msgid "manage-title"
+msgstr "Verwalte Konto ${username}"
+
+#. Default: "Update"
+#: tweetengine/templates/manage.pt:65
+msgid "manage-update-button"
+msgstr "Speichern"
+
+#. Default: "User"
+#: tweetengine/templates/manage.pt:26
+msgid "manage-user"
+msgstr "Benutzer"
+
+#. Default: "Users"
+#: tweetengine/templates/manage.pt:19
+msgid "manage-users"
+msgstr "Benutzer"
+
+#. Default: "Add a new account"
+#: tweetengine/templates/macros.pt:19
+msgid "sbaccounts-add"
+msgstr "Neues Konto hinzufügen"
+
+#. Default: "Logged in as ${useremail}"
+#: tweetengine/templates/macros.pt:4
+msgid "sbaccounts-loggedin"
+msgstr "Eingeloggt als ${useremail}"
+
+#. Default: "Public Accounts"
+#: tweetengine/templates/macros.pt:23
+msgid "sbaccounts-public"
+msgstr "Öffentliche Konten"
+
+#. Default: "Your Accounts"
+#: tweetengine/templates/macros.pt:8
+msgid "sbaccounts-your"
+msgstr "Deine Konten"
 
 #. Default: "Congruatulations! You've logged in to Tweet Engine."
 #: tweetengine/templates/gettingstarted.pt:14

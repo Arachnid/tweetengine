@@ -1,11 +1,11 @@
 <html metal:use-macro="master" i18n:domain="tweetengine">
- <metal:macro metal:define-macro="sidebar-accounts">
-  <div id="current-user">
-    Logged in as ${user.email()}
+ <metal:macro metal:define-macro="sidebar-accounts" i18n:domain="tweetengine">
+  <div id="current-user" i18n:translate="sbaccounts-loggedin">
+    Logged in as <span i18n:name="useremail">${user.email()}</span>
   </div>
   <div class="post"
        tal:condition="permissions and current_account">
-      <h2>Your Accounts</h2>
+      <h2 i18n:translate="sbaccounts-your">Your Accounts</h2>
       <table class="accounts">
           <tr tal:repeat="permission permissions"
               tal:attributes="class permission.account.key()==current_account.key() and 'selected' or ''">
@@ -16,11 +16,11 @@
                 ${permission.account.name} (${permission.account.username})</a></td>
           </tr>
       </table>
-      <p><a href="/add">Add a new account</a></p>
+      <p><a href="/add" i18n:translate="sbaccounts-add">Add a new account</a></p>
   </div>
     <div class="post"
          tal:condition="public_accounts">
-        <h2>Public Accounts</h2>
+        <h2 i18n:translate="sbaccounts-public">Public Accounts</h2>
         <table class="accounts">
               <tr tal:repeat="account public_accounts"
                   tal:attributes="class current_account and account.key()==current_account.key() and 'selected' or ''">
