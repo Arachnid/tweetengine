@@ -4,12 +4,13 @@ import logging
 import urlparse
 
 from google.appengine.api import users
-
+from google.appengine.ext import db
+from google.appengine.ext import webapp
 from tweetengine.handlers import base
 from tweetengine import model
 from tweetengine import oauth
 
-class TweetHandler(base.BaseHandler):
+class TweetHandler(base.UserHandler):
     @base.requires_account
     def post(self, account_name):
         permission = self.current_permission
@@ -36,6 +37,13 @@ class TweetHandler(base.BaseHandler):
         self.redirect("/%s/" % (account_name,))
 
 
+class ScheduledTweetHandler(webapp.RequestHandler):
+    URL_PATH = '/_ah/queue/scheduled_tweets'
+
+    def post(self):
+        publishApprovedTweets()
+
+
 def publishApprovedTweets():
     q = model.OutgoingTweet.all()
     q.filter("approved =", True)
@@ -53,6 +61,7 @@ def publishApprovedTweets():
             successful_tweets.append(tweet)
         else:
             logging.error(response.content)
+    logging.info("Sent %d tweets", len(successful_tweets))
     db.put(successful_tweets)
 
             
