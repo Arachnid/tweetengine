@@ -1,0 +1,29 @@
+<metal:master use-macro="master">
+
+  <metal:title fill-slot="title">${code} ${status}</metal:title>
+
+  <metal:sidebar fill-slot="sidebar">
+    <metal:use metal:use-macro="macros['sidebar-accounts'] if user else macros['sidebar-logo']"  />
+  </metal:sidebar>
+  
+  <metal:body fill-slot="body">
+
+    <h2>${code} ${status}</h2>
+    
+    <p tal:condition="code == 403">
+        You do not have permission to access this page. Sorry!
+    </p>
+    
+    <p tal:condition="code == 500">
+        An internal error occurred while trying to process your request. A
+        highly trained team of commando monkeys has been dispatched to fix it;
+        in the meantime, try reloading.
+    </p>
+    
+    <p tal:condition="code == 400">
+        You submitted an invalid request. If you were using an invite link, make
+        sure the link didn't get cut off by your mail client.
+    </p>
+
+  </metal:body>
+</metal:master>

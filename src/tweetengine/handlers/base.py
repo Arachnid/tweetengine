@@ -92,6 +92,12 @@ class BaseHandler(webapp.RequestHandler):
         tpl = tpl_loader.load(template_file)
         self.response.out.write(tpl(**template_vars))
 
+    def error(self, code):
+        super(BaseHandler, self).error(code)
+        self.render_template("error.pt", {
+            "code": code,
+            "status": self.response.http_status_message(code),
+        })
 
 class UserHandler(BaseHandler):
     def render_template(self, template_path, template_vars=None):
