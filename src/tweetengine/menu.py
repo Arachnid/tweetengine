@@ -35,9 +35,17 @@ class Menu(object):
     
 mainmenu = Menu()
 
+def home(handler):
+    if not handler.user:
+        return dict(visible=True, active=True, url="/")
+    else:
+        return dict(visible=False, active=False, url="/")
+
+mainmenu.add("home", home)
+
 def login(handler):
-    if not handler.user:                
-        return dict(visible=True, active=True, 
+    if not handler.user:
+        return dict(visible=True, active=False, 
                     url=users.create_login_url("/"))
     return dict(visible=False, active=False, url='')
     
