@@ -3,7 +3,6 @@ import logging
 import time
 from google.appengine.ext import db
 from google.appengine.ext import deferred
-from google.appengine.api.labs import taskqueue
 from tweetengine.handlers import base, twitter
 from tweetengine.oauth import TwitterClient
 from tweetengine import model
@@ -20,7 +19,7 @@ class DashboardHandler(base.UserHandler):
             return []
 
     @base.requires_account
-    def get(self, account_name):        
+    def get(self, account_name):
         self.render_template("dashboard.pt", {
             "tweets": self.get_tweets(),
         })
@@ -39,7 +38,7 @@ class DashboardHandler(base.UserHandler):
                      if k.startswith("tweet.") and v=='delete']
         db.delete(to_delete)
 
-
+        rpcs = []
         for k, v in self.request.POST.iteritems():
             if k.startswith("tweet.") and v=='send':
                 tweet = tweet_map[int(k.split(".")[1])]
@@ -47,23 +46,24 @@ class DashboardHandler(base.UserHandler):
                 tweet.approved = True
                 timestamp = "%s %s" % (self.request.POST['datestamp.%s' % tweet.key().id()],
                                        self.request.POST['timestamp.%s' % tweet.key().id()])
-                now = datetime.datetime.now()
-                if timestamp:
-                    tweet.timestamp = datetime.datetime.strptime(timestamp,"%d/%m/%Y %H:%M")                
-                    if tweet.timestamp > now:
-                        tweet.put()
-                        task_name = 'tweet-%d' % (time.mktime(tweet.timestamp.timetuple())/300)
-                        try:
-                            deferred.defer(twitter.publishApprovedTweets, _eta=tweet.timestamp,_name=task_name)
-                        except taskqueue.TaskAlreadyExistsError:
-                            pass
+                if timestamp.strip():
+                    tweet.timestamp = datetime.datetime.strptime(timestamp,"%d/%m/%Y %H:%M")
+                    if tweet.timestamp > datetime.datetime.now():
+                        tweet.schedule()
                         # we have postpone the sending, continue to next tweet
                         continue
 
                 # send now
-                response = tweet.send()
-                if response.status_code != 200:
-                    self.error(500)
-                    logging.error(response.content)
+                rpcs.append((tweet.send_async(), tweet))
 
+        successful_tweets = []
+        for rpc, tweet in rpcs:
+            response = rpc.get_result()
+            if response.status_code == 200:
+                successful_tweets.append(tweet)
+            else:
+                self.error(500)
+                logging.error(response.content)
+        db.put(successful_tweets)
+        
         self.redirect('/%s/' % account_name)

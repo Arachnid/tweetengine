@@ -1,3 +1,4 @@
+import environment
 import datetime
 import logging
 import urlparse
@@ -19,10 +20,17 @@ class TweetHandler(base.BaseHandler):
                                     in_reply_to=in_reply_to)
         if permission.can_send():
             tweet.approved_by=self.user_account
-            response = tweet.send()
-            if response.status_code != 200:
-                self.error(500)
-                logging.error(response.content)
+            tweet.approved = True
+            if self.request.POST["when"] == "schedule":
+                timestamp = "%s %s" % (self.request.POST['datestamp'],
+                                       self.request.POST['timestamp'])
+                tweet.timestamp = datetime.datetime.strptime(timestamp,"%d/%m/%Y %H:%M")
+                tweet.schedule()
+            else:
+                response = tweet.send()
+                if response.status_code != 200:
+                    self.error(500)
+                    logging.error(response.content)
         elif permission.can_suggest():
             tweet.put()
         self.redirect("/%s/" % (account_name,))
@@ -33,6 +41,18 @@ def publishApprovedTweets():
     q.filter("approved =", True)
     q.filter("sent =", False)
     q.filter("timestamp <", datetime.datetime.now())
-    for tweet in q.fetch(20):
-        tweet.send()
+    rpcs = []
+    for tweet in q.fetch(30):
+        rpcs.append((tweet.send_async(), tweet))
         logging.error('sending tweet %s' % tweet.message)
+        
+    successful_tweets = []
+    for rpc, tweet in rpcs:
+        response = rpc.get_result()
+        if response.status_code == 200:
+            successful_tweets.append(tweet)
+        else:
+            logging.error(response.content)
+    db.put(successful_tweets)
+
+            

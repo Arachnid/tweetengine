@@ -36,6 +36,9 @@ img {
     height: 50px;
     font-size: 1.3em;
 }
+#tweetsubmit {
+    float: right;
+}
 #tweetlabel {
     float: right;
     margin: 0;
@@ -92,4 +95,9 @@ ol.tweetlist li {
 
 #pendingTweets .odd {
     background: #ddd;
+}
+
+#current-user {
+    font-weight: bold;
+    margin-bottom: 1em;
 }

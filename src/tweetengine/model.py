@@ -1,6 +1,9 @@
 import datetime
+import time
 from google.appengine.api import urlfetch
+from google.appengine.api.labs import taskqueue
 from google.appengine.ext import db
+from google.appengine.ext import deferred
 from google.appengine.ext.db import polymodel
 
 from tweetengine import oauth
@@ -47,16 +50,19 @@ class TwitterAccount(db.Model):
     def username(self):
         return self.key().name()
 
-    def make_request(self, url, additional_params=None, method=urlfetch.POST):
+    def make_async_request(self, url, additional_params=None, method=urlfetch.POST):
         client = Configuration.instance().get_client("")
-        return client.make_request(
+        return client.make_async_request(
             url,
             token=self.oauth_token,
             secret=self.oauth_secret,
             additional_params=additional_params,
             protected=True,
             method=method)
-        
+
+    def make_request(self, url, additional_params=None, method=urlfetch.POST):
+        return self.make_async_request(url, additional_params, method).get_result()
+    
     def prepare_request(self, url, additional_params=None, 
                         method=urlfetch.GET):
         client = Configuration.instance().get_client("")
@@ -139,17 +145,33 @@ class OutgoingTweet(db.Model):
             return self.timestamp.strftime("%H:%M")
         return ''
     
+    def send_async(self):
+        rpc = self.account.make_async_request(
+            "http://twitter.com/statuses/update.json",
+            additional_params={
+                "status": self.message,
+                "in_reply_to_status_id": self.in_reply_to})
+        self.approved = True
+        self.sent = True
+        self.timestamp = datetime.datetime.now()
+        return rpc
+
     def send(self):
-        class Resp:
-            status_code = 200
-        response = Resp()
-        if response.status_code == 200:
-            self.approved = True
-            self.sent = True
-            self.timestamp = datetime.datetime.now()
+        response = self.send_async().get_result()
+        if respones.status_code == 200:
             self.put()
         return response
-
+    
+    def schedule(self):
+        from tweetengine.handlers import twitter
+        task_name = 'tweet-%d' % (time.mktime(self.timestamp.timetuple())/300)
+        try:
+            deferred.defer(twitter.publishApprovedTweets, _eta=self.timestamp,
+                           _name=task_name)
+        except taskqueue.TaskAlreadyExistsError:
+            pass
+        self.put()
+        
 
 class Configuration(db.Model):
     INSTANCE = None

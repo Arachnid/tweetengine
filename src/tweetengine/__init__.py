@@ -1,3 +1,4 @@
+import os
 from google.appengine.ext import webapp
 from tweetengine import handlers
 import tweetengine.i18n
@@ -16,4 +17,4 @@ application = webapp.WSGIApplication([
         ('/add', handlers.AddHandler),
         ('/admin', handlers.SettingsHandler),
         ('/_ah/xmpp/message/chat/', handlers.XMPPHandler),
-], debug=True)
+], debug=os.environ['SERVER_SOFTWARE'].startswith('Dev'))

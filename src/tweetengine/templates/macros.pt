@@ -1,4 +1,7 @@
 <metal:macro metal:define-macro="sidebar-accounts">
+  <div id="current-user">
+    Logged in as ${user.email()}
+  </div>
   <div class="post"
        tal:condition="permissions">
       <h2>Your Accounts</h2>

@@ -113,8 +113,17 @@ jQuery(document).ready(function() {
 		}		
 	});
 
-	jQuery('#pendingTweets .datestamp').dateEntry({dateFormat: 'dmy/',
-		                   spinnerImage: '/static/dateentry/spinnerDefault.png'});
-	jQuery('#pendingTweets .timestamp').timeEntry({show24Hours: true,
-		                   spinnerImage: '/static/dateentry/spinnerDefault.png'});
+    jQuery('.datestamp').dateEntry({dateFormat: 'dmy/',
+		                   spinnerImage: '/static/dateentry/spinnerDefault.png',
+                           spinnerBigImage: '/static/dateentry/spinnerDefaultBig.png'});
+	jQuery('.timestamp').timeEntry({show24Hours: true, timeSteps: [1,5,60],
+		                   spinnerImage: '/static/dateentry/spinnerDefault.png',
+                           spinnerBigImage: '/static/dateentry/spinnerDefaultBig.png'});
+
+    var now = new Date();
+    jQuery("#tweetbox .datestamp").dateEntry("setDate", now);
+    jQuery("#tweetbox .timestamp").timeEntry("setTime", now);
+    jQuery("#tweetbox .datestamp, #tweetbox .timestamp").focus(function() {
+        jQuery("#whensched").attr("checked", "checked");
+    });
 });
