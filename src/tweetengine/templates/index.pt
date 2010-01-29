@@ -15,8 +15,8 @@
   </metal:sidebar>
 
   <metal:body fill-slot="body">
-   <div class="post">  
-    <h2>Welcome to TweetEngine</h2>
+   <div class="post" i18n:domain="tweetengine">  
+    <h2 i18n:translate="index-welcome">Welcome to TweetEngine</h2>
     
     <p>TweetEngine makes it possible to share a Twitter account without giving
     out the password. Now, managing shared twitter accounts is easy!</p>

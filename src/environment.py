@@ -1,4 +1,4 @@
-"""This module sets up the python path and preloads modules"""
+"""This module sets up the python path and preloads modules and sets up i18n"""
 import sys
 import os
 import logging
