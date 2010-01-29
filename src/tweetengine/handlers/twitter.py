@@ -1,7 +1,6 @@
 import environment
 import datetime
 import logging
-import time
 import urlparse
 
 from google.appengine.api import users
