@@ -10,6 +10,7 @@ application = webapp.WSGIApplication([
         ('/', handlers.HomepageHandler),
         (TWITTER_RE, handlers.DashboardHandler),
         (TWITTER_RE+'manage', handlers.ManageHandler),
+        (TWITTER_RE+'delete', handlers.DeleteHandler),
         (TWITTER_RE+'manage_users', handlers.ManageUsersHandler),
         (TWITTER_RE+'invite', handlers.InviteHandler),
         (TWITTER_RE+'tweet', handlers.TweetHandler),

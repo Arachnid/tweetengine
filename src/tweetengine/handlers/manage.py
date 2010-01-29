@@ -174,3 +174,15 @@ class InviteHandler(base.UserHandler):
                 nonce)
             permission.put()
         self.redirect("/%s/" % (self.current_account.username,))
+
+
+class DeleteHandler(base.UserHandler):
+    @base.requires_account_admin
+    def post(self, account_name):
+        if self.request.POST.get("confirm") and self.request.POST.get("confirm2"):
+            to_delete = [self.current_account]
+            to_delete.extend(self.current_account.permission_set.fetch(1000))
+            db.delete(to_delete)
+            self.redirect("/")
+        else:
+            self.redirect("/%s/manage" % self.current_account.username)

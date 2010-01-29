@@ -73,5 +73,22 @@
       </form>
     </div>  
 
+    <div class="post">
+      <h3>Delete Account ${current_account.username}</h3>
+      <form method="POST" action="/${current_account.username}/delete">
+        <p>
+            <input type="checkbox" name="confirm" value="yes" id="confirm" />
+            <label for="confirm">Yes, I'm really, really sure I want to remove this
+            twitter account from Tweet Engine</label>
+        </p>
+        <p>
+            <input type="checkbox" name="confirm2" value="yes" id="confirm2" />
+            <label for="confirm2">I know this will remove this account for everyone,
+            not just me, and that if I re-add it, I will have to invite all my users
+            again.</label>
+        </p>
+        <input type="submit" value="Delete" />
+      </form>
+    </div>
   </metal:body>
 </metal:master>
