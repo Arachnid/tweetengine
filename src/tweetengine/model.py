@@ -140,9 +140,11 @@ class OutgoingTweet(db.Model):
         return ''
     
     def send(self):
-        class Resp:
-            status_code = 200
-        response = Resp()
+        response = self.account.make_request(
+            "http://twitter.com/statuses/update.json",
+            additional_params={
+                "status": self.message,
+                "in_reply_to_status_id": self.in_reply_to})
         if response.status_code == 200:
             self.approved = True
             self.sent = True
