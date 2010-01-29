@@ -38,7 +38,7 @@ class DashboardHandler(base.UserHandler):
                      if k.startswith("tweet.") and v=='delete']
         db.delete(to_delete)
 
-
+        rpcs = []
         for k, v in self.request.POST.iteritems():
             if k.startswith("tweet.") and v=='send':
                 tweet = tweet_map[int(k.split(".")[1])]
@@ -54,9 +54,16 @@ class DashboardHandler(base.UserHandler):
                         continue
 
                 # send now
-                response = tweet.send()
-                if response.status_code != 200:
-                    self.error(500)
-                    logging.error(response.content)
+                rpcs.append((tweet.send_async(), tweet))
 
+        successful_tweets = []
+        for rpc, tweet in rpcs:
+            response = rpc.get_result()
+            if response.status_code == 200:
+                successful_tweets.append(tweet)
+            else:
+                self.error(500)
+                logging.error(response.content)
+        db.put(successful_tweets)
+        
         self.redirect('/%s/' % account_name)
