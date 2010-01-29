@@ -91,12 +91,11 @@ ol.tweetlist li {
     position: absolute;
     bottom: 0;
     right: 0;
+    display: none;
 }
-
 #pendingTweets .odd {
     background: #ddd;
 }
-
 #current-user {
     font-weight: bold;
     margin-bottom: 1em;
