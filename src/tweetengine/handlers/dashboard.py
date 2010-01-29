@@ -20,7 +20,6 @@ class DashboardHandler(base.UserHandler):
 
     @base.requires_account
     def get(self, account_name):
-        fooz()
         self.render_template("dashboard.pt", {
             "tweets": self.get_tweets(),
         })
