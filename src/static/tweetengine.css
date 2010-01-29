@@ -100,3 +100,7 @@ ol.tweetlist li {
     font-weight: bold;
     margin-bottom: 1em;
 }
+.accounts img {
+    width: 48px;
+    height: 48px;
+}
