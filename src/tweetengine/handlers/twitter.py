@@ -41,6 +41,18 @@ def publishApprovedTweets():
     q.filter("approved =", True)
     q.filter("sent =", False)
     q.filter("timestamp <", datetime.datetime.now())
-    for tweet in q.fetch(20):
-        tweet.send()
+    rpcs = []
+    for tweet in q.fetch(30):
+        rpcs.append((tweet.send_async(), tweet))
         logging.error('sending tweet %s' % tweet.message)
+        
+    successful_tweets = []
+    for rpc, tweet in rpcs:
+        response = rpc.get_result()
+        if response.status_code == 200:
+            successful_tweets.append(tweet)
+        else:
+            logging.error(response.content)
+    db.put(successful_tweets)
+
+            

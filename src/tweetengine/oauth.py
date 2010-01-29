@@ -155,7 +155,7 @@ class OAuthClient():
     return urlencode(params)
     
     
-  def make_request(self, url, token="", secret="", additional_params=None,
+  def make_async_request(self, url, token="", secret="", additional_params=None,
                    protected=False, method=urlfetch.GET):
     """Make Request.
 
@@ -171,9 +171,14 @@ class OAuthClient():
         url = "%s?%s" % (url, payload)
         payload = None
     headers = {"Authorization": "OAuth"} if protected else {}
-    return urlfetch.fetch(url, method=method, headers=headers, payload=payload,
-                          deadline=10.0)
+    rpc = urlfetch.create_rpc(deadline=10.0)
+    urlfetch.make_fetch_call(rpc, url, method=method, headers=headers, payload=payload)
+    return rpc
 
+  def make_request(self, url, token="", secret="", additional_params=None,
+                                      protected=False, method=urlfetch.GET):
+      return make_async_request(url, token, secret, additional_params, protected, method).get_result()
+  
   def get_authorization_url(self):
     """Get Authorization URL.
 
