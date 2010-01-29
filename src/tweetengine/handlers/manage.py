@@ -166,7 +166,7 @@ class InviteHandler(base.UserHandler):
         
         # Add the permission record
         permission = model.Permission.find(self.user_account, self.current_account)
-        if not permission:
+        if permission.role < int(role):
             permission = model.Permission.create(
                 self.user_account,
                 self.current_account,
