@@ -24,7 +24,6 @@ class TwitterApiHandler(base.UserHandler):
         url = "http://twitter.com/%s.json" % ALLOWED_ENDPOINTS[scope][listtype]
         response = self.current_account.make_request(
             url, method=urlfetch.GET, additional_params=self.request.GET)
-        logging.warn(response.status_code)
         self.response.headers['Content-Type'] = response.headers['Content-Type']
         self.response.set_status(response.status_code)
         self.response.out.write(response.content)
