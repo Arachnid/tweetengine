@@ -48,12 +48,12 @@
 
     <form method="POST" action="/${current_account.username}/">
       <table class="display" id="pendingTweets">
-        <tr><th>Send</th><th>Delete</th><th>No change</th><th>Tweet message</th></tr>
+        <tr><th>Approve</th><th>Hold</th><th>Delete</th><th>Tweet message</th></tr>
           <tal:tweets tal:repeat="tweet tweets">
             <tr tal:attributes="class python:repeat.tweet.odd() and 'odd' or 'even'"> 
               <td class="field"><input type="radio" name="tweet.${tweet.key().id()}" value="send" checked="${tweet.approved and 'checked'}"/></td>
-              <td class="field"><input type="radio" name="tweet.${tweet.key().id()}" value="delete" /></td>
               <td class="field"><input type="radio" name="tweet.${tweet.key().id()}" value="leave" /></td>
+              <td class="field"><input type="radio" name="tweet.${tweet.key().id()}" value="delete" /></td>
               <td tal:content="structure tweet.message">MESSAGE</td>
             </tr>
             <tr tal:attributes="class python:repeat.tweet.odd() and 'odd' or 'even'">
