@@ -78,7 +78,18 @@
                 <th i18n:translate="manage-administrators">Administrators</th>
             </tr>
           </thead>
-          <tal:form tal:replace="structure settings_form" />
+          <tr>
+            <th i18n:translate="manage-suggest">Suggest tweets:</th>
+            <td><tal:form tal:replace="structure str(settings_form['suggest_tweets']) + str(settings_form['suggest_tweets'].errors)" /></td>
+          </tr>
+          <tr>
+            <th i18n:translate="manage-review">Review tweets:</th>
+            <td><tal:form tal:replace="structure str(settings_form['review_tweets']) + str(settings_form['review_tweets'].errors)" /></td>
+          </tr>
+          <tr>
+            <th i18n:translate="manage-send">Send tweets:</th>
+            <td><tal:form tal:replace="structure str(settings_form['send_tweets']) + str(settings_form['send_tweets'].errors)" /></td>
+          </tr>
         </table>
         <input type="submit" value="Update" i18n:attributes="value manage-update-button" />
       </form>

@@ -13,7 +13,22 @@
 
     <form action="/admin" method="post" id="global-settings-form">
       <table>
-        <tal tal:replace="structure form" />
+        <tr>
+            <th i18n:translate="admin-mail-from">Mail from:</th>
+            <td><tal:form tal:replace="structure str(form['mail_from']) + str(form['mail_from'].errors)" /></td>
+        </tr>
+        <tr>
+            <th i18n:translate="admin-oauth-key">OAuth key:</th>
+            <td><tal:form tal:replace="structure str(form['oauth_key']) + str(form['oauth_key'].errors)" /></td>
+        </tr>
+        <tr>
+            <th i18n:translate="admin-oauth-secret">OAuth secret:</th>
+            <td><tal:form tal:replace="structure str(form['oauth_secret']) + str(form['oauth_secret'].errors)" /></td>
+        </tr>
+        <tr>
+            <th i18n:translate="admin-allow-public">Allow public accounts:</th>
+            <td><tal:form tal:replace="structure str(form['allow_public']) + str(form['allow_public'].errors)" /></td>
+        </tr>
         <tr><th></th><td><input name="settings" type="submit" value="save" /></td></tr>
       </table>
     </form>
