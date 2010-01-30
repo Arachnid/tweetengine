@@ -137,6 +137,10 @@ class OAuthClient():
     if additional_params:
         params.update(additional_params)
 
+    for k,v in params.items():
+        if isinstance(v, unicode):
+            params[k] = v.encode('utf8')
+
     # Join all of the params together.
     params_str = "&".join(["%s=%s" % (encode(k), encode(params[k]))
                            for k in sorted(params)])
