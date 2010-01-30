@@ -10,7 +10,6 @@ from django import newforms as forms
 from django.newforms import widgets
 from google.appengine.api import mail
 from google.appengine.ext import db
-from google.appengine.ext.webapp import template
 from tweetengine.handlers import base
 from tweetengine import model
 
@@ -118,9 +117,8 @@ class ManageUsersHandler(base.UserHandler):
 
     def send_invites(self, invites):
         config = model.Configuration.instance()
-        template_path = os.path.join(os.path.dirname(__file__), "..",
-                                     "templates", "email.txt")
         account_username = self.current_account.username
+        mail_template = base.tpl_loader("email.txt", "text")
         for username, role in invites:
             nonce = str(uuid.uuid4())
             mac_data = ":".join([account_username, role, nonce])
@@ -133,7 +131,7 @@ class ManageUsersHandler(base.UserHandler):
             url = urlparse.urljoin(
                 self.request.url,
                 "/%s/invite?%s" % (account_username, qs))
-            email_body = template.render(template_path, {
+            email_body = mail_template({
                 "account_username": account_username,
                 "username": username,
                 "url": url
