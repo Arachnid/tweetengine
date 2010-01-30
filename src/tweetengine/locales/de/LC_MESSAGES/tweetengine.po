@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TweetEngine\n"
-"POT-Creation-Date: 2010-01-29 19:02+0000\n"
+"POT-Creation-Date: 2010-01-30 09:11+0000\n"
 "PO-Revision-Date: 2010-01-28 22:44+0100\n"
 "Last-Translator: Jens W. Klein <jens@bluedynamics.com>\n"
 "Language-Team: Tweetengine <dev@tweetengine.net>\n"
@@ -9,22 +9,26 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"Language-Code: en\n"
-"Language-Name: English\n"
+"Language-Code: de\n"
+"Language-Name: German\n"
 "Preferred-Encodings: utf-8 latin1\n"
-"Domain: DOMAIN\n"
+"Domain: tweetengine\n"
 
-#: tweetengine/model.py:31
+#: tweetengine/model.py:30
 msgid "Administrator"
 msgstr "Verwalter"
 
-#: tweetengine/model.py:29
+#: tweetengine/model.py:28
 msgid "Anyone"
 msgstr "Jeder"
 
-#: tweetengine/model.py:30
+#: tweetengine/model.py:29
 msgid "User"
 msgstr "Benutzer"
+
+#: tweetengine/handlers/manage.py:141
+msgid "You have been invited to tweet as ${name} via Tweet Engine"
+msgstr "Du wurdest eingeladen als ${name} auf Tweet Engine zu tweeten"
 
 #. Default: "Account added"
 #: tweetengine/templates/added.pt:3
@@ -49,6 +53,36 @@ msgstr "Du hast das Konto \"${accountname} (${username})\" erfolgreich zur Tweet
 #: tweetengine/menu.py:88
 msgid "admin"
 msgstr "Einstellungen"
+
+#. Default: "Allow public accounts:"
+#: tweetengine/templates/settings.pt:29
+msgid "admin-allow-public"
+msgstr "Erlaube öffentliche Konten:"
+
+#. Default: "save"
+#: tweetengine/templates/settings.pt:32
+msgid "admin-button-save"
+msgstr "Speichern"
+
+#. Default: "Mail from:"
+#: tweetengine/templates/settings.pt:17
+msgid "admin-mail-from"
+msgstr "Absender E-Mail"
+
+#. Default: "OAuth key:"
+#: tweetengine/templates/settings.pt:21
+msgid "admin-oauth-key"
+msgstr "OAuth Key:"
+
+#. Default: "OAuth secret:"
+#: tweetengine/templates/settings.pt:25
+msgid "admin-oauth-secret"
+msgstr "OAuth Secret:"
+
+#. Default: "Global Settings"
+#: tweetengine/templates/settings.pt:3
+msgid "admin-title"
+msgstr "Globale Einstellungen"
 
 #: tweetengine/menu.py:67
 msgid "dashboard"
@@ -208,6 +242,18 @@ msgstr "Falsche Konfiguration!"
 msgid "invalid-what"
 msgstr "${invlalid-adminlink} um die OAuth Schlüssel zu setzen."
 
+#. Default: "You have been invited to tweet as ${account_username} on Tweet Engine!\n\nTweet Engine is a system for collaborative tweeting with shared accounts.\n\nTo accept your invitation, click on the link below.\n\n${url}"
+#: tweetengine/templates/email.py:3
+msgid "invitemail"
+msgstr ""
+"Du wurdest auf Tweet Engine eingeladen um als ${account_username} zu tweeten!\n"
+"\n"
+"Mit Tweet Engine kannst Du gemeinsam mit anderen ein Twitter Konto teilen.\n"
+"\n"
+"Um die Einladung zu akzeptieren, klicke auf den Link dort unten.\n"
+"\n"
+"${url}"
+
 #: tweetengine/menu.py:54
 msgid "login"
 msgstr "Anmelden"
@@ -236,12 +282,12 @@ msgid "manage-anyone"
 msgstr "Jeder"
 
 #. Default: "Yes, I'm really, really sure I want to remove this twitter account from Tweet Engine"
-#: tweetengine/templates/manage.pt:94
+#: tweetengine/templates/manage.pt:105
 msgid "manage-confirm-1"
 msgstr "Ja, ich bin wirklich, wirklich sicher, dass ich dieses Konto von der Tweet Engine löschen will"
 
 #. Default: "I know this will remove this account for everyone, not just me, and that if I re-add it, I will have to invite all my users again."
-#: tweetengine/templates/manage.pt:100
+#: tweetengine/templates/manage.pt:111
 msgid "manage-confirm-2"
 msgstr "Ich weiss, dass damit das Konto für jeden entfernt wird und eben nicht nur für mich. Und wenn ich es wieder hinzufüge, so muss ich alle Benutzer erneut einladen."
 
@@ -251,12 +297,12 @@ msgid "manage-delete"
 msgstr "Löschen"
 
 #. Default: "Delete Account ${username}"
-#: tweetengine/templates/manage.pt:89
+#: tweetengine/templates/manage.pt:100
 msgid "manage-delete-account"
 msgstr "Lösche das Konto ${username}"
 
 #. Default: "Delete"
-#: tweetengine/templates/manage.pt:104
+#: tweetengine/templates/manage.pt:115
 msgid "manage-delete-button"
 msgstr "Löschen"
 
@@ -274,6 +320,21 @@ msgstr "Einladungen verschickt!"
 #: tweetengine/templates/manage.pt:70
 msgid "manage-permissions"
 msgstr "Berechtigungen"
+
+#. Default: "Review tweets:"
+#: tweetengine/templates/manage.pt:86
+msgid "manage-review"
+msgstr "Tweets freigeben:"
+
+#. Default: "Send tweets:"
+#: tweetengine/templates/manage.pt:90
+msgid "manage-send"
+msgstr "Tweets versenden:"
+
+#. Default: "Suggest tweets:"
+#: tweetengine/templates/manage.pt:82
+msgid "manage-suggest"
+msgstr "Tweets vorschlagen:"
 
 #. Default: "Manage Account ${username}"
 #: tweetengine/templates/manage.pt:3

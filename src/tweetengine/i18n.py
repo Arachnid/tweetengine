@@ -1,6 +1,5 @@
 """ load the message catalogs and provide them as ztk utilities."""
 import os
-import logging
 from zope.interface import implements
 from zope.component import getSiteManager
 from zope.i18n.interfaces import (
@@ -52,12 +51,9 @@ class RequestNegotiator(object):
     def getLanguage(self, available_languages, accept_languages_header):
         if isinstance(accept_languages_header, Request):
              accept_languages_header = accept_languages_header.headers.get('Accept-Language', '')
-        logging.info(available_languages)
         accept_languages = self.accept_languages(accept_languages_header)
-        logging.info(accept_languages)
         for accepted_language in accept_languages:
             if accepted_language in available_languages:
-                logging.info('getLanguage returns %s' % accepted_language)
                 return accepted_language
 
     def accept_languages(self, browser_pref_langs):
@@ -121,7 +117,6 @@ def smart_translate(msgid, domain=None, mapping=None, context=None,
                    target_language=None, default=None):
     """ target_language is expected to be the http accept-language header
     """
-    logging.info("TRANSLATE: msgid %s, domain %s, mapping %s, context %s, target_language %s, default %s" % (msgid, domain, mapping, context, target_language, default))
     if msgid is None:
         return
 
@@ -152,9 +147,3 @@ TemplateLoader.formats = {
     "xml"  : SmartI18nPageTemplateFile,
     "text" : SmartI18nPageTextTemplateFile,
 }
-
-
-# not sure what this should be good for, keep it as comment for now        
-#from zope.component.interface import provideInterface
-#itdname = ITranslationDomain.__module__ + '.' + ITranslationDomain.getName()        
-#provideInterface(itdname, ITranslationDomain)

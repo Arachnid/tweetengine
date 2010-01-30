@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-01-29 19:02+0000\n"
+"POT-Creation-Date: 2010-01-30 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,16 +17,20 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: tweetengine\n"
 
-#: tweetengine/model.py:31
+#: tweetengine/model.py:30
 msgid "Administrator"
 msgstr ""
 
-#: tweetengine/model.py:29
+#: tweetengine/model.py:28
 msgid "Anyone"
 msgstr ""
 
-#: tweetengine/model.py:30
+#: tweetengine/model.py:29
 msgid "User"
+msgstr ""
+
+#: tweetengine/handlers/manage.py:141
+msgid "You have been invited to tweet as ${name} via Tweet Engine"
 msgstr ""
 
 #. Default: "Account added"
@@ -51,6 +55,36 @@ msgstr ""
 
 #: tweetengine/menu.py:88
 msgid "admin"
+msgstr ""
+
+#. Default: "Allow public accounts:"
+#: tweetengine/templates/settings.pt:29
+msgid "admin-allow-public"
+msgstr ""
+
+#. Default: "save"
+#: tweetengine/templates/settings.pt:32
+msgid "admin-button-save"
+msgstr ""
+
+#. Default: "Mail from:"
+#: tweetengine/templates/settings.pt:17
+msgid "admin-mail-from"
+msgstr ""
+
+#. Default: "OAuth key:"
+#: tweetengine/templates/settings.pt:21
+msgid "admin-oauth-key"
+msgstr ""
+
+#. Default: "OAuth secret:"
+#: tweetengine/templates/settings.pt:25
+msgid "admin-oauth-secret"
+msgstr ""
+
+#. Default: "Global Settings"
+#: tweetengine/templates/settings.pt:3
+msgid "admin-title"
 msgstr ""
 
 #: tweetengine/menu.py:67
@@ -211,6 +245,11 @@ msgstr ""
 msgid "invalid-what"
 msgstr ""
 
+#. Default: "You have been invited to tweet as ${account_username} on Tweet Engine!\n\nTweet Engine is a system for collaborative tweeting with shared accounts.\n\nTo accept your invitation, click on the link below.\n\n${url}"
+#: tweetengine/templates/email.py:3
+msgid "invitemail"
+msgstr ""
+
 #: tweetengine/menu.py:54
 msgid "login"
 msgstr ""
@@ -239,12 +278,12 @@ msgid "manage-anyone"
 msgstr ""
 
 #. Default: "Yes, I'm really, really sure I want to remove this twitter account from Tweet Engine"
-#: tweetengine/templates/manage.pt:94
+#: tweetengine/templates/manage.pt:105
 msgid "manage-confirm-1"
 msgstr ""
 
 #. Default: "I know this will remove this account for everyone, not just me, and that if I re-add it, I will have to invite all my users again."
-#: tweetengine/templates/manage.pt:100
+#: tweetengine/templates/manage.pt:111
 msgid "manage-confirm-2"
 msgstr ""
 
@@ -254,12 +293,12 @@ msgid "manage-delete"
 msgstr ""
 
 #. Default: "Delete Account ${username}"
-#: tweetengine/templates/manage.pt:89
+#: tweetengine/templates/manage.pt:100
 msgid "manage-delete-account"
 msgstr ""
 
 #. Default: "Delete"
-#: tweetengine/templates/manage.pt:104
+#: tweetengine/templates/manage.pt:115
 msgid "manage-delete-button"
 msgstr ""
 
@@ -276,6 +315,21 @@ msgstr ""
 #. Default: "Permissions"
 #: tweetengine/templates/manage.pt:70
 msgid "manage-permissions"
+msgstr ""
+
+#. Default: "Review tweets:"
+#: tweetengine/templates/manage.pt:86
+msgid "manage-review"
+msgstr ""
+
+#. Default: "Send tweets:"
+#: tweetengine/templates/manage.pt:90
+msgid "manage-send"
+msgstr ""
+
+#. Default: "Suggest tweets:"
+#: tweetengine/templates/manage.pt:82
+msgid "manage-suggest"
 msgstr ""
 
 #. Default: "Manage Account ${username}"

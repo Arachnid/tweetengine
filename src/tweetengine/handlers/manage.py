@@ -12,7 +12,9 @@ from google.appengine.api import mail
 from google.appengine.ext import db
 from tweetengine.handlers import base
 from tweetengine import model
-
+from tweetengine.i18n import translate
+from tweetengine.i18n import _
+from tweetengine.templates.email import mailbody
 
 class TabularRadioInput(widgets.RadioInput):
     def __unicode__(self):
@@ -118,7 +120,6 @@ class ManageUsersHandler(base.UserHandler):
     def send_invites(self, invites):
         config = model.Configuration.instance()
         account_username = self.current_account.username
-        mail_template = base.tpl_loader("email.txt", "text")
         for username, role in invites:
             nonce = str(uuid.uuid4())
             mac_data = ":".join([account_username, role, nonce])
@@ -131,13 +132,15 @@ class ManageUsersHandler(base.UserHandler):
             url = urlparse.urljoin(
                 self.request.url,
                 "/%s/invite?%s" % (account_username, qs))
-            email_body = mail_template({
+            email_body = _(mailbody, mapping = {
                 "account_username": account_username,
-                "username": username,
                 "url": url
             })
+            email_body = translate(email_body, context=self.request)
             logging.info(email_body)
-            subject = "You have been invited to tweet as %s!" % (account_username,)
+            subject = _(u"You have been invited to tweet as ${name} via Tweet Engine", 
+                        mapping={u'name': account_username}) 
+            subject = translate(subject, context=self.request)
             mail.send_mail(config.mail_from, username, subject, email_body)
 
 
