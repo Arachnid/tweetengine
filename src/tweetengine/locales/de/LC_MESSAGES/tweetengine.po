@@ -116,7 +116,7 @@ msgstr "Löschen"
 #. Default: "Hold"
 #: tweetengine/templates/dashboard.pt:57
 msgid "dashboard-pending-hold"
-msgstr "zurückhalten"
+msgstr "Zurückhalten"
 
 #. Default: "Postpone until"
 #: tweetengine/templates/dashboard.pt:71
@@ -131,7 +131,7 @@ msgstr "Wartende Tweets"
 #. Default: "Tweet message"
 #: tweetengine/templates/dashboard.pt:59
 msgid "dashboard-pending-tweet"
-msgstr "Nachricht Tweeten"
+msgstr "Tweet-Nachricht"
 
 #. Default: "Submit"
 #: tweetengine/templates/dashboard.pt:40
