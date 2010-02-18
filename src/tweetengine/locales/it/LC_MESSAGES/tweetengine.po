@@ -1,0 +1,411 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2010-01-30 09:11+0000\n"
+"PO-Revision-Date: 2010-02-10 16:30 +0100\n"
+"Last-Translator: Andrea Schmid <a.schmid00@gmail.com>\n"
+"Language-Team: Tweetengine <dev@tweetengine.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: it\n"
+"Language-Name: Italian\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: tweetengine\n"
+
+#: tweetengine/model.py:30
+msgid "Administrator"
+msgstr "Amministratore"
+
+#: tweetengine/model.py:28
+msgid "Anyone"
+msgstr "Chiunque"
+
+#: tweetengine/model.py:29
+msgid "User"
+msgstr "Utente"
+
+#: tweetengine/handlers/manage.py:141
+msgid "You have been invited to tweet as ${name} via Tweet Engine"
+msgstr "Sei stato invitato come ${name} a partecipare (tweet) a Tweet Engine" 
+
+#. Default: "Account added"
+#: tweetengine/templates/added.pt:3
+msgid "added-account"
+msgstr "Contatto aggiunto"
+
+#. Default: "Go back to ${backlink}"
+#: tweetengine/templates/added.pt:14
+msgid "added-back"
+msgstr "Indietro a ${backlink}"
+
+#. Default: "your account"
+#: tweetengine/templates/added.pt:14
+msgid "added-backlink"
+msgstr "Il tuo Account"
+
+#. Default: "You successfully added the account \"${accountname} (${username})\" to TweetEngine."
+#: tweetengine/templates/added.pt:10
+msgid "added-message"
+msgstr "Hai aggiunto con successo l'Account \"${accountname} (${username})\" a TweetEngine."
+
+#: tweetengine/menu.py:88
+msgid "admin"
+msgstr "Impostazioni"
+
+#. Default: "Allow public accounts:"
+#: tweetengine/templates/settings.pt:29
+msgid "admin-allow-public"
+msgstr "Consenti Account Pubblici"
+
+#. Default: "save"
+#: tweetengine/templates/settings.pt:32
+msgid "admin-button-save"
+msgstr "Salva"
+
+#. Default: "Mail from:"
+#: tweetengine/templates/settings.pt:17
+msgid "admin-mail-from"
+msgstr "Mail da:"
+
+#. Default: "OAuth key:"
+#: tweetengine/templates/settings.pt:21
+msgid "admin-oauth-key"
+msgstr "OAuth key:"
+
+#. Default: "OAuth secret:"
+#: tweetengine/templates/settings.pt:25
+msgid "admin-oauth-secret"
+msgstr "OAuth secret:"
+
+#. Default: "Global Settings"
+#: tweetengine/templates/settings.pt:3
+msgid "admin-title"
+msgstr "Impostazioni Globali"
+
+#: tweetengine/menu.py:67
+msgid "dashboard"
+msgstr "dashboard"
+
+#. Default: "What's happening with ${username}"
+#: tweetengine/templates/dashboard.pt:29
+msgid "dashboard-happening"
+msgstr "Ultimi aggiornamenti di ${username}"
+
+#. Default: "Now"
+#: tweetengine/templates/dashboard.pt:35
+msgid "dashboard-now"
+msgstr "Adesso"
+
+#. Default: "or"
+#: tweetengine/templates/dashboard.pt:36
+msgid "dashboard-or"
+msgstr "oppure"
+
+#. Default: "Approve"
+#: tweetengine/templates/dashboard.pt:56
+msgid "dashboard-pending-approve"
+msgstr "Approva"
+
+#. Default: "Delete"
+#: tweetengine/templates/dashboard.pt:58
+msgid "dashboard-pending-delete"
+msgstr "Cancella"
+
+#. Default: "Hold"
+#: tweetengine/templates/dashboard.pt:57
+msgid "dashboard-pending-hold"
+msgstr "Trattenere"
+
+#. Default: "Postpone until"
+#: tweetengine/templates/dashboard.pt:71
+msgid "dashboard-pending-postpone"
+msgstr "Rinvia fino a"
+
+#. Default: "Pending tweets"
+#: tweetengine/templates/dashboard.pt:50
+msgid "dashboard-pending-title"
+msgstr "Tweets in attesa"
+
+#. Default: "Tweet message"
+#: tweetengine/templates/dashboard.pt:59
+msgid "dashboard-pending-tweet"
+msgstr "Messaggio/Tweet"
+
+#. Default: "Submit"
+#: tweetengine/templates/dashboard.pt:40
+msgid "dashboard-submit"
+msgstr "Invia"
+
+#. Default: "direct messages"
+#: tweetengine/templates/dashboard.pt:117
+msgid "dashboard-timeline-direct"
+msgstr "Messaggi diretti"
+
+#. Default: "friends"
+#: tweetengine/templates/dashboard.pt:113
+msgid "dashboard-timeline-friends"
+msgstr "Amici"
+
+#. Default: "Loading direct messages..."
+#: tweetengine/templates/dashboard.pt:135
+msgid "dashboard-timeline-loaddirect"
+msgstr "Caricamento messaggi diretti..."
+
+#. Default: "Loading friends tweets..."
+#: tweetengine/templates/dashboard.pt:127
+msgid "dashboard-timeline-loadfriends"
+msgstr "Caricamento messaggi/tweet di amici..."
+
+#. Default: "Loading mentions..."
+#: tweetengine/templates/dashboard.pt:131
+msgid "dashboard-timeline-loadmentions"
+msgstr ""
+
+#. Default: "Loading ${username}"
+#: tweetengine/templates/dashboard.pt:123
+msgid "dashboard-timeline-loadmy"
+msgstr "Caricamento ${username}"
+
+#. Default: "mentions"
+#: tweetengine/templates/dashboard.pt:115
+msgid "dashboard-timeline-mentions"
+msgstr "Caricamento menzionamenti..."
+
+#. Default: "Reply"
+#: tweetengine/templates/dashboard.pt:104
+msgid "dashboard-timeline-reply"
+msgstr "Rispondi"
+
+#. Default: "Retweet"
+#: tweetengine/templates/dashboard.pt:105
+msgid "dashboard-timeline-retweet"
+msgstr "Retweet"
+
+#. Default: "Timeline"
+#: tweetengine/templates/dashboard.pt:85
+msgid "dashboard-timeline-title"
+msgstr "Spanna di tempo"
+
+#. Default: "${username}Dashboard"
+#: tweetengine/templates/dashboard.pt:4
+msgid "dashboard-title"
+msgstr "${username}Dashboard"
+
+#: tweetengine/menu.py:46
+msgid "home"
+msgstr "home"
+
+#. Default: "TweetEngine makes it possible to share a Twitter account without giving out the password. Now, managing shared twitter accounts is easy!"
+#: tweetengine/templates/index.pt:21
+msgid "index-introduction-1"
+msgstr "TweetEngine permette di condividere un account Twitter dover impostare la password. Ora, la gestione di account Twitter condivisi è facile!"
+
+#. Default: "With TweetEngine, you can control what access rights other users have over your account, allowing them to administer the account or just to send tweets. You can even allow outside users to suggest tweets, which you can approve or decline."
+#: tweetengine/templates/index.pt:24
+msgid "index-introduction-2"
+msgstr "Con TweetEngine, è possibile controllare quali sono i diritti di accesso gli altri utenti hanno sul tuo account, permettendo loro di gestire l'account o semplicemente per inviare tweets. Si può anche consentire agli utenti al di fuori di suggerire tweets, che si può approvare o rifiutare."
+
+#. Default: "To get started, simply log in above."
+#: tweetengine/templates/index.pt:29
+msgid "index-introduction-3"
+msgstr "Per iniziare, é sufficente accedere sopra"
+
+#. Default: "Welcome to TweetEngine"
+#: tweetengine/templates/index.pt:19
+msgid "index-welcome"
+msgstr "Benvenuto a TweetEngine"
+
+#. Default: "Ask your administrator to set up the OAuth settings on the admin page."
+#: tweetengine/templates/invalid_configuration.pt:18
+msgid "invalid-ask"
+msgstr "Chiedere all'amministratore di configurare le impostazioni OAuth sulla pagina di amministrazione."
+
+#. Default: "Click here"
+#: tweetengine/templates/invalid_configuration.pt:13
+msgid "invalid-clickhere"
+msgstr "Clicca qui"
+
+#. Default: "We were unable to communicate with the Twitter server. This is probably because the administrator of this app has not set up the Twitter OAuth settings correctly."
+#: tweetengine/templates/invalid_configuration.pt:8
+msgid "invalid-text"
+msgstr "Non siamo stati in grado di comunicare con il server di Twitter. Questo probabilmente perché l'amministratore di questa applicazione non ha istituito le impostazioni di Twitter OAuth correttamente."
+
+#. Default: "Invalid Configuration!"
+#: tweetengine/templates/invalid_configuration.pt:3
+msgid "invalid-title"
+msgstr "Configurazione non valida!"
+
+#. Default: "${invlalid-adminlink} to set the OAuth settings."
+#: tweetengine/templates/invalid_configuration.pt:13
+msgid "invalid-what"
+msgstr "${invlalid-adminlink} per impostare le impostazioni OAuth."
+
+#. Default: "You have been invited to tweet as ${account_username} on Tweet Engine!\n\nTweet Engine is a system for collaborative tweeting with shared accounts.\n\nTo accept your invitation, click on the link below.\n\n${url}"
+#: tweetengine/templates/email.py:3
+msgid "invitemail"
+msgstr "Sei stato invitato a scambiare tweet come ${account_username} on TweetEngine!\n\nTweetEngine é un sistema di tweeting collaborativo con account condivisi.\n\nPer accettare l'invito clicca sul link sottostante.\n\n${url}"
+
+#: tweetengine/menu.py:54
+msgid "login"
+msgstr "accedi"
+
+#: tweetengine/menu.py:96
+msgid "logout"
+msgstr "esci"
+
+#: tweetengine/menu.py:79
+msgid "manage"
+msgstr "Gestione"
+
+#. Default: "Admin"
+#: tweetengine/templates/manage.pt:27
+msgid "manage-admin"
+msgstr "Amministratore"
+
+#. Default: "Administrators"
+#: tweetengine/templates/manage.pt:78
+msgid "manage-administrators"
+msgstr "Amministratori"
+
+#. Default: "Anyone"
+#: tweetengine/templates/manage.pt:76
+msgid "manage-anyone"
+msgstr "Chiunque"
+
+#. Default: "Yes, I'm really, really sure I want to remove this twitter account from Tweet Engine"
+#: tweetengine/templates/manage.pt:105
+msgid "manage-confirm-1"
+msgstr "Sì, sono davvero, davvero sicuro di voler rimuovere questo account Twitter da Tweet Engine"
+
+#. Default: "I know this will remove this account for everyone, not just me, and that if I re-add it, I will have to invite all my users again."
+#: tweetengine/templates/manage.pt:111
+msgid "manage-confirm-2"
+msgstr "Capisco che questo rimuoverá l'account per chiunque e non solo per me stesso, e che se lo riaggiungeró dovró riinvitare nuovamente tutti i miei utenti"
+
+#. Default: "Delete"
+#: tweetengine/templates/manage.pt:24
+msgid "manage-delete"
+msgstr "Cancella"
+
+#. Default: "Delete Account ${username}"
+#: tweetengine/templates/manage.pt:100
+msgid "manage-delete-account"
+msgstr "Cancellare Account ${username}"
+
+#. Default: "Delete"
+#: tweetengine/templates/manage.pt:115
+msgid "manage-delete-button"
+msgstr "Cancella"
+
+#. Default: "Email"
+#: tweetengine/templates/manage.pt:25
+msgid "manage-email"
+msgstr "Email"
+
+#. Default: "Invites sent!"
+#: tweetengine/templates/manage.pt:13
+msgid "manage-invites-send"
+msgstr "Inviti spediti!"
+
+#. Default: "Permissions"
+#: tweetengine/templates/manage.pt:70
+msgid "manage-permissions"
+msgstr "Permessi"
+
+#. Default: "Review tweets:"
+#: tweetengine/templates/manage.pt:86
+msgid "manage-review"
+msgstr "Revisiona tweets:"
+
+#. Default: "Send tweets:"
+#: tweetengine/templates/manage.pt:90
+msgid "manage-send"
+msgstr "Invia tweets:"
+
+#. Default: "Suggest tweets:"
+#: tweetengine/templates/manage.pt:82
+msgid "manage-suggest"
+msgstr "Consiglia tweets:"
+
+#. Default: "Manage Account ${username}"
+#: tweetengine/templates/manage.pt:3
+msgid "manage-title"
+msgstr "Gestisci account ${username}"
+
+#. Default: "Update"
+#: tweetengine/templates/manage.pt:65
+msgid "manage-update-button"
+msgstr "Aggiorna"
+
+#. Default: "User"
+#: tweetengine/templates/manage.pt:26
+msgid "manage-user"
+msgstr "Utente"
+
+#. Default: "Users"
+#: tweetengine/templates/manage.pt:19
+msgid "manage-users"
+msgstr "Utenti"
+
+#. Default: "Add a new account"
+#: tweetengine/templates/macros.pt:19
+msgid "sbaccounts-add"
+msgstr "Aggiungi nuovo account"
+
+#. Default: "Logged in as ${useremail}"
+#: tweetengine/templates/macros.pt:4
+msgid "sbaccounts-loggedin"
+msgstr "Loggato come ${username}"
+
+#. Default: "Public Accounts"
+#: tweetengine/templates/macros.pt:23
+msgid "sbaccounts-public"
+msgstr "Account pubblici"
+
+#. Default: "Your Accounts"
+#: tweetengine/templates/macros.pt:8
+msgid "sbaccounts-your"
+msgstr "I tuoi account"
+
+#. Default: "Congruatulations! You've logged in to Tweet Engine."
+#: tweetengine/templates/gettingstarted.pt:14
+msgid "started-introduction-1"
+msgstr "Congratulazioni! Ti sei loggato con successo a Tweet Engine"
+
+#. Default: "What now, you may ask? You have some options:"
+#: tweetengine/templates/gettingstarted.pt:16
+msgid "started-introduction-2"
+msgstr "Ora ti starai chidendo cosa fare. Hai diveres opzioni:"
+
+#. Default: "Ask your friend/boss/spouse to add you as a user on one of their Twitter accounts, OR"
+#: tweetengine/templates/gettingstarted.pt:20
+msgid "started-point-1"
+msgstr "Chiedi al tuo amico / coniuge / capo di aggiungti come utente su uno dei loro account Twitter, OPPURE"
+
+#. Default: "Suggest tweets for one of the public accounts on the right, OR"
+#: tweetengine/templates/gettingstarted.pt:22
+msgid "started-point-2"
+msgstr "Proponi tweets per uno degli account pubblici sulla destra, OPPURE"
+
+#. Default: "Add your own account."
+#: tweetengine/templates/gettingstarted.pt:25
+msgid "started-point-3"
+msgstr "Aggiungi il tuo account personale"
+
+#. Default: "Getting started"
+#: tweetengine/templates/gettingstarted.pt:3
+msgid "started-title"
+msgstr "Come iniziare"
+
+#. Default: "Collaborative tweeting"
+#: tweetengine/templates/base.pt:36
+msgid "subline"
+msgstr "Tweeting collaborativo"
+
+#. Default: "Welcome!"
+#: tweetengine/templates/index.pt:3
+msgid "title-welcome"
+msgstr "Benvenuto!"
+
