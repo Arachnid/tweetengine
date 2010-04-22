@@ -2,6 +2,7 @@
 import sys
 import os
 import logging
+import pkg_resources
 
 # the root directory of the appengine project
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
