@@ -22,4 +22,21 @@ instance. In your browser go to ``http://localhost:8080``. In case of problems
 consult the zc.buildout and/or Appengine documentation. 
 
 http://www.buildout.org/
-https://appengine.google.com/
+https://appengine.google.com
+
+Running the application
+========================
+
+The first time you run the application, you will need to configure it. Both on
+the local server in in production, this is done by logging in with an admin account.
+
+1. Click on "Admin" - this will take you to a settings page where you can add your 
+Twitter API keys. If you don't already have a key, sign up for one at 
+http://dev.twitter.com. Note that you can use any callback or URL you want - Twitter's
+application admin page won't let you set localhost:8080 as the callback URL, but
+this won't matter since Tweetengine will pass this as an OAuth parameter anyway
+when users add an account.
+
+2. From dev.twitter.com, copy "Consumer Key" to your dashboard's "OAuth key", 
+"Consumer secret" to "OAuth secret" and set "Mail from" to an email account that
+your App Engine account is able to sent email from.  
